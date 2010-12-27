@@ -120,7 +120,7 @@ typedef struct {
 typedef struct {
     char            order;             //!< 5 bits   : Order in list 1-31
     char            vessel_name[16];   //!< 15*6(90) bits : Vessel Name
-    char            position_name[13]; //!< 13*6(72) bits : Position Name
+    char            position_name[14]; //!< 13*6(72) bits : Position Name
     char            time_hh;           //!< 5 bits   : Hours of call in
     char            time_mm;           //!< 6 bits   : Minutes of call in
     char            spare;             //!< 6 bits   : Reserved for Future Use

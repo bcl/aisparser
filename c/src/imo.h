@@ -61,12 +61,12 @@ typedef struct {
 /** Application 2 - Dangerous Cargo Indication
 */
 typedef struct {
-    char            last_port[6];      //!< 5x6 (30) bits : Last Port of Call UN Locode
+    char            last_port[7];      //!< 5x6 (30) bits : Last Port of Call UN Locode
     timetag			atd;               //!< 20 bits  : Actual Time of Departure
-    char            next_port[6];      //!< 5x6 (30) bits : Last Port of Call UN Locode
+    char            next_port[7];      //!< 5x6 (30) bits : Last Port of Call UN Locode
     timetag			eta;               //!< 20 bits  : Estimated Time of Arrival
     char            good[21];          //!< 20x6 (120) bits : Main Dangerous Good
-    char			imd[5];            //!< 4x6 (24) bits : IMD Category of Main Dangerous Good
+    char			imd[6];            //!< 4x6 (24) bits : IMD Category of Main Dangerous Good
     int             un_number;         //!< 13 bits  : UN Number 1-3363  0=not available
     int             quantity;          //!< 10 bits  : Quantity of Main Dangerous Good 
     char            units;             //!< 2 bits   : 0=not avail. 1=kg 2=tons (1E3kg) 3=1000tons(1E6kg)
