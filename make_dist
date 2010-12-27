@@ -1,0 +1,16 @@
+#!/bin/sh
+
+export TARGET=aisparser-1.9
+
+# Make a distribution archive
+# Do not include test code
+rm -rf ./$TARGET
+svn export https://svn.home/libais/tags/$TARGET ./$TARGET
+rm -rf ./$TARGET/c/test
+rm -rf ./$TARGET/c/src/test_*
+rm -rf ./$TARGET/python/test
+rm ./$TARGET/make_dist
+cd ./$TARGET/c/docs/; 
+doxygen doxygen.conf
+cd -
+zip -9r $TARGET.zip ./$TARGET

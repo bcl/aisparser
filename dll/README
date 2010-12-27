@@ -1,0 +1,19 @@
+AIS Parser SDK VB6 DLL
+Copyright 2006-2010 by Brian C. Lane
+http://www.aisparser.com
+
+
+Example VB6 code is in ./examples
+
+Look at the example code for instructions on how to use the VB6 interface.
+The DLL includes a Type Library so it can be browsed in the VB browser.
+
+The DLL is compiled with __stdcall and 4 byte struct packing, it should be
+possible to use it with other Windows languages without modification.
+
+Quickstart
+1. Build the DLL with Visual Studio 6
+1. Copy aisparser.dll from ./aisparser/Release/ to ./examples
+2. Double Click on ./examples/Project1.vbw
+3. Click play to run it
+

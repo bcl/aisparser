@@ -1,0 +1,9 @@
+Requires SWIG and VC++ 6
+
+1. swig -python aisparser.i
+2. Use VC++ to rebuild the _aisparser.pyd
+
+Note: In python2.5 the win32 version changed to using .pyd instead of .dll
+The VC++ project has been updated to reflect this.
+
+

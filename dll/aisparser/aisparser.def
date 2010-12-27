@@ -1,0 +1,45 @@
+LIBRARY   aisparser
+DESCRIPTION "AIS Parser http://www.aisparser.com\nCopyright 2006-2007 by Brian C. Lane\nAll Rights Reserved\n"
+EXPORTS
+    InitAisparser
+	CloseAisparser
+    AssembleVdm
+    Get6Bit
+	ais2ascii
+	pos2ddd
+	pos2dmm
+    parse_ais_1
+    parse_ais_2
+    parse_ais_3
+    parse_ais_4
+    parse_ais_5
+    parse_ais_6
+    parse_ais_7
+    parse_ais_8
+    parse_ais_9
+    parse_ais_10
+    parse_ais_11
+    parse_ais_12
+    parse_ais_13
+    parse_ais_14
+    parse_ais_15
+    parse_ais_16
+    parse_ais_17
+    parse_ais_18
+    parse_ais_19
+    parse_ais_20
+    parse_ais_21
+    parse_ais_22
+    parse_ais_23
+    parse_ais_24
+    parse_seaway1_1
+    parse_seaway1_2
+    parse_seaway1_3
+    parse_seaway1_6
+    parse_seaway2_1
+    parse_seaway2_2
+    parse_seaway32_1
+    parse_pawss1_4
+    parse_pawss1_5
+    parse_pawss2_3
+

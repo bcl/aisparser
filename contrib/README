@@ -1,0 +1,7 @@
+The files in here have been contributed by generous AIS Parser SDK users.
+They are unsupported at this time, because they use platforms or compilers
+that I do not have access to or experience with.
+
+File                    Description
+-----------------------------------------------------------------------
+AISParser.pas		Delphi port by Chris Krohn

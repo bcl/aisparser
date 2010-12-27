@@ -1,0 +1,8 @@
+#!/bin/sh
+PYTHON_INCLUDE=/System/Library/Frameworks/Python.framework/Versions/2.3/include/python2.3/
+swig -python aisparser.i
+gcc -fPIC -I ../../c/src/ -I $PYTHON_INCLUDE \
+    -c ../../c/src/nmea.c ../../c/src/sixbit.c ../../c/src/vdm_parse.c ../../c/src/seaway.c \
+       	../../c/src/imo.c ../../c/src/access.c \
+        aisparser_wrap.c
+ld -bundle -flat_namespace -undefined suppress nmea.o sixbit.o vdm_parse.o seaway.o imo.o access.o aisparser_wrap.o -o _aisparser.so

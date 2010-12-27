@@ -1,0 +1,1275 @@
+// This is the type library for aisparser.dll
+[
+    // UUID for this project, generated with GUIDGEN
+	uuid(1E5B88B3-2F69-41d3-B5F7-7BA6FC5CB5F7),
+    helpstring("AIS Parser SDK Library for Windows - http://www.aisparser.com\nCopyright 2006-2007 by Brian C. Lane\nAll Rights Reserved"),
+    // Standard English Locale
+	lcid(0x0409),
+    // Assign a version number to keep track of changes.
+    version(1.7)
+]
+library aisparser
+{
+    typedef [public] long AISSTATE;
+	typedef [public] long SIXBIT_PTR;
+
+	typedef [public, uuid(082EE8B6-2C86-48c3-8DC3-199391687437)] struct {
+		unsigned char bits[255];		//!< raw 6-bit ASCII data string
+//		unsigned char *p;               //!< pointer to current character in bits
+		long p;                         //!< pointer to current character in bits
+		unsigned char remainder;        //!< Remainder bits
+		unsigned char remainder_bits;   //!< Number of remainder bits
+	} sixbit;
+
+    typedef [public, uuid(1F739112-B5B9-473a-BA9F-9699E98427E8)] struct {
+        unsigned char            msgid;             //!< 6 bits  : Message ID (1)
+        unsigned char            repeat;            //!< 2 bits  : Repeated
+        long                     userid;            //!< 30 bits : UserID / MMSI    
+        unsigned char            nav_status;        //!< 4 bits  : Navigational Status
+        unsigned char            rot;               //!< 8 bits  : Rate of Turn   
+        int                      sog;               //!< 10 bits : Speed Over Ground
+        unsigned char            pos_acc;           //!< 1 bit   : Position Accuracy
+        long                     longitude;         //!< 28 bits : Longitude in 1/10000 minute
+        long                     latitude;          //!< 27 bits : Latitude in 1/10000 minute
+        int                      cog;               //!< 12 bits : Course over Ground
+        int                      true;              //!< 9 bits  : True heading
+        unsigned char            utc_sec;           //!< 6 bits  : UTC Seconds
+        unsigned char            regional;          //!< 4 bits  : Regional bits
+        unsigned char            spare;             //!< 1 bit   : Spare
+        unsigned char            raim;              //!< 1 bit   : RAIM flag
+        unsigned char            sync_state;        //!< 2 bits  : SOTDMA sync state
+        unsigned char            slot_timeout;      //!< 3 bits  : SOTDMA Slot Timeout
+        int                      sub_message;       //!< 14 bits : SOTDMA sub-message
+    } aismsg_1;
+
+    typedef [public, uuid(408023C6-83C6-4c0b-81CC-5C9952C64E22)] struct {
+        unsigned char   msgid;             //!< 6 bits  : Message ID (2)
+        unsigned char   repeat;            //!< 2 bits  : Repeated
+        long            userid;            //!< 30 bits : UserID / MMSI
+        unsigned char   nav_status;        //!< 4 bits  : Navigational Status
+        unsigned char   rot;               //!< 8 bits  : Rate of Turn
+        int             sog;               //!< 10 bits : Speed Over ground
+        unsigned char   pos_acc;           //!< 1 bit   : Position Accuracy
+        long            longitude;         //!< 28 bits : Longitude in 1/10000 minute
+        long            latitude;          //!< 27 bits : Latitude in 1/10000 minute
+        int             cog;               //!< 12 bits : Course over Ground
+        int             true;              //!< 9 bits  : True Heading
+        unsigned char   utc_sec;           //!< 6 bits  : UTC Seconds
+        unsigned char   regional;          //!< 4 bits  : Regional bits
+        unsigned char   spare;             //!< 1 bit   : Spare
+        unsigned char   raim;              //!< 1 bit   : RAIM flag
+        unsigned char   sync_state;        //!< 2 bits  : SOTDMA sync state
+        unsigned char   slot_timeout;      //!< 3 bits  : SOTDMA Slot Timeout
+		int             sub_message;       //!< 14 bits : SOTDMA sub-message
+    } aismsg_2 ;
+
+
+    typedef [public, uuid(A03C0B67-41C1-43bb-B8E2-64EF2A1D1AF3)] struct {
+        unsigned char   msgid;             //!< 6 bits  : MessageID (3)
+        unsigned char   repeat;            //!< 2 bits  : Repeated
+        long            userid;            //!< 30 bits : UserID / MMSI
+        unsigned char   nav_status;        //!< 4 bits  : Navigational Status
+        unsigned char   rot;               //!< 8 bits  : Rate of Turn
+        int             sog;               //!< 10 bits : Speed Over Ground
+        unsigned char   pos_acc;           //!< 1 bit   : Position Accuracy
+        long            longitude;         //!< 28 bits : Longitude in 1/10000 minute
+        long            latitude;          //!< 27 bits : Latitude in 1/10000 minute
+        int             cog;               //!< 12 bits : Course over Ground
+        int             true;              //!< 9 bits  : True Heading
+        unsigned char   utc_sec;           //!< 6 bits  : UTC Seconds
+        unsigned char   regional;          //!< 4 bits  : Regional bits
+        unsigned char   spare;             //!< 1 bit   : Spare
+        unsigned char   raim;              //!< 1 bit   : RAIM Flag
+        unsigned char   sync_state;        //!< 2 bits  : ITDMA sync state
+        int             slot_increment;    //!< 13 bits : ITDMA Slot Increment
+        unsigned char   num_slots;         //!< 3 bits  : ITDMA Number of Slots
+        unsigned char   keep;              //!< 1 bit   : ITDMA Keep Flag
+    } aismsg_3 ;
+
+    typedef [public, uuid(B1043A17-1D47-477e-AF60-6FA58C5E943E)] struct {
+        unsigned char   msgid;             //!< 6 bits  : MessageID (4)
+        unsigned char   repeat;            //!< 2 bits  : Repeated
+        long            userid;            //!< 30 bits : UserID / MMSI
+        int             utc_year;          //!< 14 bits : UTC Year
+        unsigned char   utc_month;         //!< 4 bits  : UTC Month
+        unsigned char   utc_day;           //!< 5 bits  : UTC Day
+        unsigned char   utc_hour;          //!< 5 bits  : UTC Hour
+        unsigned char   utc_minute;        //!< 6 bits  : UTC Minute
+        unsigned char   utc_second;        //!< 6 bits  : UTC Second
+        unsigned char   pos_acc;           //!< 1 bit   : Position Accuracy
+        long            longitude;         //!< 28 bits : Longitude in 1/10000 minute
+        long            latitude;          //!< 27 bits : Latitude in 1/10000 minute
+        unsigned char   pos_type;          //!< 4 bits  : Type of position fixing device
+        int             spare;             //!< 10 bits : Spare
+        unsigned char   raim;              //!< 1 bit   : RAIM flag
+        unsigned char   sync_state;        //!< 2 bits  : SOTDMA sync state
+        unsigned char   slot_timeout;      //!< 3 bits  : SOTDMA Slot Timeout
+        int             sub_message;       //!< 14 bits : SOTDMA sub-message
+    } aismsg_4 ;
+
+    typedef [public, uuid(59315BF4-4F17-4875-9ED6-86940EA667C3)] struct {
+        unsigned char   msgid;             //!< 6 bits  : MessageID (5)
+        unsigned char   repeat;            //!< 2 bits  : Repeated
+        long            userid;            //!< 30 bits : UserID / MMSI
+        unsigned char   version;           //!< 2 bits  : AIS Version
+        long            imo;               //!< 30 bits : IMO Number
+        unsigned char   callsign[8];       //!< 7x6 (42) bits : Callsign
+        unsigned char   name[21];          //!< 20x6 (120) bits : Ship Name
+        unsigned char   ship_type;         //!< 8 bits  : Type of Ship and Cargo
+        int             dim_bow;           //!< 9 bits  : GPS Ant. Distance from Bow
+        int             dim_stern;         //!< 9 bits  : GPS Ant. Distance from stern
+        unsigned char   dim_port;          //!< 6 bits  : GPS Ant. Distance from port
+        unsigned char   dim_starboard;     //!< 6 bits  : GPS Ant. Distance from starboard
+        unsigned char   pos_type;          //!< 4 bits  : Type of position fixing device
+        long            eta;               //!< 20 bits : Estimated Time of Arrival MMDDHHMM
+        unsigned char   draught;           //!< 8 bits  : Maximum present static draught
+        unsigned char   dest[21];          //!< 6x20 (120) bits : Ship Destination
+        unsigned char   dte;               //!< 1 bit   : DTE flag
+        unsigned char   spare;             //!< 1 bit   : spare
+    } aismsg_5;
+
+
+    typedef [public, uuid(A883C7B0-29FC-4ba5-BAD3-1BECD3AE82BD)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (6)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   sequence;          //!< 2 bits   : Sequence number
+        long            destination;       //!< 30 bits  : Destination MMSI
+        unsigned char   retransmit;        //!< 1 bit    : Retransmit
+        unsigned char   spare;             //!< 1 bit    : Spare
+        int             app_id;            //!< 16 bits  : Application ID
+        sixbit          data;              //!< 960 bits : Data payload (in 6-bit ASCII)   
+    } aismsg_6;
+
+    typedef [public, uuid(CAA8B69F-025E-4788-A8E6-5BD5E03EF49C)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (7)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare;             //!< 2 bits   : Spare
+        long            destid_1;          //!< 30 bits  : Destination MMSI 1
+        unsigned char   sequence_1;        //!< 2 bits   : Sequence Number 1
+        long            destid_2;          //!< 30 bits  : Destination MMSI 2
+        unsigned char   sequence_2;        //!< 2 bits   : Sequence Number 2
+        long            destid_3;          //!< 30 bits  : Destination MMSI 3
+        unsigned char   sequence_3;        //!< 2 bits   : Sequence Number 3
+        long            destid_4;          //!< 30 bits  : Destination MMSI 4
+        unsigned char   sequence_4;        //!< 2 bits   : Sequence Number 4
+        unsigned char   num_acks;          //!< Number of acks 
+    } aismsg_7;
+
+
+    typedef [public, uuid(74F17634-458C-405d-B7AC-E21D8CECC595)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (8)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare;             //!< 2 bits   : Spare
+        int             app_id;            //!< 16 bits  : Application ID
+        sixbit          data;              //!< 952 bits : Data payload (in 6-bit ASCII)
+    } aismsg_8;
+
+    typedef [public, uuid(4B27D972-C51E-48ef-825B-7AC2BC5BAC3B)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (9)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        int             altitude;          //!< 12 bits  : Altitude
+        int             sog;               //!< 10 bits  : Speed Over Ground
+        unsigned char   pos_acc;           //!< 1 bit    : Position Accuracy
+        long            longitude;         //!< 28 bits  : Longitude in 1/10000 minute
+        long            latitude;          //!< 27 bits  : Latitude in 1/10000 minute
+        int             cog;               //!< 12 bits  : Course Over Ground
+        unsigned char   utc_sec;           //!< 6 bits   : UTC Seconds
+        unsigned char   regional;          //!< 8 bits   : Regional bits
+        unsigned char   dte;               //!< 1 bit    : DTE flag
+        unsigned char   spare;             //!< 3 bits   : Spare
+        unsigned char   assigned;          //!< 1 bit    : Assigned mode flag
+        unsigned char   raim;              //!< 1 bit    : RAIM flag
+        unsigned char   comm_state;        //!< 1 bit    : Comm State Flag
+        struct {
+            unsigned char sync_state;      //!< 2 bits   : SOTDMA Sync State
+            unsigned char slot_timeout;    //!< 3 bits   : SOTDMA Slot Timeout
+            int           sub_message;     //!< 14 bits  : SOTDMA Sub-Messsage
+        } sotdma;
+        struct {
+            unsigned char sync_state;      //!< 2 bits   : ITDMA Sync State
+            int           slot_inc;        //!< 13 bits  : ITDMA Slot Increment
+            unsigned char num_slots;       //!< 3 bits   : ITDMA Number of Slots
+            unsigned char keep_flag;       //!< 1 bit    : ITDMA Keep Flag
+        } itdma;
+    } aismsg_9;
+
+    typedef [public, uuid(D06C7B60-47BE-423b-8AB7-00579A96AACC)] struct  {
+        unsigned char     msgid;             //!< 6 bits   : MessageID (10)
+        unsigned char     repeat;            //!< 2 bits   : Repeated
+        long              userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char     spare1;            //!< 2 bits   : Spare
+        long              destination;       //!< 30 bits  : Destination MMSI
+        unsigned char     spare2;            //!< 2 bits   : Spare
+    } aismsg_10;
+
+    typedef [public, uuid(44596148-327C-4b0d-97CE-D6A814836301)] struct {
+        unsigned char   msgid;             //!< 6 bits  : MessageID (11)
+        unsigned char   repeat;            //!< 2 bits  : Repeated
+        long            userid;            //!< 30 bits : UserID / MMSI
+        int             utc_year;          //!< 14 bits : UTC Year
+        unsigned char   utc_month;         //!< 4 bits  : UTC Month
+        unsigned char   utc_day;           //!< 5 bits  : UTC Day
+        unsigned char   utc_hour;          //!< 5 bits  : UTC Hour
+        unsigned char   utc_minute;        //!< 6 bits  : UTC Minute
+        unsigned char   utc_second;        //!< 6 bits  : UTC Second
+        unsigned char   pos_acc;           //!< 1 bit   : Position Accuracy
+        long            longitude;         //!< 28 bits : Longitude in 1/10000 minute
+        long            latitude;          //!< 27 bits : Latitude in 1/10000 minute
+        unsigned char   pos_type;          //!< 4 bits  : Type of position fixing device
+        int             spare;             //!< 10 bits : Spare
+        unsigned char   raim;              //!< 1 bit   : RAIM flag
+        unsigned char   sync_state;        //!< 2 bits  : SOTDMA sync state
+        unsigned char   slot_timeout;      //!< 3 bits  : SOTDMA Slot Timeout
+        int             sub_message;       //!< 14 bits : SOTDMA sub-message
+    } aismsg_11 ;
+
+    typedef [public, uuid(900E0F31-8D38-4bb4-ACB3-45B55C4B6FC7)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (12)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   sequence;          //!< 2 bits   : Sequence
+        long            destination;       //!< 30 bits  : Destination MMSI
+        unsigned char   retransmit;        //!< 1 bit    : Retransmit
+        unsigned char   spare;             //!< 1 bit    : Spare
+        unsigned char   message[158];      //!< 936 bits : Message in ASCII   
+    } aismsg_12;
+
+    typedef [public, uuid(F2B61E8E-8D6C-4b0f-B03E-A758844BAA3D)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (13)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare;             //!< 2 bits   : Spare
+        long            destid_1;          //!< 30 bits  : Destination MMSI 1
+        unsigned char   sequence_1;        //!< 2 bits   : Sequence Number 1
+        long            destid_2;          //!< 30 bits  : Destination MMSI 2
+        unsigned char   sequence_2;        //!< 2 bits   : Sequence Number 2
+        long            destid_3;          //!< 30 bits  : Destination MMSI 3
+        unsigned char   sequence_3;        //!< 2 bits   : Sequence Number 3
+        long            destid_4;          //!< 30 bits  : Destination MMSI 4
+        unsigned char   sequence_4;        //!< 2 bits   : Sequence Number 4
+        unsigned char   num_acks;          //!< Number of acks 
+    } aismsg_13;
+
+    typedef [public, uuid(F7812552-7D3F-4d17-8773-3FD2115C5072)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (14)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare;             //!< 2 bits   : Spare
+        unsigned char   message[164];      //!< 968 bits : Message in ASCII
+    } aismsg_14;
+
+    typedef [public, uuid(5BA10BBB-25E2-4840-97DE-9653D575B303)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (15)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare1;            //!< 2 bits   : Spare
+        long            destid1;           //!< 30 bits  : Destination MMSI 1
+        unsigned char   msgid1_1;          //!< 6 bits   : MessageID 1.1
+        int             offset1_1;         //!< 12 bits  : Slot Offset 1.1
+        unsigned char   spare2;            //!< 2 bits   : Spare
+        unsigned char   msgid1_2;          //!< 6 bits   : MessageID 1.2
+        int             offset1_2;         //!< 12 bits  : Slot Offset 1.2
+        unsigned char   spare3;            //!< 2 bits   : Spare
+        long            destid2;           //!< 30 bits  : Destination MMSI 2
+        unsigned char   msgid2_1;          //!< 6 bits   : MessageID 2.1
+        int             offset2_1;         //!< 12 bits  : Slot Offset 2.1
+        unsigned char   spare4;            //!< 2 bits   : Spare
+        unsigned char   num_reqs;          //!< Number of interrogation requests           
+    } aismsg_15;
+
+    typedef [public, uuid(E3F10BC8-E1CD-4832-B818-A10765105BED)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (16)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare1;            //!< 2 bits   : Spare
+        long            destid_a;          //!< 30 bits  : Destination MMSI A
+        int             offset_a;          //!< 12 bits  : Slot Offset A
+        int             increment_a;       //!< 10 bits  : Increment A
+        long            destid_b;          //!< 30 bits  : Destination MMSI B
+        int             offset_b;          //!< 12 bits  : Slot Offset B
+        int             increment_b;       //!< 10 bits  : Increment B
+        unsigned char   spare2;            //!< 4 bits   : Spare
+        unsigned char   num_cmds;          //!< Number of commands received
+    } aismsg_16;
+
+
+    typedef [public, uuid(5CDD2D35-A9BC-4012-AD4E-F1BF835E7C6E)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (17)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare1;            //!< 2 bits   : Spare
+        long            longitude;         //!< 18 bits  : Longiture in 1/1000 minute
+        long            latitude;          //!< 17 bits  : Latitude in 1/1000 minute
+        unsigned char   spare2;            //!< 5 bits   : Spare
+        unsigned char   msg_type;          //!< 6 bits   : Mesage Type from M.823
+        int             station_id;        //!< 10 bits  : Station ID from M.823
+        int             z_count;           //!< 13 bits  : Z Count
+        unsigned char   seq_num;           //!< 3 bits   : Sequence Number
+        unsigned char   num_words;         //!< 5 bits   : Number of Data Words
+        unsigned char   health;            //!< 3 bits   : Reference Station Health from M.823
+        sixbit          data;              //!< 0-696 bits  : Data in 6-bit format
+    } aismsg_17;
+
+    typedef [public, uuid(DBBD00EC-AD13-4743-B673-8F7656661969)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (18)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   regional1;         //!< 8 bits   : Regional Bits
+        int             sog;               //!< 10 bits  : Speed Over Ground
+        unsigned char   pos_acc;           //!< 1 bit    : Position Accuracy
+        long            longitude;         //!< 28 bits  : Longitude in 1/10000 minute
+        long            latitude;          //!< 27 bits  : Latitude in 1/10000 minute
+        int             cog;               //!< 12 bits  : Course Over Ground
+        int             true;              //!< 9 bits   : True Heading
+        unsigned char   utc_sec;           //!< 6 bits   : UTC Seconds
+        unsigned char   regional2;         //!< 2 bits   : Regional Bits
+        unsigned char   unit_flag;         //!< 1 bit    : Class B CS Flag
+        unsigned char   display_flag;      //!< 1 bit    : Integrated msg14 Display Flag
+        unsigned char   dsc_flag;          //!< 1 bit    : DSC Capability flag
+        unsigned char   band_flag;         //!< 1 bit    : Marine Band Operation Flag
+        unsigned char   msg22_flag;        //!< 1 bit    : Msg22 Frequency Management Flag
+        unsigned char   mode_flag;         //!< 1 bit    : Autonomous Mode Flag
+        unsigned char   raim;              //!< 1 bit    : RAIM Flag
+        unsigned char   comm_state;        //!< 1 bit    : Comm State Flag
+        struct {
+            unsigned char sync_state;      //!< 2 bits   : SOTDMA Sync State
+            unsigned char slot_timeout;    //!< 3 bits   : SOTDMA Slot Timeout
+            int           sub_message;     //!< 14 bits  : SOTDMA Sub-Message
+        } sotdma;
+        struct {
+            unsigned char sync_state;      //!< 2 bits   : ITDMA Sync State
+            int           slot_inc;        //!< 13 bits  : ITDMA Slot Increment
+            unsigned char num_slots;       //!< 3 bits   : ITDMA Number of Slots
+            unsigned char keep_flag;       //!< 1 bit    : ITDMA Keep Flag
+        } itdma;
+    } aismsg_18;
+
+    typedef [public, uuid(4305F774-0E03-43a2-B19C-2F8C4DF27AA8)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (19)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   regional1;         //!< 8 bits   : Regional Bits
+        int             sog;               //!< 10 bits  : Speed Over Ground
+        unsigned char   pos_acc;           //!< 1 bit    : Position Accuracy
+        long            longitude;         //!< 28 bits  : Longitude in 1/10000 minute
+        long            latitude;          //!< 27 bits  : Latitude in 1/10000 minute
+        int             cog;               //!< 12 bits  : Course Over Ground
+        int             true;              //!< 9 bits   : True Heading
+        unsigned char   utc_sec;           //!< 6 bits   : UTC Seconds
+        unsigned char   regional2;         //!< 4 bits   : Regional Bits
+        unsigned char   name[21];          //!< 120 bits : Ship Name in ASCII
+        unsigned char   ship_type;         //!< 8 bits   : Type of Ship and Cargo
+        int             dim_bow;           //!< 9 bits   : GPS Ant. Distance from Bow
+        int             dim_stern;         //!< 9 bits   : GPS Ant. Distance from Stern   
+        unsigned char   dim_port;          //!< 6 bits   : GPS Ant. Distance from Port
+        unsigned char   dim_starboard;     //!< 6 bits   : GPS Ant. Distance from Starboard
+        unsigned char   pos_type;          //!< 4 bits   : Type of Position Fixing Device
+        unsigned char   raim;              //!< 1 bit    : RAIM Flag
+        unsigned char   dte;               //!< 1 bit    : DTE Flag
+        unsigned char   spare;             //!< 5 bits   : Spare
+    } aismsg_19;
+
+    typedef [public, uuid(560691F7-06D3-4bd0-ACC3-4B785D905DA0)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (20)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare1;            //!< 2 bits   : Spare
+        int             offset1;           //!< 12 bits  : Slot Offset 1
+        unsigned char   slots1;            //!< 4 bits   : Number of Slots 1
+        unsigned char   timeout1;          //!< 3 bits   : Timeout in Minutes 2
+        int             increment1;        //!< 11 bits  : Slot Increment 1
+        int             offset2;           //!< 12 bits  : Slot Offset 2
+        unsigned char   slots2;            //!< 4 bits   : Number of Slots 2
+        unsigned char   timeout2;          //!< 3 bits   : Timeout in Minutes 2
+        int             increment2;        //!< 11 bits  : Slot Increment 2
+        int             offset3;           //!< 12 bits  : Slot Offset 3
+        unsigned char   slots3;            //!< 4 bits   : Number of Slots 3
+        unsigned char   timeout3;          //!< 3 bits   : Timeout in Minutes 3
+        int             increment3;        //!< 11 bits  : Slot Increment 3
+        int             offset4;           //!< 12 bits  : Slot Offset 4
+        unsigned char   slots4;            //!< 4 bits   : Number of Slots 4
+        unsigned char   timeout4;          //!< 3 bits   : Timeout in Minutes 4
+        int             increment4;        //!< 11 bits  : Slot Increment 4
+        unsigned char   spare2;            //!< 0-6 bits : Spare
+        unsigned char   num_cmds;          //!< Number of commands received
+    } aismsg_20;
+
+    typedef [public, uuid(93DCE21A-1F00-4749-84DB-4FBA886C6B26)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (21)     
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   aton_type;         //!< 5 bits   : Type of AtoN
+        unsigned char   name[21];          //!< 120 bits : Name of AtoN in ASCII
+        unsigned char   pos_acc;           //!< 1 bit    : Position Accuracy
+        long            longitude;         //!< 28 bits  : Longitude in 1/10000 minutes
+        long            latitude;          //!< 27 bits  : Latitude in 1/10000 minutes
+        int             dim_bow;           //!< 9 bits   : GPS Ant. Distance from Bow
+        int             dim_stern;         //!< 9 bits   : GPS Ant. Distance from Stern
+        unsigned char   dim_port;          //!< 6 bits   : GPS Ant. Distance from Port
+        unsigned char   dim_starboard;     //!< 6 bits   : GPS Ant. Distance from Starboard
+        unsigned char   pos_type;          //!< 4 bits   : Type of Position Fixing Device
+        unsigned char   utc_sec;           //!< 6 bits   : UTC Seconds
+        unsigned char   off_position;      //!< 1 bit    : Off Position Flag
+        unsigned char   regional;          //!< 8 bits   : Regional Bits
+        unsigned char   raim;              //!< 1 bit    : RAIM Flag
+        unsigned char   virtual;           //!< 1 bit    : Virtual/Pseudo AtoN Flag
+        unsigned char   assigned;          //!< 1 bit    : Assigned Mode Flag
+        unsigned char   spare1;            //!< 1 bit    : Spare
+        unsigned char   name_ext[16];      //!< 0-84 bits : Extended name in ASCII
+        unsigned char   spare2;            //!< 0-6 bits : Spare
+    } aismsg_21;
+
+    typedef [public, uuid(342352F0-CF3C-461d-9A8E-2E3CB0F566B5)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (22)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare1;            //!< 2 bits   : Spare
+        int             channel_a;         //!< 12 bits  : M.1084 Channel A Frequency
+        int             channel_b;         //!< 12 bits  : M.1084 Channel B Frequency
+        unsigned char   txrx_mode;         //!< 4 bits   : TX/RX Mode
+        unsigned char   power;             //!< 1 bit    : Power Level
+        long            NE_longitude;      //!< 18 bits  : Longitude in 1/1000 minutes
+        long            NE_latitude;       //!< 17 bits  : Latitude in 1/1000 minutes
+        long            addressed_1;       //!< 30 bits  : Destination MMSI 1
+        long            SW_longitude;      //!< 18 bits  : Longitude in 1/1000 minutes
+        long            SW_latitude;       //!< 17 bits  : Latitude in 1/1000 minutes
+        long            addressed_2;       //!< 30 bits  : Destination MMSI 2
+        unsigned char   addressed;         //!< 1 bit    : Addressed flag
+        unsigned char   bw_a;              //!< 1 bit    : Channel A Bandwidth
+        unsigned char   bw_b;              //!< 1 bit    : Channel B Bandwidth
+        unsigned char   tz_size;           //!< 3 bits   : Transitional Zone size
+        long            spare2;            //!< 23 bits  : Spare
+    } aismsg_22 ;
+
+    typedef [public, uuid(7CB8704D-8B4C-4551-9ADF-96A42279A06D)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (23)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   spare1;            //!< 2 bits   : Spare
+        long            NE_longitude;      //!< 18 bits  : Longitude in 1/1000 minutes
+        long            NE_latitude;       //!< 17 bits  : Latitude in 1/1000 minutes
+        long            SW_longitude;      //!< 18 bits  : Longitude in 1/1000 minutes
+        long            SW_latitude;       //!< 17 bits  : Latitude in 1/1000 minutes
+        unsigned char   station_type;      //!< 4 bits   : Station Type
+        unsigned char   ship_type;         //!< 8 bits   : Type of Ship and Cargo
+        long            spare2;            //!< 22 bits  : Spare
+        unsigned char   txrx_mode;         //!< 2 bits   : TX/RX Mode
+        unsigned char   report_interval;   //!< 4 bits   : Reporting Interval from IEC 62287 Table 17
+        unsigned char   quiet_time;        //!< 4 bits   : Quiet Time in Minutes
+        unsigned char   spare3;            //!< 6 bits   : Spare
+    } aismsg_23 ;
+
+    typedef [public, uuid(4B4918B1-804E-4c2c-9F2A-1B963E49DECE)] struct {
+        unsigned char   msgid;             //!< 6 bits   : MessageID (24)
+        unsigned char   repeat;            //!< 2 bits   : Repeated
+        long            userid;            //!< 30 bits  : UserID / MMSI
+        unsigned char   part_number;       //!< 2 bits   : Part Number
+
+    //!< Message 24A 
+        unsigned char   name[21];          //!< 120 bits : Ship Name in ASCII
+
+    //!< Message 24B 
+        unsigned char   ship_type;         //!< 8 bits   : Type of Ship and Cargo
+        unsigned char   vendor_id[8];      //!< 42 bits  : Vendor ID in ASCII
+        unsigned char   callsign[8];       //!< 42 bits  : Callsign in ASCII
+        int             dim_bow;           //!< 9 bits   : GPS Ant. Distance from Bow
+        int             dim_stern;         //!< 9 bits   : GPS Ant. Distance from Stern
+        unsigned char   dim_port;          //!< 6 bits   : GPS Ant. Distance from Port
+        unsigned char   dim_starboard;     //!< 6 bits   : GPS Ant. Distance from Starboard
+        unsigned char   spare;             //!< 6 bits   : Spare
+
+        unsigned char   flags;             //!< A/B flags - A = 1  B = 2  Both = 3  
+	} aismsg_24;
+
+	// St. Lawrence Seaway Structures
+    typedef [public] long SEAWAYSTATE;
+
+	typedef [public, uuid(1A6ECDE6-0953-4fe0-BA9F-BA2B73185188)] struct {
+		unsigned char   month;             //!< 4 bits   : Month
+		unsigned char   day;               //!< 5 bits   : Day
+		unsigned char   hours;             //!< 5 bits   : UTC Hours
+		unsigned char   minutes;           //!< 6 bits   : UTC Minutes
+	} timetag;
+
+	typedef [public, uuid(F24C2742-DACE-4dbe-A7B4-66542B4665CD)] struct {
+		timetag         utc_time;          //!< 20 bits  : UTC Time tag
+		unsigned char   station_id[8];     //!< 7x6(42) bits  : Station ID
+		long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+		long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+		int             speed;             //!< 10 bits  : Average Wind Speed
+		int             gust;              //!< 10 bits  : Wind Gust
+		int             direction;         //!< 9 bits   : Wind Direction
+		unsigned char   spare;             //!< 4 bits   : Reserved for Future Use
+	} wind_report;
+
+	typedef [public, uuid(1FD5CF6C-061D-4874-BE44-55A13EB6B39D)] struct {
+		timetag         utc_time;          //!< 20 bits  : UTC Time tag
+	    unsigned char   station_id[8];     //!< 7x6(42) bits  : Station ID
+	    long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+	    long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+	    int             speed;             //!< 10 bits  : Average Wind Speed
+	    int             gust;              //!< 10 bits  : Wind Gust
+	    int             direction;         //!< 9 bits   : Wind Direction
+	    int             pressure;          //!< 14 bits  : Atmospheric Pressure
+	    int             air_temp;          //!< 10 bits  : Air Temperature
+	    int             dew_point;         //!< 10 bits  : Dew Point
+	    unsigned char   visibility;        //!< 8 bits   : Visibility
+	    int             water_temp;        //!< 10 bits  : Water Temperature
+	} weather_report;
+
+	typedef [public, uuid(17F673FF-79F2-4859-BBB6-21BDA123AFEE)] struct {
+	    timetag         utc_time;          //!< 20 bits  : UTC Time tag
+	    unsigned char   station_id[8];     //!< 7x6(42) bits  : Station ID
+	    long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+	    long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+	    unsigned char   type;              //!< 1 bit    : Water Level Type
+	    int			    level;             //!< 16 bits  : Water Level
+	    unsigned char   datum;             //!< 2 bits   : Reference Datum
+	    int             spare;             //!< 14 bits  : Reserved for Future Use
+	} water_level_report;
+
+	typedef [public, uuid(6A7E33F1-F617-4fa3-A1F2-BD3D9FB4236C)] struct {
+	    timetag         utc_time;          //!< 20 bits  : UTC Time tag
+	    unsigned char   station_id[8];     //!< 7x6(42) bits  : Station ID
+	    long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+	    long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+	    int             flow;              //!< 14 bits  : Water Flow
+	    long            spare;             //!< 19 bits  : Reserved for Future Use
+	} water_flow_report;
+
+	typedef [public, uuid(5102596C-52AB-4b76-B2C7-1E6B2D15FD2B)] struct {
+		unsigned char   name[16];          //!< 15x6(90) bits  : Vessel Name
+		unsigned char   direction;         //!< 1 bit    : Direction
+		timetag         eta;               //!< 20 bits  : ETA
+		int             spare;             //!< 9 bits   : Reserved for Future Use
+	} lock_schedule;
+
+	typedef [public, uuid(651FCE29-D542-4b33-AD05-DD5420F544A2)] struct {
+		timetag         utc_time;          //!< 20 bits  : UTC Time Tag
+		unsigned char   station_id[8];     //!< 7x6(42) bits  : Station ID
+		long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+		long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+		unsigned char   speed;             //!< 8 bits   : Current Speed
+		int             direction;         //!< 9 bits   : Current Direction
+		int             spare;             //!< 16 bits  : Reserved for Future Use
+	} current_report;
+
+	typedef [public, uuid(D7EFB3E8-8FE7-4629-937D-B6C1FBB9A080)] struct {
+		timetag         utc_time;          //!< 20 bits  : UTC Time Tag
+		unsigned char   station_id[8];     //!< 7x6(42) bits  : Station ID
+		long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+		long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+		int             salinity;          //!< 10 bits  : Salinity
+		int             water_temp;        //!< 10 bits  : Water Temp
+		int             spare;             //!< 13 bits  : Reserved for Future Use
+	} salinity_report;
+
+	typedef [public, uuid(62F2F240-1A9C-4d1f-8A88-D8560F4EC454)] struct {
+		unsigned char   order;             //!< 5 bits   : Order in list 1-31
+		unsigned char   vessel_name[16];   //!< 15*6(90) bits : Vessel Name
+		unsigned char   position_name[13]; //!< 13*6(72) bits : Position Name
+		unsigned char   time_hh;           //!< 5 bits   : Hours of call in
+		unsigned char   time_mm;           //!< 6 bits   : Minutes of call in
+		unsigned char   spare;             //!< 6 bits   : Reserved for Future Use
+	} procession_order;
+
+	typedef [public, uuid(4F2FB1EE-0251-4b29-92DB-69382F350CFA)] struct {
+		int dac;                           //!< DAC
+		unsigned char   fi;                //!< FI
+		unsigned char   spare;             //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (1)
+		weather_report  report[4];         //!< N * 192  : 1-4 Weather Reports
+	} seaway1_1;
+
+	typedef [public, uuid(6B1A1D26-430A-4b62-A2BC-D528E8FB7B3D)] struct {
+		int dac;                           //!< DAC
+		unsigned char   fi;                //!< FI
+		unsigned char   spare;             //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (2)
+		wind_report     report[6];         //!< N * 144  : 1-6 Wind Reports
+	} seaway1_2;
+
+	typedef [public, uuid(77CC686A-B1F7-4c4b-A189-04F1F03C94B7)] struct {
+		int dac;                           //!< DAC
+		unsigned char   fi;                           //!< FI
+		unsigned char   spare;             //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (3)
+		water_level_report report[6];      //!< N * 144  : 1-6 Water Level Reports
+	} seaway1_3;
+
+
+	typedef [public, uuid(EFA94F1E-E060-4eec-BEF7-D12D91A7AFE8)] struct {
+	    int dac;                           //!< DAC
+	    unsigned char   fi;                //!< FI
+		unsigned char   spare;             //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (6)
+		water_flow_report report[6];       //!< N * 144  : 1-6 Water Flow Reports
+	} seaway1_6;
+
+
+	typedef [public, uuid(7A56A72A-A0A2-40e0-B16C-91179BE3D6D9)] struct {
+		int dac;                           //!< DAC
+		unsigned char   fi;                //!< FI
+		unsigned char   spare1;            //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (1)
+		timetag         utc_time;          //!< 20 bits  : UTC Time tag
+		unsigned char   lock_id[8];        //!< 7x6(42) bits  : Lock ID
+		long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+		long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+		int             spare2;            //!< 9 bits   : Reserved for Future Use
+		lock_schedule   schedule[6];       //!< N * 120  : 1-6 Lock Schedules
+	} seaway2_1;
+
+	typedef [public, uuid(7BD01C89-DF44-4efb-BDCA-826C18E2DECB)] struct {
+	    int dac;                           //!< DAC
+		unsigned char   fi;                //!< FI
+		unsigned char   spare1;            //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (2)
+		timetag         utc_time;          //!< 20 bits  : UTC Time tag
+		unsigned char   name[16];          //!< 15x6(90) bits : Vessel Name
+		unsigned char   ast_location[8];   //!< 7x6(42) bits  : Last Location
+		timetag         last_ata;          //!< 20 bits  : Last ATA in UTC Time
+		unsigned char   first_lock[8];     //!< 7x6(42) bits  : First Lock
+		timetag         first_eta;         //!< 20 bits  : First Lock ETA in UTC
+		unsigned char   second_lock[8];    //!< 7x6(42) bits  : Second Lock
+		timetag         second_eta;        //!< 20 bits  : Second Lock ETA in UTC
+		unsigned char   delay[8];          //!< 7x6(42) bits  : Delay
+		unsigned char   spare2;            //!< 4 bits   : Reserved for Future Use
+	} seaway2_2;
+
+	typedef [public, uuid(37C7B4EB-BA68-4ec8-B329-72ECD5816499)] struct {
+	    int dac;                           //!< DAC
+	    unsigned char   fi;                //!< FI
+		unsigned char   spare1;            //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (1)
+		unsigned char   major;             //!< 8 bits   : Major revision number
+		unsigned char   minor;             //!< 8 bits   : Minor revision number
+		unsigned char   spare2;            //!< 8 bits   : Reserved for Future Use
+	} seaway32_1;
+
+	typedef [public, uuid(16742035-F143-4532-9EC1-93691828ABFA)] struct {
+		int dac;                           //!< DAC
+	    unsigned char   fi;                //!< FI
+		unsigned char   spare;             //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (4)
+		current_report  report[6];         //!< N * 144  : 1-6 Hydro Reports
+	} pawss1_4;
+
+	typedef [public, uuid(8BC2C977-6630-4ece-B790-A206A8F832A3)] struct {
+	    int dac;                           //!< DAC
+	    unsigned char   fi;                //!< FI
+		unsigned char   spare;             //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (5)
+	    salinity_report report[6];         //!< N * 144  : 1-6 Hydro Reports
+	} pawss1_5;
+
+	typedef [public, uuid(390B8AE2-C344-409c-8A66-516F430752F3)] struct {
+	    int dac;                           //!< DAC
+	    unsigned char   fi;                //!< FI
+		unsigned char   spare1;            //!< 2 bits   : Spare
+		unsigned char   msgid;             //!< 6 bits   : Message ID (3)
+		timetag         utc_time;          //!< 20 bits  : UTC Time tag
+		unsigned char   direction[17];     //!< 16*6(96) bits : Direction
+		long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+		long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+		unsigned char   spare2;            //!< 3 bits   : Reserved for Future Use
+		procession_order  report[4];       //!< N * 184  : 1-4 Vessel Procession Order Reports    
+	} pawss2_3;
+
+
+	typedef [public, uuid(B05AEDD9-0C66-465b-833C-BE7A04CA1288)] struct {
+		long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+		long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+	    int             timedate;          //!< 16 bits  : Date and Time DDHHMM
+	    unsigned char            wind_avg;          //!< 7 bits   : Average of wind speed for the last 10 minutes 0-120kts
+	    unsigned char            wind_gust;         //!< 7 bits   : Maximum wind speed during the last 10 minutes 0-120kt
+	    int             wind_dir;          //!< 9 bits   : 0-359 degrees
+	    int             gust_dir;          //!< 9 bits   : 0-359 degrees
+	    int             air_temp;          //!< 11 bits  : Dry bulb temp. -60.0 to +60.0 C
+	    unsigned char            humidity;          //!< 7 bits   : 0-100%
+	    int             dew_point;         //!< 10 bits  : -20.0 to +50.0 degrees
+	    int             pressure;          //!< 9 bits   : 800-1200 hPa
+	    unsigned char            tendency;          //!< 2 bits   : 0=steady 1=decreasing 2=increasing
+	    int             visibility;        //!< 8 bits   : 0.0 to 25.0 NM
+	    int             water_level;       //!< 9 bits   : -10.0 to +30.0m
+	    unsigned char            water_trend;       //!< 2 bits   : 0=steady 1=decreasing 2=increasing
+	    unsigned char            surface_speed;     //!< 8 bits   : 0.0 to 25.0 kts
+	    int             surface_dir;       //!< 9 bits   : 0-359 degrees
+	    unsigned char            speed_2;           //!< 8 bits   : Current measured at chosen level 0.0 to 25.0 kts
+	    int             dir_2;             //!< 9 bits   : Current direction 0-359 degrees
+	    unsigned char            level_2;           //!< 5 bits   : Measuring level 0-30m
+	    unsigned char            speed_3;           //!< 8 bits   : Current measured at chosen level 0.0 to 25.0 kts
+	    int             dir_3;             //!< 9 bits   : Current direction 0-359 degrees
+		unsigned char            level_3;           //!< 5 bits   : Measuring level 0-30m
+	    unsigned char            wave_height;       //!< 8 bits   : 0.0 to 25.0 m
+	    unsigned char            wave_period;       //!< 6 bits   : Period in second 0-60
+	    unsigned char            swell_height;      //!< 8 bits   : 0.0 to 25.0 m
+	    unsigned char            swell_period;      //!< 6 bits   : Period in second 0-60
+	    int             swell_dir;         //!< 9 bits   : 0-359 degrees
+	    unsigned char            sea_state;         //!< 4 bits   : Beaufort scale
+	    int             water_temp;        //!< 10 bits  : -10.0 to +50.0 degrees
+	    unsigned char            precip_type;       //!< 3 bits   : According to WMO
+	    int             salanity;          //!< 9 bits   : 0.0 to 50.0%o
+	    unsigned char            ice;               //!< 2 bits   : yes/no
+	    unsigned char            spare;             //!< 6 bits   : spare
+	} imo1_11;
+
+
+	typedef [public, uuid(AE2A9470-AFFE-4bd0-B5A5-81C9DC005E50)] struct {
+	    unsigned char            last_port[6];      //!< 5x6 (30) bits : Last Port of Call UN Locode
+	    timetag			atd;               //!< 20 bits  : Actual Time of Departure
+	    unsigned char            next_port[6];      //!< 5x6 (30) bits : Last Port of Call UN Locode
+	    timetag			eta;               //!< 20 bits  : Estimated Time of Arrival
+	    unsigned char            good[21];          //!< 20x6 (120) bits : Main Dangerous Good
+	    unsigned char			imd[5];            //!< 4x6 (24) bits : IMD Category of Main Dangerous Good
+	    int             un_number;         //!< 13 bits  : UN Number 1-3363  0=not available
+	    int             quantity;          //!< 10 bits  : Quantity of Main Dangerous Good 
+	    unsigned char            units;             //!< 2 bits   : 0=not avail. 1=kg 2=tons (1E3kg) 3=1000tons(1E6kg)
+	    unsigned char            spare;             //!< 3 bits   : spare
+	} imo1_12;
+
+	typedef [public, uuid(E1D3AD01-38DA-44c2-A684-CFA56168D6B8)] struct {
+	    unsigned char            reason[21];        //!< 20x6 (120) bits : Reason for closing
+		unsigned char            location_from[21]; //!< 20x6 (120) bits : Location of closing from
+		unsigned char            location_to[21];   //!< 20x6 (120) bits : Location of closing to
+		int             extension;         //!< 10 bits : Extension of closed area radius (0-1000 1001=not available)
+		unsigned char            units;             //!< 2 bits  : 0=m 1=km 2=nm 3=cbl
+		unsigned char            from_day;          //!< 5 bits  : 1-31 0=not available
+		unsigned char            from_month;        //!< 4 bits  : 1-12 0=not available
+		unsigned char            from_hour;         //!< 5 bits  : 0-23 24=not available
+		unsigned char            from_minute;       //!< 6 bits  : 0-59 60=not available
+		unsigned char            to_day;            //!< 5 bits  : 1-31 0=not available
+		unsigned char            to_month;          //!< 4 bits  : 1-12 0=not available
+	    unsigned char            to_hour;           //!< 5 bits  : 0-23 24=not available
+	    unsigned char            to_minute;         //!< 6 bits  : 0-59 60=not available
+	    unsigned char            spare;             //!< 4 bits  : spare
+	} imo1_13;
+
+
+	typedef [public, uuid(9699CAAC-CA53-4427-B0AD-BB5057588B60)] struct {
+	    long            latitude;         //!< 27 bits  : Latitude in 1/10000 minute
+	    long            longitude;        //!< 28 bits  : Longitude in 1/10000 minute
+	    unsigned char            from_hour;        //!< 5 bits   : 0-23 24=not available
+	    unsigned char            from_minute;      //!< 6 bits   : 0-59 60=not available
+	    unsigned char            to_hour;          //!< 5 bits   : 0-23 24=not available
+	    unsigned char            to_minute;        //!< 6 bits   : 0-59 60=not available
+	    int             current_dir;      //!< 9 bits   : Current direction in degrees 0-359 360=not available
+	    unsigned char            current_speed;    //!< 7 bits   : Current speed 0-12.6 kts 127=not available
+	} tidal_window;
+
+
+	typedef [public, uuid(519388AD-BA1F-43d6-96F2-5D37448FA0A6)] struct {
+	    unsigned char            utc_month;         //!< 4 bits  : 1-12 0=not available
+	    unsigned char            utc_day;           //!< 5 bits  : 1-31 0=not available
+	    tidal_window    windows[3];
+	} imo1_14;
+
+
+	typedef [public, uuid(ABDBEFD5-DCA7-4318-B283-D5308D5BFBF8)] struct {
+	    int             ais_draught;       //!< 11 bits  : Height over Keel in 1/10m 0=not available
+	    unsigned char            spare;             //!< 5 bits   : spare
+	} imo1_15;
+
+
+	typedef [public, uuid(FA99B463-A03F-4c5a-A87E-72B11584CE1F)] struct {
+		int             num_persons;       //!< 13 bits  : Number of Persons on Board 0-8191 0=not available
+		unsigned char            spare;             //!< 3 bits   : spare
+	} imo1_16;
+	
+
+	typedef [public, uuid(A82552C0-9DD0-4574-87B5-33041A104774)] struct {
+	    unsigned char            type;              //!< 2 bits   : 0=MMSI 1=IMO 2=Callsign 3=Other
+		// 42 bits are allocated for MMSI, ISO or Callsign 
+		// When MMSI and ISO are used, skip 12 bits first
+		long            mmsi;              //!< 30 bits  : MMSI
+		long            imo;               //!< 30 bits  : IMO
+	    unsigned char            callsign[8];       //!< 7x6 (42) bits : Callsign
+	    unsigned char            other[8];          //!< 7x6 (42) bits : Callsign
+	    unsigned char            spare;             //!< 4 bits  : spare
+	    long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
+	    long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
+		int             cog;               //!< 9 bits   : Course over ground 0-359 degrees 360=not available
+		unsigned char            timestamp;         //!< 6 bits   : UTC Second when generated 60=not available
+		unsigned char   sog;               //!< 8 bits   : Speed over ground 0-254kts 255=not available		
+	}  pseudo_target;
+
+
+	typedef [public, uuid(CB96212B-A7C4-4f69-A349-A587AF2AAFD3)] struct {
+		pseudo_target   targets[4];        //!< 1-4 targets
+	} imo1_17;
+
+
+    // Module that will "declare" the 'C' functions
+	[
+	    helpstring("AIS Parser SDK functions"),
+		version(1.7),
+		dllname("aisparser.dll")
+	]
+
+	module AISFunctions
+	{
+	    [
+		    helpstring("Initialize the AIS Parser"),
+			entry("InitAisparser")
+		]
+		AISSTATE __stdcall InitAisparser();
+
+        [
+		    helpstring("Clean up memory usage"),
+			entry("CloseAisparser")
+		]
+		void __stdcall CloseAisparser( AISSTATE state);
+        
+        [
+		    helpstring("Assemble VDM strings"),
+			entry("AssembleVdm")
+		]
+	    int __stdcall AssembleVdm( AISSTATE state, LPSTR str);
+
+        [
+		    helpstring("Retrieve a value from the 6-bit stream"),
+			entry("Get6Bit")
+		]
+        long __stdcall Get6Bit( AISSTATE state, short numbits);
+       
+        [
+		    helpstring("Convert AIS 6-bit Text to ASCII"),
+			entry("ais2ascii")
+		]
+        unsigned char __stdcall ais2ascii( unsigned char value);
+
+        [
+		    helpstring("Convert AIS 1/10000 degree position to DD.DDDDDD format"),
+			entry("pos2ddd")
+		]
+        int __stdcall pos2ddd( long latitude, long longitude, [in,out] double *lat_dd, [in,out] double *long_ddd );
+
+        [
+		    helpstring("Convert AIS 1/10000 degree position to DD MM.MMMM format"),
+			entry("pos2dmm")
+		]
+        int __stdcall pos2dmm( long latitude, long longitude, [in,out] short *lat_dd, [in,out] double *lat_min, [in,out] short *long_ddd, [in,out] double *long_min );
+
+        [
+		    helpstring("Parse AIS Message 1"),
+			entry("parse_ais_1")
+		]
+        int __stdcall ParseMsg1( [in] AISSTATE state,  [in,out] aismsg_1 *msg );
+
+        [
+		    helpstring("Parse AIS Message 2"),
+			entry("parse_ais_2")
+		]
+        int __stdcall ParseMsg2( [in] AISSTATE state,  [in,out] aismsg_2 *msg );
+
+        [
+		    helpstring("Parse AIS Message 3"),
+			entry("parse_ais_3")
+		]
+        int __stdcall ParseMsg3( [in] AISSTATE state,  [in,out] aismsg_3 *msg );
+
+        [
+		    helpstring("Parse AIS Message 4"),
+			entry("parse_ais_4")
+		]
+        int __stdcall ParseMsg4( [in] AISSTATE state,  [in,out] aismsg_4 *msg );
+
+        [
+		    helpstring("Parse AIS Message 5"),
+			entry("parse_ais_5")
+		]
+        int __stdcall ParseMsg5( [in] AISSTATE state,  [in,out] aismsg_5 *msg );
+
+        [
+		    helpstring("Parse AIS Message 6"),
+			entry("parse_ais_6")
+		]
+        int __stdcall ParseMsg6( [in] AISSTATE state,  [in,out] aismsg_6 *msg );
+
+        [
+		    helpstring("Parse AIS Message 7"),
+			entry("parse_ais_7")
+		]
+        int __stdcall ParseMsg7( [in] AISSTATE state,  [in,out] aismsg_7 *msg );
+
+        [
+		    helpstring("Parse AIS Message 8"),
+			entry("parse_ais_8")
+		]
+        int __stdcall ParseMsg8( [in] AISSTATE state,  [in,out] aismsg_8 *msg );
+
+        [
+		    helpstring("Parse AIS Message 9"),
+			entry("parse_ais_9")
+		]
+        int __stdcall ParseMsg9( [in] AISSTATE state,  [in,out] aismsg_9 *msg );
+
+        [
+		    helpstring("Parse AIS Message 10"),
+			entry("parse_ais_10")
+		]
+        int __stdcall ParseMsg10( [in] AISSTATE state,  [in,out] aismsg_10 *msg );
+
+        [
+		    helpstring("Parse AIS Message 11"),
+			entry("parse_ais_11")
+		]
+        int __stdcall ParseMsg11( [in] AISSTATE state,  [in,out] aismsg_11 *msg );
+
+        [
+		    helpstring("Parse AIS Message 12"),
+			entry("parse_ais_12")
+		]
+        int __stdcall ParseMsg12( [in] AISSTATE state,  [in,out] aismsg_12 *msg );
+
+        [
+		    helpstring("Parse AIS Message 13"),
+			entry("parse_ais_13")
+		]
+        int __stdcall ParseMsg13( [in] AISSTATE state,  [in,out] aismsg_13 *msg );
+
+        [
+		    helpstring("Parse AIS Message 14"),
+			entry("parse_ais_14")
+		]
+        int __stdcall ParseMsg14( [in] AISSTATE state,  [in,out] aismsg_14 *msg );
+
+        [
+		    helpstring("Parse AIS Message 15"),
+			entry("parse_ais_15")
+		]
+        int __stdcall ParseMsg15( [in] AISSTATE state,  [in,out] aismsg_15 *msg );
+
+        [
+		    helpstring("Parse AIS Message 16"),
+			entry("parse_ais_16")
+		]
+        int __stdcall ParseMsg16( [in] AISSTATE state,  [in,out] aismsg_16 *msg );
+
+        [
+		    helpstring("Parse AIS Message 17"),
+			entry("parse_ais_17")
+		]
+        int __stdcall ParseMsg17( [in] AISSTATE state,  [in,out] aismsg_17 *msg );
+
+        [
+		    helpstring("Parse AIS Message 18"),
+			entry("parse_ais_18")
+		]
+        int __stdcall ParseMsg18( [in] AISSTATE state,  [in,out] aismsg_18 *msg );
+
+        [
+		    helpstring("Parse AIS Message 19"),
+			entry("parse_ais_19")
+		]
+        int __stdcall ParseMsg19( [in] AISSTATE state,  [in,out] aismsg_19 *msg );
+
+        [
+		    helpstring("Parse AIS Message 20"),
+			entry("parse_ais_20")
+		]
+        int __stdcall ParseMsg20( [in] AISSTATE state,  [in,out] aismsg_20 *msg );
+
+        [
+		    helpstring("Parse AIS Message 21"),
+			entry("parse_ais_21")
+		]
+        int __stdcall ParseMsg21( [in] AISSTATE state,  [in,out] aismsg_21 *msg );
+
+        [
+		    helpstring("Parse AIS Message 22"),
+			entry("parse_ais_22")
+		]
+        int __stdcall ParseMsg22( [in] AISSTATE state,  [in,out] aismsg_22 *msg );
+
+        [
+		    helpstring("Parse AIS Message 23"),
+			entry("parse_ais_23")
+		]
+        int __stdcall ParseMsg23( [in] AISSTATE state,  [in,out] aismsg_23 *msg );
+
+        [
+		    helpstring("Parse AIS Message 24"),
+			entry("parse_ais_24")
+		]
+        int __stdcall ParseMsg24( [in] AISSTATE state,  [in,out] aismsg_24 *msg );
+
+        [
+		    helpstring("Parse Seaway Message 1.1"),
+			entry("parse_seaway1_1")
+		]
+		int __stdcall ParseSeaway11( [in] SEAWAYSTATE state, [in,out] seaway1_1 *result );
+
+        [
+		    helpstring("Parse Seaway Message 1.2"),
+			entry("parse_seaway1_2")
+		]
+		int __stdcall ParseSeaway12( [in] SEAWAYSTATE state, [in,out] seaway1_2 *result );
+
+        [
+		    helpstring("Parse Seaway Message 1.3"),
+			entry("parse_seaway1_3")
+		]
+		int __stdcall ParseSeaway13( [in] SEAWAYSTATE state, [in,out] seaway1_3 *result );
+
+        [
+		    helpstring("Parse Seaway Message 1.6"),
+			entry("parse_seaway1_6")
+		]
+		int __stdcall ParseSeaway16( [in] SEAWAYSTATE state, [in,out] seaway1_6 *result );
+
+        [
+		    helpstring("Parse Seaway Message 2.1"),
+			entry("parse_seaway2_1")
+		]
+		int __stdcall ParseSeaway21( [in] SEAWAYSTATE state, [in,out] seaway2_1 *result );
+
+        [
+		    helpstring("Parse Seaway Message 2.2"),
+			entry("parse_seaway2_2")
+		]
+		int __stdcall ParseSeaway22( [in] SEAWAYSTATE state, [in,out] seaway2_2 *result );
+
+        [
+		    helpstring("Parse Seaway Message 32.1"),
+			entry("parse_seaway32_1")
+		]
+		int __stdcall ParseSeaway321( [in] SEAWAYSTATE state, [in,out] seaway32_1 *result );
+
+        [
+		    helpstring("Parse PAWSS Message 1.4"),
+			entry("parse_pawss1_4")
+		]
+		int __stdcall ParsePawss14( [in] SEAWAYSTATE state, [in,out] pawss1_4 *result );
+
+        [
+		    helpstring("Parse PAWSS Message 1.5"),
+			entry("parse_pawss1_5")
+		]
+		int __stdcall ParsePawss15( [in] SEAWAYSTATE state, [in,out] pawss1_5 *result );
+
+        [
+		    helpstring("Parse PAWSS Message 2.3"),
+			entry("parse_pawss2_3")
+		]
+		int __stdcall ParsePawss23( [in] SEAWAYSTATE state, [in,out] pawss2_3 *result );
+
+		[
+			helpstring("Parse IMO 1.11"),
+			entry("parse_imo1_11")
+		]
+		int __stdcall ParseIMO1_11( [in] SIXBIT_PTR *state, [in,out] imo1_11 *result );
+
+		[
+			helpstring("Parse IMO 1.12"),
+			entry("parse_imo1_12")
+		]
+		int __stdcall ParseIMO1_12( [in] SIXBIT_PTR *state, [in,out] imo1_12 *result );
+
+		[
+			helpstring("Parse IMO 1.13"),
+			entry("parse_imo1_13")
+		]
+		int __stdcall ParseIMO1_13( [in] SIXBIT_PTR *state, [in,out] imo1_13 *result );
+
+		[
+			helpstring("Parse IMO 1.14"),
+			entry("parse_imo1_14")
+		]
+		int __stdcall ParseIMO1_14( [in] SIXBIT_PTR *state, [in,out] imo1_14 *result );
+
+		[
+			helpstring("Parse IMO 1.15"),
+			entry("parse_imo1_15")
+		]
+		int __stdcall ParseIMO1_15( [in] SIXBIT_PTR *state, [in,out] imo1_15 *result );
+
+		[
+			helpstring("Parse IMO 1.16"),
+			entry("parse_imo1_16")
+		]
+		int __stdcall ParseIMO1_16( [in] SIXBIT_PTR *state, [in,out] imo1_16 *result );
+
+		[
+			helpstring("Parse IMO 1.17"),
+			entry("parse_imo1_17")
+		]
+		int __stdcall ParseIMO1_17( [in] SIXBIT_PTR *state, [in,out] imo1_17 *result );
+
+		[
+			helpstring("Get aismsg_6->data pointer"),
+			entry("get_msg6_data")
+		]
+		sixbit * __stdcall GetMsg6Data( [in,out] aismsg_6 *msg );
+
+		[
+			helpstring("Get aismsg_8->data pointer"),
+			entry("get_msg8_data")
+		]
+		sixbit * __stdcall GetMsg8Data( [in,out] aismsg_8 *msg );
+
+		[
+			helpstring("Get aismsg_17->data pointer"),
+			entry("get_msg17_data")
+		]
+		sixbit * __stdcall GetMsg17Data( [in,out] aismsg_17 *msg );
+
+		[
+			helpstring("Get seaway1_1 weather_report pointer"),
+			entry("get_weather_report")
+		]
+		weather_report * __stdcall GetWeatherReport( [in,out] seaway1_1 *msg, [in] int idx );
+
+		[
+			helpstring("Get weather_report timetag pointer"),
+			entry("get_weather_utc_time")
+		]
+		timetag * __stdcall GetWeatherUtcTime( [in,out] weather_report *msg );
+
+		[
+			helpstring("Get seaway1_2 wind_report pointer"),
+			entry("get_wind_report")
+		]
+		wind_report * __stdcall GetWindReport( [in,out] seaway1_2 *msg, [in] int idx );
+
+		[
+			helpstring("Get wind_report timetag pointer"),
+			entry("get_wind_utc_time")
+		]
+		timetag * __stdcall GetWindUtcTime( [in,out] wind_report *msg );
+
+		[
+			helpstring("Get seaway1_3 water_level_report pointer"),
+			entry("get_water_level_report")
+		]
+		water_level_report * __stdcall GetWaterLevelReport( [in,out] seaway1_3 *msg, [in] int idx );
+
+		[
+			helpstring("Get water_level_report timetag pointer"),
+			entry("get_water_level_utc_time")
+		]
+		timetag * __stdcall GetWaterLevelUtcTime( [in,out] water_level_report *msg );
+
+		[
+			helpstring("Get seaway1_6 water_flow_report pointer"),
+			entry("get_water_flow_report")
+		]
+		water_flow_report * __stdcall GetWaterFlowReport( [in,out] seaway1_6 *msg, [in] int idx );
+
+		[
+			helpstring("Get water_flow_report timetag pointer"),
+			entry("get_water_flow_utc_time")
+		]
+		timetag * __stdcall GetWaterFlowUtcTime( [in,out] water_flow_report *msg );
+
+		[
+			helpstring("Get seaway2_1 lock_schedule pointer"),
+			entry("get_lock_schedule")
+		]
+		lock_schedule * __stdcall GetLockSchedule( [in,out] seaway2_1 *msg, [in] int idx );
+
+		[
+			helpstring("Get lock_schedule timetag pointer"),
+			entry("get_lock_schedule_utc_time")
+		]
+		timetag * __stdcall GetLockScheduleUtcTime( [in,out] seaway2_1 *msg );
+
+		[
+			helpstring("Get lock_schedule timetag pointer"),
+			entry("get_lock_schedule_eta")
+		]
+		timetag * __stdcall GetLockScheduleEta( [in,out] lock_schedule *msg );
+
+		[
+			helpstring("Get seaway2_2 lock_times timetag pointer"),
+			entry("get_lock_times_utc_time")
+		]
+		timetag * __stdcall GetLockTimesUtcTime( [in,out] seaway2_2 *msg );
+
+		[
+			helpstring("Get seaway2_2 lock_times timetag pointer"),
+			entry("get_lock_times_last_ata")
+		]
+		timetag * __stdcall GetLockTimesLastAta( [in,out] seaway2_2 *msg );
+
+		[
+			helpstring("Get seaway2_2 lock_times timetag pointer"),
+			entry("get_lock_times_first_eta")
+		]
+		timetag * __stdcall GetLockTimesFirstEta( [in,out] seaway2_2 *msg );
+
+		[
+			helpstring("Get seaway2_2 lock_times timetag pointer"),
+			entry("get_lock_times_second_eta")
+		]
+		timetag * __stdcall GetLockTimesSecondEta( [in,out] seaway2_2 *msg );
+
+		[
+			helpstring("Get pawss1_4 current_report pointer"),
+			entry("get_current_report")
+		]
+		current_report * __stdcall GetCurrentReport( [in,out] pawss1_4 *msg, [in] int idx );
+
+		[
+			helpstring("Get current_report timetag pointer"),
+			entry("get_current_utc_time")
+		]
+		timetag * __stdcall GetCurrentUtcTime( [in,out] current_report *msg );
+
+		[
+			helpstring("Get pawss1_5 salinity_report pointer"),
+			entry("get_salinity_report")
+		]
+		salinity_report * __stdcall GetSalinityReport( [in,out] pawss1_5 *msg, [in] int idx );
+
+		[
+			helpstring("Get salinity_report timetag pointer"),
+			entry("get_salinity_utc_time")
+		]
+		timetag * __stdcall GetSalinityUtcTime( [in,out] salinity_report *msg );
+
+		[
+			helpstring("Get pawss2_3 procession_order pointer"),
+			entry("get_procession_order")
+		]
+		procession_order * __stdcall GetProcessionOrder( [in,out] pawss2_3 *msg, [in] int idx );
+
+		[
+			helpstring("Get procession_order timetag pointer"),
+			entry("get_procession_order_utc_time")
+		]
+		timetag * __stdcall GetProcessionOrderUtcTime( [in,out] pawss2_3 *msg );
+
+		[
+			helpstring("Get imo1_12 timetag pointer"),
+			entry("get_imo1_12_atd")
+		]
+		timetag * __stdcall GetImo1_12Atd( [in,out] imo1_12 *msg );
+
+		[
+			helpstring("Get imo1_12 timetag pointer"),
+			entry("get_imo1_12_eta")
+		]
+		timetag * __stdcall GetImo1_12Eta( [in,out] imo1_12 *msg );
+
+		[
+			helpstring("Get imo1_14 tidal_window pointer"),
+			entry("get_tidal_window")
+		]
+		tidal_window * __stdcall GetIidalWindow( [in,out] imo1_14 *msg, [in] int idx );
+
+		[
+			helpstring("Get imo1_17 pseudo_target pointer"),
+			entry("get_pseudo_target")
+		]
+		pseudo_target * __stdcall GetPseudoTarget( [in,out] imo1_17 *msg, [in] int idx );
+
+	} // End of Module
+
+}; // End of library
+
+

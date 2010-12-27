@@ -1,0 +1,4 @@
+Run 'make linux' to build a Linux compatible shared library.
+Run 'make osx' to build a OSX compatible shared library.
+
+

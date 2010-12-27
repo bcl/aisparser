@@ -1,0 +1,112 @@
+AIS Parser SDK v1.10
+Copyright 2006-2010 by Brian C. Lane <bcl@brianlane.com>
+All Rights Reserved
+See LICENSE for licensing information
+
+
+This is the first public release of the AIS Parser SDK. I have re-licensed it under the BSD license. See LICENSE for details. This code will now be available at https://github.com/bcl/aisparser/
+
+
+'C' Version:
+AIS Parser SDK source is in ./c/src/
+HTML documentation is in ./c/docs/html/
+Example programs are in ./c/examples/
+
+
+Python Version:
+The Python version is created using SWIG (www.swig.org), there are modules
+for OSX, Linux and Windows. The SWIG .i file is included so you can rebuild
+it yourself if needed.
+
+Linux Python is in ./python/linux/
+OSX Python is in ./python/osx/
+Win32 Python is in ./python/win32/
+
+I have removed the pre-compiled Python versions because they were out of date. You can rebuild them on your system by running the buildit script in their respective directories.
+
+Win32 DLL built using Visual Studio 6 is in ./dll/aisparser 
+Visual Basic 6 example is in ./dll/examples
+This version does not include a pre-compiled DLL. I no longer support Windows as a development environment so you will need to build your own.
+
+
+AIS Parser SDK source
+---------------------
+The core parser consists of 12 files, 6 .c files and their associated .h files:
+
+nmea.c/nmea.h - functions for processing NMEA 0183 sentences.
+sixbit.c/sixbit.h - functions for processing packed 6-bit strings
+vdm_parser.c/vdm_parser.h - functions for processing AIVDM sentences
+imo.c/imo.h - functions for parsing IMO binary messages
+seaway.c/seaway.h - functions for parsing St. Lawrence Seaway binary messages
+access.c/access.h - helper functions for python and Visual Basic
+
+
+St. Lawrence Seaway
+-------------------
+The parser code for St. Lawrence seaway binary messages is in the seaway.c file. The 
+seawayX_X messages have been tested against the examples in the Seaway documentation. 
+the pawssX_X messages have not been tested.
+
+If someone has access to live Seaway messages that I could use in testing, I would 
+appreciate it if you would forward them to me at bcl@brianlane.com
+
+The St. Lawrence Seaway message specification is in ./c/docs/StLawrence.pdf
+
+
+IMO Binary Messages
+-------------------
+The parser code for IMO binary messages is in the imo.c and imo.h files. The imoX_X messages have not yet been tested against real data.
+
+If someone has access to live IMO Binary messages that I could use in testing, I would 
+appreciate it if you would forward them to me at bcl@brianlane.com
+
+The IMO Binary Message specification is in ./c/docs/IMO-236.pdf
+
+
+HTML Documentation
+------------------
+The documentation is integrated with the code and extracted using Doxygen.
+The HTML documentation index file is in ./c/docs/html/index.html
+It can be regenerated using the Doxygen config file at ./c/docs/doxygen.conf
+
+
+Examples
+--------
+The best place to start is the example code. I have included ais_json which
+parses messages with position information and outputs a JSON (JavaScript) 
+data structure for use with the Google Maps demo webpage. There is also a
+simple XML version and a text output version.
+
+Parsing St. Lawrence Seaway and IMO binary messages are more complicated than the other messages. You must first parse the mssage 8 or 6, and then pass its data payload to the appropriate seaway/imo parser function to extract all of the information.
+
+
+Python
+------
+The Python module is created using the SWIG project, it is a wrapper
+around the SDK's 'c' source. Structures are implemented as classes in
+Python, and all of the SDK's functions are exposed via the Python interface.
+
+Check the ./python/example/ directory for examples of how to use the Python
+module. There is a wxPython GUI application that will read a log file and display the details of the messages. There is also last_ais.py which I use to generate my dynamic 
+email signature, capturing the latest ship info from my local receiver.
+
+The runme.py example in the swig directory can also be used. It has an example of parsing a Seaway 1.3 message. In python the struct arrays are not properly understood by the SWIG wrapper, so the helper function that matches the message must be used to first extract the array element before Python can operate on it.
+
+
+Windows DLL
+-----------
+There is a Windows DLL, including source, in ./dll/aisparser 
+It was compiled using Visual Studio 6, and does not work with .NET or any of the new Visual tools that I am aware of. There is an example VB6 application in the ./dll/examples directory.
+
+The Visual Basic example form code show how to use all of the normal parsing functions. I have attempted to add parsing of the IMO and St. Lawrence Seaway messages to it, including adding helper functions (which are also used by python), but I have been unable to convince Visual Basic to correctly recognize the data structures. So, for now, parsing all of the normal AIS messages works fine in VB6, but IMO and Seaway parsing doesn't work.
+
+
+Delphi
+------
+Thanks to Chris Krohn for allowing me to include his Delphi port of the parser. This does not include the St. Lawrence Seaway parser code. It can be found in ./contrib/AISParser.pas
+
+
+If you have any comments, questions, problems, etc. Please contact me and I'll get back to you as soon as I can. I appreciate feedback of any kind.
+
+email - bcl@brianlane.com
+
