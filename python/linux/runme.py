@@ -13,8 +13,8 @@ s = [	"!AIVDM,1,1,,B,35Mj3MPOj@o?FVFK<5w3r3@L00di,0*0F",
 	"!AIVDM,2,2,9,B,h00,2*76",
 	"!AIVDM,2,1,3,B,8030ojA?0@=DE9CD:?B9Fot`9UKQW03Gh01DE9CD6B19?oqHd5H=WP11,0*51",
 	"!AIVDM,2,2,3,B,h00,2*7C",
-      ]
-
+    "\s:ASM//Port=63//MMSI=2573225,c:1301961602*7A\!BSVDM,1,1,,A,13P<JR50h00IkkJQi<Dt29ef0`PL,0*57"
+    ]
 
 ais_state = aisparser.ais_state()
 

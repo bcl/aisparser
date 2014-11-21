@@ -1,0 +1,6 @@
+*.o
+*.so
+*.pyc
+python/linux/aisparser_wrap.c
+python/linux/aisparser.py
+tags

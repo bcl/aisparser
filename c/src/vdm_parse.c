@@ -375,15 +375,8 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
     unsigned char checksum;
     unsigned int  i;
     unsigned int length;
-    
-    
-    /* Check the string's checksum */
-    if (check_nmea_checksum( str, &checksum ) != 0 )
-    {
-        /* Checksum failed */
-        return 2;
-    }
-    
+
+
     /* Is the string an AIS message? Allow any start character and any
        device pair.
     */
@@ -394,7 +387,14 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         /* Not an AIS message */
         return 3;
     }
-   
+
+    /* Check the string's checksum */
+    if (check_nmea_checksum( p, &checksum ) != 0 )
+    {
+        /* Checksum failed */
+        return 2;
+    }
+
     /* Get the 3 message info values from the packet */
     for (i=0; i<3; i++)
     {
