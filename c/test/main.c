@@ -48,7 +48,7 @@ int main( int argc, char *argv[] )
 
     };
 
-    #define NUM_DEMO_MSGS 10
+    #define NUM_DEMO_MSGS 11
     char *demo_msgs[] = { "!AIVDM,1,1,,B,15MqvC0Oh9G?qinK?VlPhA480@2n,0*1F,123,14",
                           "!AIVDM,1,1,,B,15Mf@6P001G?v68K??4SejL<00Sl,0*71",
                           "!AIVDM,1,1,,B,15Mn4kPP01G?qNvK>:grkOv<0<11,0*55",
@@ -58,7 +58,8 @@ int main( int argc, char *argv[] )
                           "$BSVDM,1,1,,B,15MqvC0Oh:G?qj0K?Vp@di4B0@5>,0*5D",
                           "!AIVDM,1,1,,B,15Mts3?P@;G8RB@JLbgamrBF0H6B,0*16,142,aass,12311",
                           "!AIVDM,1,1,,A,34a=CB1001JwAEhHra0qk4wF2000,0*5B",
-                          "\s:ASM//Port=63//MMSI=2573225,c:1301961602*7A\!BSVDM,1,1,,A,13P<JR50h00IkkJQi<Dt29ef0`PL,0*57"
+                          "\\s:ASM//Port=63//MMSI=2573225,c:1301961602*7A\\!BSVDM,1,1,,A,13P<JR50h00IkkJQi<Dt29ef0`PL,0*57",
+                          "AIVDM,1,1,,A,18UG;P0012G?Uq4EdHa=c;7@051@,0*53"
     };
 
     
@@ -292,13 +293,17 @@ int main( int argc, char *argv[] )
 
     for (i=0; i<NUM_DEMO_MSGS; i++)
     {
-        if( assemble_vdm( &ais, demo_msgs[i] ) != 0 )
+        int err;
+
+        printf( "%d of %d: %s\n", i+1, NUM_DEMO_MSGS, demo_msgs[i]);
+        if( (err = assemble_vdm( &ais, demo_msgs[i] )) != 0 ) {
+            printf("ERROR %d\n", err);
             continue;
+        }
 
         ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6 );
     
         /* Process the AIS message */
-        printf( "%d of %d: %s\n", i+1, NUM_DEMO_MSGS, demo_msgs[i]);
         printf( "msgid       : %d\n", ais.msgid );
 
         /* process message with appropriate parser */
