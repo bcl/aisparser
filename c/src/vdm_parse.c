@@ -380,7 +380,8 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
     /* Is the string an AIS message? Allow any start character and any
        device pair.
     */
-    p = find_nmea_start( str );
+    if ( (p = find_nmea_start( str )) == NULL )
+        return 3;
     if (   (strncmp( p+3, "VDM", 3 ) != 0)
         && (strncmp( p+3, "VDO", 3 ) != 0) )
     {
