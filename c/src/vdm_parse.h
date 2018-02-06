@@ -566,6 +566,24 @@ typedef struct {
 } aismsg_24;
 
 
+/* AIS Message 27 - Long Range AIS Broadcast message
+*/
+typedef struct {
+    char            msgid;             //!< 6 bits  : Message ID (1)
+    char            repeat;            //!< 2 bits  : Repeated
+    unsigned long   userid;            //!< 30 bits : UserID / MMSI
+    char            pos_acc;           //!< 1 bit   : Position Accuracy
+    char            raim;              //!< 1 bit   : RAIM flag
+    char            nav_status;        //!< 4 bits  : Navigational Status
+    long            longitude;         //!< 18 bits : Longitude in minutes/10,181000 = N/A (default)
+    long            latitude;          //!< 17 bits : Latitude in minutes/10,91000 = N/A (default)
+    int             sog;               //!< 6 bits  : Speed Over Ground, Knots (0-62); 63 = N/A (default)
+    int             cog;               //!< 9 bits  : Course over Ground,0 to 359 degrees, 511 = not available.
+    char            gnss;             //!< 1 bit   : GNSS Position status,0 = current GNSS position 1 = not GNSS position (default)
+    char            spare;             //!< 1 bit   : Spare
+} aismsg_27;
+
+
 /** ETA, Seaway and IMO UTC Timetag
 */
 typedef struct {
@@ -642,3 +660,4 @@ int __stdcall parse_ais_21( ais_state *state, aismsg_21 *result );
 int __stdcall parse_ais_22( ais_state *state, aismsg_22 *result );
 int __stdcall parse_ais_23( ais_state *state, aismsg_23 *result );
 int __stdcall parse_ais_24( ais_state *state, aismsg_24 *result );
+int __stdcall parse_ais_27( ais_state *state, aismsg_27 *result );
