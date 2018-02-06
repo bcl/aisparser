@@ -2039,3 +2039,55 @@ int __stdcall  parse_ais_24( ais_state *state, aismsg_24 *result )
     }
     return 0;
 }
+
+/* ----------------------------------------------------------------------- */
+/** Parse an AIS message 27 into an aismsg_27 structure
+    Ship Position report with SOTDMA Communication state
+    \param state    pointer to ais_state
+    \param result   pointer to parsed message result structure to be filled
+    return:
+      - 0 if no errors
+      - 1 if there is an error
+      - 2 if there is a packet length error
+    Note that the latitude and longitude are converted to signed values
+    before being returned.
+*/
+/* ----------------------------------------------------------------------- */
+int __stdcall parse_ais_27( ais_state *state, aismsg_27 *result )
+{
+    if( !state )
+        return 1;
+    if( !result )
+        return 1;
+    int length;
+    //Length according to ITU-1374 is 96 bits. However, in the wild these are sometimes transmitted with 168 bits (a full slot).
+    //Robust decoders should warn when this occurs but decode the first 96 bits.
+    length = strlen(state->six_state.bits) * 6;
+    if( (length < 96) || (length > 168) )
+            return 2;
+
+    /* Clear out the structure first */
+    memset( result, 0, sizeof( aismsg_27 ) );
+
+    result->msgid = state->msgid;
+
+    /* Parse the Message 27 */
+    result->repeat       = (char)          get_6bit( &state->six_state, 2  );
+    result->userid       = (unsigned long) get_6bit( &state->six_state, 30 );
+    result->pos_acc      = (char)          get_6bit( &state->six_state, 1  );
+    result->raim         = (char)          get_6bit( &state->six_state, 1  );
+    result->nav_status   = (char)          get_6bit( &state->six_state, 4  );
+    result->longitude    = (long)          get_6bit( &state->six_state, 18 );
+    result->latitude     = (long)          get_6bit( &state->six_state, 17 );
+    result->sog          = (int)           get_6bit( &state->six_state, 6 );
+    result->cog          = (int)           get_6bit( &state->six_state, 9 );
+    result->gnss         = (int)           get_6bit( &state->six_state, 1  );
+    result->spare        = (char)          get_6bit( &state->six_state, 1  );
+    result->longitude    = 1000*result->longitude ;
+    result->latitude     = 1000*result->latitude ;
+
+    /* Convert the position to signed value */
+    conv_pos( &result->latitude, &result->longitude);
+
+    return 0;
+}
