@@ -130,7 +130,7 @@ public class Sixbit {
      * Otherwise it returns the 6-bit ASCII value.
      * 
      * @param value to convert
-     * @returns 6-bit ASCII
+     * @return 6-bit ASCII
      * 
 	 */
 	public int binto6bit( int value )
