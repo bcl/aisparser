@@ -12,6 +12,7 @@ int test_ais2ascii( void );
 int test_pos2ddd( void );
 int test_pos2dmm( void );
 int test_conv_pos( void );
+int test_conv_pos27();
 int test_assemble_vdm( void );
 int test_ais_1( void );
 int test_ais_2( void );

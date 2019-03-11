@@ -257,6 +257,74 @@ int test_conv_pos( void )
     return 1;
 }
 
+int test_conv_pos27( void )
+{
+	long latitude;
+	long longitude;
+
+
+	/* North East quadrant (+,+)
+       Trondheim, Norway  63.416277, 10.412227
+	 */
+	latitude = 38049;
+	longitude = 6247;
+	conv_pos27( &latitude, &longitude );
+	if ((latitude!=38049000) || (longitude!=6247000))
+	{
+		fprintf( stderr, "test_conv_pos27() 1: failed\n");
+		return 0;
+	}
+
+	/* North West quadrant (+,-)
+       Lexington Green, USA  42.471021, -71.353514
+	 */
+	latitude = 25482;
+	longitude = 219331;
+	conv_pos27( &latitude, &longitude );
+	if ((latitude!=25482000) || (longitude!=-42813000))
+	{
+		fprintf( stderr, "test_conv_pos27() 2: failed\n");
+		return 0;
+	}
+
+	/* South East quadrant (-,+)
+       Tasmania  -42.000951, 146.594319
+	 */
+	latitude = 105871;
+	longitude = 87956;
+	conv_pos27( &latitude, &longitude );
+	if ((latitude!=-25201000) || (longitude!=87956000))
+	{
+		fprintf( stderr, "test_conv_pos27() 3: failed\n");
+		return 0;
+	}
+
+	/* South West quadrant (-,-)
+       Bolivia  -17.668295, -62.777665
+	 */
+	latitude = 120472;
+	longitude = 224477;
+	conv_pos27( &latitude, &longitude );
+	if ((latitude!=-10600000) || (longitude!=-37667000))
+	{
+		fprintf( stderr, "test_conv_pos27() 4: failed  %ld %ld\n",latitude,longitude);
+		return 0;
+	}
+
+	/* Center */
+	latitude = 0;
+	longitude = 0;
+	conv_pos27( &latitude, &longitude );
+	if ((latitude!=0) || (longitude!=0))
+	{
+		fprintf( stderr, "test_conv_pos27() 5: failed\n");
+		return 0;
+	}
+
+	fprintf( stderr, "test_conv_pos27() Passed\n");
+	return 1;
+}
+
 
 int test_assemble_vdm( void )
 {

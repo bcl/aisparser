@@ -114,6 +114,10 @@ int main( int argc, char *argv[] )
     {
         exit(-1);
     }
+    if (test_conv_pos27() != 1)
+    {
+        exit(-1);
+    }
     if (test_pos2ddd() != 1)
     {
         exit(-1);
