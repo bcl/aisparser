@@ -312,6 +312,40 @@ int __stdcall conv_pos( long *latitude, long *longitude )
     return 0;
 }
 
+/* ----------------------------------------------------------------------- */
+/** Convert unsigned 1/10 minute position to signed (as used in Type 27 messages)
+
+    \param latitude pointer to an unsigned latitude
+    \param longitude pointer to an unsigned longitude
+
+    This function converts the raw 2's complement values to signed long
+    1/10000 minute position. It is used internally by the parse_ais_27 function.
+*/
+/* ----------------------------------------------------------------------- */
+int __stdcall conv_pos27( long *latitude, long *longitude )
+{
+    /* LATITUDE */
+    /* Convert latitude to signed number */
+    if( *latitude & 0x10000 )
+    {
+        *latitude = 0x20000 - *latitude;
+        *latitude *= -1;
+    }
+
+    /* LONGITUDE */
+    /* Convert longitude to signed number */
+    if( *longitude & 0x20000 )
+    {
+        *longitude = 0x40000 - *longitude;
+        *longitude *= -1;
+    }
+
+    *latitude *= 1000;
+    *longitude *= 1000;
+
+    return 0;
+}
+
 
 /* ----------------------------------------------------------------------- */
 /** Assemble AIVDM/VDO sentences
@@ -2083,11 +2117,11 @@ int __stdcall parse_ais_27( ais_state *state, aismsg_27 *result )
     result->cog          = (int)           get_6bit( &state->six_state, 9 );
     result->gnss         = (int)           get_6bit( &state->six_state, 1  );
     result->spare        = (char)          get_6bit( &state->six_state, 1  );
-    result->longitude    = 1000*result->longitude ;
-    result->latitude     = 1000*result->latitude ;
+    result->longitude    = result->longitude ;
+    result->latitude     = result->latitude ;
 
     /* Convert the position to signed value */
-    conv_pos( &result->latitude, &result->longitude);
+    conv_pos27( &result->latitude, &result->longitude);
 
     return 0;
 }

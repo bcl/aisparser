@@ -635,6 +635,7 @@ char __stdcall ais2ascii( char value );
 int __stdcall pos2ddd( long latitude, long longitude, double *lat_dd, double *long_ddd );
 int __stdcall pos2dmm( long latitude, long longitude, short *lat_dd, double *lat_min, short *long_ddd, double *long_min );
 int __stdcall conv_pos( long *latitude, long *longitude );
+int __stdcall conv_pos27( long *latitude, long *longitude );
 int __stdcall assemble_vdm( ais_state *state, char *str );
 int __stdcall parse_ais_1( ais_state *state, aismsg_1 *result );
 int __stdcall parse_ais_2( ais_state *state, aismsg_2 *result );
