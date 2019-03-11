@@ -1827,54 +1827,152 @@ int test_ais_24B( void )
         return 0;
     }
 
-	if( message.ship_type != 37 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: ship_type\n");
-	    return 0;
-	}
+    if( message.ship_type != 37 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: ship_type\n");
+        return 0;
+    }
 
-	if( strcmp( message.vendor_id, "@@@@@@@")  != 0 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: vendor_id\n");
-	    return 0;
-	}
+    if( strcmp( message.vendor_id, "@@@@@@@")  != 0 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: vendor_id\n");
+        return 0;
+    }
 
-	if( strcmp( message.callsign, "@@@@@@@")  != 0 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: callsign\n");
-	    return 0;
-	}
+    if( strcmp( message.callsign, "@@@@@@@")  != 0 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: callsign\n");
+        return 0;
+    }
 
-	if( message.dim_bow != 2 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: dim_bow\n");
-	    return 0;
-	}
+    if( message.dim_bow != 2 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: dim_bow\n");
+        return 0;
+    }
 
-	if( message.dim_stern != 5 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: dim_stern\n");
-	    return 0;
-	}
+    if( message.dim_stern != 5 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: dim_stern\n");
+        return 0;
+    }
 
-	if( message.dim_port != 1 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: dim_port\n");
-	    return 0;
-	}
+    if( message.dim_port != 1 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: dim_port\n");
+        return 0;
+    }
 
-	if( message.dim_starboard != 2 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: dim_starboard\n");
-	    return 0;
-	}
+    if( message.dim_starboard != 2 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: dim_starboard\n");
+        return 0;
+    }
 
-	if( message.spare != 0 )
-	{
-	    fprintf( stderr, "test_ais_24B() failed: spare\n");
-	    return 0;
-	}
+    if( message.spare != 0 )
+    {
+        fprintf( stderr, "test_ais_24B() failed: spare\n");
+        return 0;
+    }
 
     fprintf( stderr, "test_ais_24B() passed\n");
     return 1;
 }
+
+int test_ais_27( void )
+{
+   ais_state state;
+   aismsg_27  message;
+   unsigned int  result;
+   /* 27 !AIVDM,1,1,,B,K3M@PpqK>Qkv=PEp,0*60 */
+   char s[] = "K3M@PpqK>Qkv=PEp";
+
+   /* Clear out the structure first */
+   memset( &message, 0, sizeof( aismsg_27 ));
+
+   init_6bit( &state.six_state );
+   strcpy( state.six_state.bits, s );
+   state.msgid = (char) get_6bit( &state.six_state, 6 );
+   if( (result = parse_ais_27( &state, &message )) != 0 )
+   {
+       fprintf( stderr, "test_ais_27() failed: error %d\n", result);
+       return 0;
+   }
+
+   /* Check the results */
+   if( message.msgid != 27 )
+   {
+       fprintf( stderr, "test_ais_27() failed: msgid\n");
+       return 0;
+   }
+
+   if( message.repeat != 0 )
+   {
+       fprintf( stderr, "test_ais_27() failed: repeat\n");
+       return 0;
+   }
+
+   if( message.userid != 232005859 )
+   {
+       fprintf( stderr, "test_ais_27() failed: MMSI/userid\n");
+       return 0;
+   }
+
+   if( message.pos_acc != 1 )
+   {
+       fprintf( stderr, "test_ais_27() failed: pos_acc\n");
+       return 0;
+   }
+
+   if( message.raim != 0 )
+   {
+       fprintf( stderr, "test_ais_27() failed: raim\n");
+       return 0;
+   }
+
+   if( message.nav_status != 5 )
+   {
+       fprintf( stderr, "test_ais_27() failed: nav_status\n");
+       return 0;
+   }
+
+   if( message.longitude != -84492456 )
+   {
+       fprintf( stderr, "test_ais_27() failed: longituden");
+       return 0;
+   }
+
+   if( message.latitude != 32539000 )
+   {
+       fprintf( stderr, "test_ais_27() failed: latitude\n");
+       return 0;
+   }
+
+   if( message.sog != 0 )
+   {
+       fprintf( stderr, "test_ais_27() failed: sog\n");
+       return 0;
+   }
+
+   if( message.cog != 350 )
+   {
+       fprintf( stderr, "test_ais_27() failed: cog\n");
+       return 0;
+   }
+
+   if( message.gnss != 0 )
+   {
+       fprintf( stderr, "test_ais_27() failed: gnss\n");
+       return 0;
+    }
+ 
+    if( message.spare != 0 )
+    {
+       fprintf( stderr, "test_ais_27() failed: spare\n");
+       return 0;
+    }
+ 
+   fprintf( stderr, "test_ais_27() passed\n");
+   return 1;
+ }
+

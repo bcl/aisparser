@@ -29,8 +29,9 @@ int main( int argc, char *argv[] )
     aismsg_4  msg_4;
     aismsg_5  msg_5;
     aismsg_12 msg_12;
-	aismsg_18 msg_18;
-	aismsg_24 msg_24;
+    aismsg_18 msg_18;
+    aismsg_24 msg_24;
+    aismsg_27 msg_27;
 
     char *test_msgs[] = { "19NS7Sp02wo?HETKA2K6mUM20<L=",
                           "35Mk33gOkSG?bLtK?;B2dRO`00`",
@@ -43,7 +44,8 @@ int main( int argc, char *argv[] )
                           "D03OwphiIN>4",
                           "B52IRsP005=abWRnlQP03w`UkP06",
                           "H52IRsP518Tj0l59D0000000000",
-                          "H52IRsTU000000000000000@5120"
+                          "H52IRsTU000000000000000@5120",
+                          "K3M@PpqK>Qkv=PEp"
 
 
     };
@@ -176,13 +178,17 @@ int main( int argc, char *argv[] )
     {
         exit(-1);
     }
+    if( test_ais_27() != 1 )
+    {
+        exit(-1);
+    }
 
     printf("Testing test_msgs\n");
 
     /* Clear out the structures */
     memset( &ais, 0, sizeof( ais_state ) );
 
-    for (i=0; i<12; i++)
+    for (i=0; i<13; i++)
     {
         init_6bit( &ais.six_state );
         strcpy( ais.six_state.bits, test_msgs[i] );
@@ -268,14 +274,24 @@ int main( int argc, char *argv[] )
                 {
                     /* Do something with results */
                     printf( "MMSI     : %09ld\n", msg_24.userid );
-					if (msg_24.flags & 1)
-					{
-						printf("Name : %s\n", msg_24.name );
-					}
-					if (msg_24.flags & 2)
-					{
-						printf("Callsign : %s\n", msg_24.callsign );
-					}
+                    if (msg_24.flags & 1)
+                    {
+                        printf("Name : %s\n", msg_24.name );
+                    }
+                    if (msg_24.flags & 2)
+                    {
+                        printf("Callsign : %s\n", msg_24.callsign );
+                    }
+                }
+                break;
+
+            case 27:
+                if( parse_ais_27( &ais, &msg_27 ) == 0 )
+                {
+                    /* Do something with results */
+                    printf( "MMSI : %09ld\n", msg_27.userid );
+                    printf( "Lat  : %ld\n", msg_27.latitude  );
+                    printf( "Long : %ld\n", msg_27.longitude  );
                 }
                 break;
 
@@ -284,7 +300,7 @@ int main( int argc, char *argv[] )
     }
 
     /* St. Lawrence msg8 testing */
-	test_seaway();
+    test_seaway();
 
     printf("Testing demo_msgs\n");
 
@@ -359,11 +375,11 @@ int main( int argc, char *argv[] )
         printf("\n\n");
     }
 
-	/* Test some possible seaway messages */
-	test_seaway_msgs();
+    /* Test some possible seaway messages */
+    test_seaway_msgs();
 
-	/* Test the seaway and imo messages */
-	test_access();
+    /* Test the seaway and imo messages */
+    test_access();
 
     return 0;
 }

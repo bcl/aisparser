@@ -38,3 +38,4 @@ int test_ais_22( void );
 int test_ais_23( void );
 int test_ais_24A( void );
 int test_ais_24B( void );
+int test_ais_27( void );
