@@ -5,14 +5,14 @@ package com.aisparser;
  * AIS Message 18 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 18 class
  * Standard Class B equipment position report
- * 
+ *
  */
 public class Message18 extends Messages {
     int             regional1;         // 8 bits   : Regional Bits
@@ -33,7 +33,7 @@ public class Message18 extends Messages {
     int             comm_state;        // 1 bit    : Comm State Flag
     Sotdma sotdma_state = null;
     Itdma itdma_state = null;
-    
+
     public int regional1() { return this.regional1; }
     public int sog() { return this.sog; }
     public int pos_acc() { return this.pos_acc; }
@@ -58,13 +58,13 @@ public class Message18 extends Messages {
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if ( six_state.bit_length() != 168 )
 			throw new AISMessageException("Message 18 wrong length");
-		
+
 		super.parse( 18, six_state );
 
 	    this.regional1      = (int) six_state.get( 8  );

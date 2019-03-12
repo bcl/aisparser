@@ -15,7 +15,7 @@ public class Message9Test extends TestCase {
 		 try {
 			 result = vdm_message.add("!AIVDM,1,1,,B,900048wwTcJb0mpF16IobRP2086Q,0*48\r\n");
 			 assertEquals( "vdm add failed", 0, result );
-			 
+
 			 msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -45,7 +45,7 @@ public class Message9Test extends TestCase {
 		} else {
 			fail("itdma state");
 		}
-		
+
 	}
 
 }

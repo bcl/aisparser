@@ -73,7 +73,7 @@ class nmea_state(_object):
     __swig_setmethods__["str_len"] = _aisparser.nmea_state_str_len_set
     __swig_getmethods__["str_len"] = _aisparser.nmea_state_str_len_get
     if _newclass:str_len = _swig_property(_aisparser.nmea_state_str_len_get, _aisparser.nmea_state_str_len_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_nmea_state(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -108,7 +108,7 @@ class sixbit(_object):
     __swig_setmethods__["remainder_bits"] = _aisparser.sixbit_remainder_bits_set
     __swig_getmethods__["remainder_bits"] = _aisparser.sixbit_remainder_bits_get
     if _newclass:remainder_bits = _swig_property(_aisparser.sixbit_remainder_bits_get, _aisparser.sixbit_remainder_bits_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_sixbit(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -183,7 +183,7 @@ class aismsg_1(_object):
     __swig_setmethods__["sub_message"] = _aisparser.aismsg_1_sub_message_set
     __swig_getmethods__["sub_message"] = _aisparser.aismsg_1_sub_message_get
     if _newclass:sub_message = _swig_property(_aisparser.aismsg_1_sub_message_get, _aisparser.aismsg_1_sub_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_1(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -252,7 +252,7 @@ class aismsg_2(_object):
     __swig_setmethods__["sub_message"] = _aisparser.aismsg_2_sub_message_set
     __swig_getmethods__["sub_message"] = _aisparser.aismsg_2_sub_message_get
     if _newclass:sub_message = _swig_property(_aisparser.aismsg_2_sub_message_get, _aisparser.aismsg_2_sub_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_2(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -324,7 +324,7 @@ class aismsg_3(_object):
     __swig_setmethods__["keep"] = _aisparser.aismsg_3_keep_set
     __swig_getmethods__["keep"] = _aisparser.aismsg_3_keep_get
     if _newclass:keep = _swig_property(_aisparser.aismsg_3_keep_get, _aisparser.aismsg_3_keep_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_3(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -393,7 +393,7 @@ class aismsg_4(_object):
     __swig_setmethods__["sub_message"] = _aisparser.aismsg_4_sub_message_set
     __swig_getmethods__["sub_message"] = _aisparser.aismsg_4_sub_message_get
     if _newclass:sub_message = _swig_property(_aisparser.aismsg_4_sub_message_get, _aisparser.aismsg_4_sub_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_4(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -462,7 +462,7 @@ class aismsg_5(_object):
     __swig_setmethods__["spare"] = _aisparser.aismsg_5_spare_set
     __swig_getmethods__["spare"] = _aisparser.aismsg_5_spare_get
     if _newclass:spare = _swig_property(_aisparser.aismsg_5_spare_get, _aisparser.aismsg_5_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_5(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -504,7 +504,7 @@ class aismsg_6(_object):
     __swig_setmethods__["data"] = _aisparser.aismsg_6_data_set
     __swig_getmethods__["data"] = _aisparser.aismsg_6_data_get
     if _newclass:data = _swig_property(_aisparser.aismsg_6_data_get, _aisparser.aismsg_6_data_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_6(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -558,7 +558,7 @@ class aismsg_7(_object):
     __swig_setmethods__["num_acks"] = _aisparser.aismsg_7_num_acks_set
     __swig_getmethods__["num_acks"] = _aisparser.aismsg_7_num_acks_get
     if _newclass:num_acks = _swig_property(_aisparser.aismsg_7_num_acks_get, _aisparser.aismsg_7_num_acks_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_7(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -591,7 +591,7 @@ class aismsg_8(_object):
     __swig_setmethods__["data"] = _aisparser.aismsg_8_data_set
     __swig_getmethods__["data"] = _aisparser.aismsg_8_data_get
     if _newclass:data = _swig_property(_aisparser.aismsg_8_data_get, _aisparser.aismsg_8_data_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_8(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -658,7 +658,7 @@ class aismsg_9(_object):
     if _newclass:itdma = _swig_property(_aisparser.aismsg_9_itdma_get)
     __swig_getmethods__["sotdma"] = _aisparser.aismsg_9_sotdma_get
     if _newclass:sotdma = _swig_property(_aisparser.aismsg_9_sotdma_get)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_9(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -685,7 +685,7 @@ class aismsg_9_itdma(_object):
     __swig_setmethods__["keep_flag"] = _aisparser.aismsg_9_itdma_keep_flag_set
     __swig_getmethods__["keep_flag"] = _aisparser.aismsg_9_itdma_keep_flag_get
     if _newclass:keep_flag = _swig_property(_aisparser.aismsg_9_itdma_keep_flag_get, _aisparser.aismsg_9_itdma_keep_flag_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_9_itdma(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -709,7 +709,7 @@ class aismsg_9_sotdma(_object):
     __swig_setmethods__["sub_message"] = _aisparser.aismsg_9_sotdma_sub_message_set
     __swig_getmethods__["sub_message"] = _aisparser.aismsg_9_sotdma_sub_message_get
     if _newclass:sub_message = _swig_property(_aisparser.aismsg_9_sotdma_sub_message_get, _aisparser.aismsg_9_sotdma_sub_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_9_sotdma(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -742,7 +742,7 @@ class aismsg_10(_object):
     __swig_setmethods__["spare2"] = _aisparser.aismsg_10_spare2_set
     __swig_getmethods__["spare2"] = _aisparser.aismsg_10_spare2_get
     if _newclass:spare2 = _swig_property(_aisparser.aismsg_10_spare2_get, _aisparser.aismsg_10_spare2_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_10(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -811,7 +811,7 @@ class aismsg_11(_object):
     __swig_setmethods__["sub_message"] = _aisparser.aismsg_11_sub_message_set
     __swig_getmethods__["sub_message"] = _aisparser.aismsg_11_sub_message_get
     if _newclass:sub_message = _swig_property(_aisparser.aismsg_11_sub_message_get, _aisparser.aismsg_11_sub_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_11(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -850,7 +850,7 @@ class aismsg_12(_object):
     __swig_setmethods__["message"] = _aisparser.aismsg_12_message_set
     __swig_getmethods__["message"] = _aisparser.aismsg_12_message_get
     if _newclass:message = _swig_property(_aisparser.aismsg_12_message_get, _aisparser.aismsg_12_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_12(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -904,7 +904,7 @@ class aismsg_13(_object):
     __swig_setmethods__["num_acks"] = _aisparser.aismsg_13_num_acks_set
     __swig_getmethods__["num_acks"] = _aisparser.aismsg_13_num_acks_get
     if _newclass:num_acks = _swig_property(_aisparser.aismsg_13_num_acks_get, _aisparser.aismsg_13_num_acks_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_13(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -934,7 +934,7 @@ class aismsg_14(_object):
     __swig_setmethods__["message"] = _aisparser.aismsg_14_message_set
     __swig_getmethods__["message"] = _aisparser.aismsg_14_message_get
     if _newclass:message = _swig_property(_aisparser.aismsg_14_message_get, _aisparser.aismsg_14_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_14(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -997,7 +997,7 @@ class aismsg_15(_object):
     __swig_setmethods__["num_reqs"] = _aisparser.aismsg_15_num_reqs_set
     __swig_getmethods__["num_reqs"] = _aisparser.aismsg_15_num_reqs_get
     if _newclass:num_reqs = _swig_property(_aisparser.aismsg_15_num_reqs_get, _aisparser.aismsg_15_num_reqs_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_15(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1048,7 +1048,7 @@ class aismsg_16(_object):
     __swig_setmethods__["num_cmds"] = _aisparser.aismsg_16_num_cmds_set
     __swig_getmethods__["num_cmds"] = _aisparser.aismsg_16_num_cmds_get
     if _newclass:num_cmds = _swig_property(_aisparser.aismsg_16_num_cmds_get, _aisparser.aismsg_16_num_cmds_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_16(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1105,7 +1105,7 @@ class aismsg_17(_object):
     __swig_setmethods__["data"] = _aisparser.aismsg_17_data_set
     __swig_getmethods__["data"] = _aisparser.aismsg_17_data_get
     if _newclass:data = _swig_property(_aisparser.aismsg_17_data_get, _aisparser.aismsg_17_data_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_17(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1184,7 +1184,7 @@ class aismsg_18(_object):
     if _newclass:itdma = _swig_property(_aisparser.aismsg_18_itdma_get)
     __swig_getmethods__["sotdma"] = _aisparser.aismsg_18_sotdma_get
     if _newclass:sotdma = _swig_property(_aisparser.aismsg_18_sotdma_get)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_18(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1211,7 +1211,7 @@ class aismsg_18_itdma(_object):
     __swig_setmethods__["keep_flag"] = _aisparser.aismsg_18_itdma_keep_flag_set
     __swig_getmethods__["keep_flag"] = _aisparser.aismsg_18_itdma_keep_flag_get
     if _newclass:keep_flag = _swig_property(_aisparser.aismsg_18_itdma_keep_flag_get, _aisparser.aismsg_18_itdma_keep_flag_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_18_itdma(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1235,7 +1235,7 @@ class aismsg_18_sotdma(_object):
     __swig_setmethods__["sub_message"] = _aisparser.aismsg_18_sotdma_sub_message_set
     __swig_getmethods__["sub_message"] = _aisparser.aismsg_18_sotdma_sub_message_get
     if _newclass:sub_message = _swig_property(_aisparser.aismsg_18_sotdma_sub_message_get, _aisparser.aismsg_18_sotdma_sub_message_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_18_sotdma(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1316,7 +1316,7 @@ class aismsg_19(_object):
     __swig_setmethods__["spare"] = _aisparser.aismsg_19_spare_set
     __swig_getmethods__["spare"] = _aisparser.aismsg_19_spare_get
     if _newclass:spare = _swig_property(_aisparser.aismsg_19_spare_get, _aisparser.aismsg_19_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_19(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1397,7 +1397,7 @@ class aismsg_20(_object):
     __swig_setmethods__["num_cmds"] = _aisparser.aismsg_20_num_cmds_set
     __swig_getmethods__["num_cmds"] = _aisparser.aismsg_20_num_cmds_get
     if _newclass:num_cmds = _swig_property(_aisparser.aismsg_20_num_cmds_get, _aisparser.aismsg_20_num_cmds_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_20(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1478,7 +1478,7 @@ class aismsg_21(_object):
     __swig_setmethods__["spare2"] = _aisparser.aismsg_21_spare2_set
     __swig_getmethods__["spare2"] = _aisparser.aismsg_21_spare2_get
     if _newclass:spare2 = _swig_property(_aisparser.aismsg_21_spare2_get, _aisparser.aismsg_21_spare2_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_21(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1550,7 +1550,7 @@ class aismsg_22(_object):
     __swig_setmethods__["spare2"] = _aisparser.aismsg_22_spare2_set
     __swig_getmethods__["spare2"] = _aisparser.aismsg_22_spare2_get
     if _newclass:spare2 = _swig_property(_aisparser.aismsg_22_spare2_get, _aisparser.aismsg_22_spare2_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_22(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1610,7 +1610,7 @@ class aismsg_23(_object):
     __swig_setmethods__["spare3"] = _aisparser.aismsg_23_spare3_set
     __swig_getmethods__["spare3"] = _aisparser.aismsg_23_spare3_get
     if _newclass:spare3 = _swig_property(_aisparser.aismsg_23_spare3_get, _aisparser.aismsg_23_spare3_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_23(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1667,7 +1667,7 @@ class aismsg_24(_object):
     __swig_setmethods__["flags"] = _aisparser.aismsg_24_flags_set
     __swig_getmethods__["flags"] = _aisparser.aismsg_24_flags_get
     if _newclass:flags = _swig_property(_aisparser.aismsg_24_flags_get, _aisparser.aismsg_24_flags_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_aismsg_24(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1694,7 +1694,7 @@ class timetag(_object):
     __swig_setmethods__["minutes"] = _aisparser.timetag_minutes_set
     __swig_getmethods__["minutes"] = _aisparser.timetag_minutes_get
     if _newclass:minutes = _swig_property(_aisparser.timetag_minutes_get, _aisparser.timetag_minutes_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_timetag(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1727,7 +1727,7 @@ class ais_state(_object):
     __swig_setmethods__["six_state"] = _aisparser.ais_state_six_state_set
     __swig_getmethods__["six_state"] = _aisparser.ais_state_six_state_get
     if _newclass:six_state = _swig_property(_aisparser.ais_state_six_state_get, _aisparser.ais_state_six_state_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_ais_state(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1757,7 +1757,7 @@ class binary_state(_object):
     __swig_setmethods__["six_state"] = _aisparser.binary_state_six_state_set
     __swig_getmethods__["six_state"] = _aisparser.binary_state_six_state_get
     if _newclass:six_state = _swig_property(_aisparser.binary_state_six_state_get, _aisparser.binary_state_six_state_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_binary_state(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1825,7 +1825,7 @@ class wind_report(_object):
     __swig_setmethods__["spare"] = _aisparser.wind_report_spare_set
     __swig_getmethods__["spare"] = _aisparser.wind_report_spare_get
     if _newclass:spare = _swig_property(_aisparser.wind_report_spare_get, _aisparser.wind_report_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_wind_report(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1876,7 +1876,7 @@ class weather_report(_object):
     __swig_setmethods__["water_temp"] = _aisparser.weather_report_water_temp_set
     __swig_getmethods__["water_temp"] = _aisparser.weather_report_water_temp_get
     if _newclass:water_temp = _swig_property(_aisparser.weather_report_water_temp_get, _aisparser.weather_report_water_temp_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_weather_report(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1915,7 +1915,7 @@ class water_level_report(_object):
     __swig_setmethods__["spare"] = _aisparser.water_level_report_spare_set
     __swig_getmethods__["spare"] = _aisparser.water_level_report_spare_get
     if _newclass:spare = _swig_property(_aisparser.water_level_report_spare_get, _aisparser.water_level_report_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_water_level_report(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1948,7 +1948,7 @@ class water_flow_report(_object):
     __swig_setmethods__["spare"] = _aisparser.water_flow_report_spare_set
     __swig_getmethods__["spare"] = _aisparser.water_flow_report_spare_get
     if _newclass:spare = _swig_property(_aisparser.water_flow_report_spare_get, _aisparser.water_flow_report_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_water_flow_report(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1975,7 +1975,7 @@ class lock_schedule(_object):
     __swig_setmethods__["spare"] = _aisparser.lock_schedule_spare_set
     __swig_getmethods__["spare"] = _aisparser.lock_schedule_spare_get
     if _newclass:spare = _swig_property(_aisparser.lock_schedule_spare_get, _aisparser.lock_schedule_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_lock_schedule(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2011,7 +2011,7 @@ class current_report(_object):
     __swig_setmethods__["spare"] = _aisparser.current_report_spare_set
     __swig_getmethods__["spare"] = _aisparser.current_report_spare_get
     if _newclass:spare = _swig_property(_aisparser.current_report_spare_get, _aisparser.current_report_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_current_report(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2047,7 +2047,7 @@ class salinity_report(_object):
     __swig_setmethods__["spare"] = _aisparser.salinity_report_spare_set
     __swig_getmethods__["spare"] = _aisparser.salinity_report_spare_get
     if _newclass:spare = _swig_property(_aisparser.salinity_report_spare_get, _aisparser.salinity_report_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_salinity_report(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2080,7 +2080,7 @@ class procession_order(_object):
     __swig_setmethods__["spare"] = _aisparser.procession_order_spare_set
     __swig_getmethods__["spare"] = _aisparser.procession_order_spare_get
     if _newclass:spare = _swig_property(_aisparser.procession_order_spare_get, _aisparser.procession_order_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_procession_order(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2098,7 +2098,7 @@ class seaway1_1(_object):
     __swig_setmethods__["report"] = _aisparser.seaway1_1_report_set
     __swig_getmethods__["report"] = _aisparser.seaway1_1_report_get
     if _newclass:report = _swig_property(_aisparser.seaway1_1_report_get, _aisparser.seaway1_1_report_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_seaway1_1(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2116,7 +2116,7 @@ class seaway1_2(_object):
     __swig_setmethods__["report"] = _aisparser.seaway1_2_report_set
     __swig_getmethods__["report"] = _aisparser.seaway1_2_report_get
     if _newclass:report = _swig_property(_aisparser.seaway1_2_report_get, _aisparser.seaway1_2_report_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_seaway1_2(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2134,7 +2134,7 @@ class seaway1_3(_object):
     __swig_setmethods__["report"] = _aisparser.seaway1_3_report_set
     __swig_getmethods__["report"] = _aisparser.seaway1_3_report_get
     if _newclass:report = _swig_property(_aisparser.seaway1_3_report_get, _aisparser.seaway1_3_report_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_seaway1_3(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2152,7 +2152,7 @@ class seaway1_6(_object):
     __swig_setmethods__["report"] = _aisparser.seaway1_6_report_set
     __swig_getmethods__["report"] = _aisparser.seaway1_6_report_get
     if _newclass:report = _swig_property(_aisparser.seaway1_6_report_get, _aisparser.seaway1_6_report_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_seaway1_6(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2185,7 +2185,7 @@ class seaway2_1(_object):
     __swig_setmethods__["schedule"] = _aisparser.seaway2_1_schedule_set
     __swig_getmethods__["schedule"] = _aisparser.seaway2_1_schedule_get
     if _newclass:schedule = _swig_property(_aisparser.seaway2_1_schedule_get, _aisparser.seaway2_1_schedule_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_seaway2_1(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2230,7 +2230,7 @@ class seaway2_2(_object):
     __swig_setmethods__["spare2"] = _aisparser.seaway2_2_spare2_set
     __swig_getmethods__["spare2"] = _aisparser.seaway2_2_spare2_get
     if _newclass:spare2 = _swig_property(_aisparser.seaway2_2_spare2_get, _aisparser.seaway2_2_spare2_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_seaway2_2(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2254,7 +2254,7 @@ class seaway32_1(_object):
     __swig_setmethods__["spare2"] = _aisparser.seaway32_1_spare2_set
     __swig_getmethods__["spare2"] = _aisparser.seaway32_1_spare2_get
     if _newclass:spare2 = _swig_property(_aisparser.seaway32_1_spare2_get, _aisparser.seaway32_1_spare2_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_seaway32_1(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2272,7 +2272,7 @@ class pawss1_4(_object):
     __swig_setmethods__["report"] = _aisparser.pawss1_4_report_set
     __swig_getmethods__["report"] = _aisparser.pawss1_4_report_get
     if _newclass:report = _swig_property(_aisparser.pawss1_4_report_get, _aisparser.pawss1_4_report_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_pawss1_4(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2290,7 +2290,7 @@ class pawss1_5(_object):
     __swig_setmethods__["report"] = _aisparser.pawss1_5_report_set
     __swig_getmethods__["report"] = _aisparser.pawss1_5_report_get
     if _newclass:report = _swig_property(_aisparser.pawss1_5_report_get, _aisparser.pawss1_5_report_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_pawss1_5(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2323,7 +2323,7 @@ class pawss2_3(_object):
     __swig_setmethods__["report"] = _aisparser.pawss2_3_report_set
     __swig_getmethods__["report"] = _aisparser.pawss2_3_report_get
     if _newclass:report = _swig_property(_aisparser.pawss2_3_report_get, _aisparser.pawss2_3_report_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_pawss2_3(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2453,7 +2453,7 @@ class imo1_11(_object):
     __swig_setmethods__["spare"] = _aisparser.imo1_11_spare_set
     __swig_getmethods__["spare"] = _aisparser.imo1_11_spare_get
     if _newclass:spare = _swig_property(_aisparser.imo1_11_spare_get, _aisparser.imo1_11_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_imo1_11(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2498,7 +2498,7 @@ class imo1_12(_object):
     __swig_setmethods__["spare"] = _aisparser.imo1_12_spare_set
     __swig_getmethods__["spare"] = _aisparser.imo1_12_spare_get
     if _newclass:spare = _swig_property(_aisparser.imo1_12_spare_get, _aisparser.imo1_12_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_imo1_12(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2555,7 +2555,7 @@ class imo1_13(_object):
     __swig_setmethods__["spare"] = _aisparser.imo1_13_spare_set
     __swig_getmethods__["spare"] = _aisparser.imo1_13_spare_get
     if _newclass:spare = _swig_property(_aisparser.imo1_13_spare_get, _aisparser.imo1_13_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_imo1_13(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2594,7 +2594,7 @@ class tidal_window(_object):
     __swig_setmethods__["current_speed"] = _aisparser.tidal_window_current_speed_set
     __swig_getmethods__["current_speed"] = _aisparser.tidal_window_current_speed_get
     if _newclass:current_speed = _swig_property(_aisparser.tidal_window_current_speed_get, _aisparser.tidal_window_current_speed_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_tidal_window(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2618,7 +2618,7 @@ class imo1_14(_object):
     __swig_setmethods__["windows"] = _aisparser.imo1_14_windows_set
     __swig_getmethods__["windows"] = _aisparser.imo1_14_windows_get
     if _newclass:windows = _swig_property(_aisparser.imo1_14_windows_get, _aisparser.imo1_14_windows_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_imo1_14(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2639,7 +2639,7 @@ class imo1_15(_object):
     __swig_setmethods__["spare"] = _aisparser.imo1_15_spare_set
     __swig_getmethods__["spare"] = _aisparser.imo1_15_spare_get
     if _newclass:spare = _swig_property(_aisparser.imo1_15_spare_get, _aisparser.imo1_15_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_imo1_15(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2660,7 +2660,7 @@ class imo1_16(_object):
     __swig_setmethods__["spare"] = _aisparser.imo1_16_spare_set
     __swig_getmethods__["spare"] = _aisparser.imo1_16_spare_get
     if _newclass:spare = _swig_property(_aisparser.imo1_16_spare_get, _aisparser.imo1_16_spare_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_imo1_16(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2708,7 +2708,7 @@ class pseudo_target(_object):
     __swig_setmethods__["sog"] = _aisparser.pseudo_target_sog_set
     __swig_getmethods__["sog"] = _aisparser.pseudo_target_sog_get
     if _newclass:sog = _swig_property(_aisparser.pseudo_target_sog_get, _aisparser.pseudo_target_sog_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_pseudo_target(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -2726,7 +2726,7 @@ class imo1_17(_object):
     __swig_setmethods__["targets"] = _aisparser.imo1_17_targets_set
     __swig_getmethods__["targets"] = _aisparser.imo1_17_targets_get
     if _newclass:targets = _swig_property(_aisparser.imo1_17_targets_get, _aisparser.imo1_17_targets_set)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = _aisparser.new_imo1_17(*args)
         try: self.this.append(this)
         except: self.this = this

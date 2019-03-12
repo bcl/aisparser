@@ -1,7 +1,7 @@
 /* -----------------------------------------------------------------------
    Header file for NMEA string parser
    Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
-   All Rights Reserved   
+   All Rights Reserved
    ----------------------------------------------------------------------- */
 /*! \file
     \brief Header file for test_nmea.c

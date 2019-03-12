@@ -17,10 +17,10 @@ public class Message24Test extends TestCase {
 			result = vdm_message.add("!AIVDM,1,1,,A,H52IRsP518Tj0l59D0000000000,2*45");
 			assertEquals( "vdm add failed", 0, result );
 			msg.parse( vdm_message.sixbit() );
-			
+
 			// Part B
 			result = vdm_message.add("!AIVDM,1,1,,A,H52IRsTU000000000000000@5120,0*76");
-			assertEquals( "vdm add failed", 0, result );			 
+			assertEquals( "vdm add failed", 0, result );
 			msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());

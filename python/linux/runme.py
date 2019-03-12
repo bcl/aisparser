@@ -85,7 +85,7 @@ for p in s:
         elif ais_state.msgid == 8:
 	    msg = aisparser.aismsg_8()
 	    aisparser.parse_ais_8( ais_state, msg )
-			
+
 	    dac = msg.app_id >> 6;
 	    fi = msg.app_id & 0x3F;
 
@@ -100,7 +100,7 @@ for p in s:
 	    if fi==1 and msgid==3:
 	    	msg1_3 = aisparser.seaway1_3()
 	    	aisparser.parse_seaway1_3( sixbit, msg1_3 )
-			
+
 	    	for i in xrange(0,6):
 		    report = aisparser.get_water_level_report( msg1_3, i)
 		    utc_time = report.utc_time

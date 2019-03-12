@@ -19,27 +19,27 @@ int test_binfrom6bit( void )
     if( binfrom6bit( 0x35 ) != 0x05 )
     {
         fprintf( stderr, "binfrom6bit() 1: Failed\n" );
-        return 0;     
+        return 0;
     }
-    
+
     if( binfrom6bit( 0x6D ) != 0x35 )
     {
         fprintf( stderr, "binfrom6bit() 2: Failed\n" );
-        return 0;     
+        return 0;
     }
-    
+
     if( binfrom6bit( 0x05 ) != -1 )
     {
         fprintf( stderr, "binfrom6bit() 3: Failed\n" );
-        return 0;     
+        return 0;
     }
-    
+
     if( binfrom6bit( 0x5B ) != -1 )
     {
         fprintf( stderr, "binfrom6bit() 4: Failed\n" );
-        return 0;     
+        return 0;
     }
-    
+
     fprintf( stderr, "binfrom6bit(): Passed\n" );
     return 1;
 }
@@ -48,7 +48,7 @@ int test_binfrom6bit( void )
 int test_init_6bit( void )
 {
     sixbit state;
-  
+
     if( init_6bit( &state ) == 1 )
     {
         fprintf( stderr, "init_6bit() 1: Failed\n" );
@@ -85,7 +85,7 @@ int test_get_6bit( void )
             return 0;
         }
     }
-    
+
     fprintf( stderr, "get_sixbit(): Passed\n" );
     return 1;
 }

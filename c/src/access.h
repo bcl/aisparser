@@ -9,7 +9,7 @@
     \brief Header file for access.h
 
 	Prototypes for access.c
-	
+
 */
 sixbit * __stdcall get_msg6_data( aismsg_6 *msg );
 sixbit * __stdcall get_msg8_data( aismsg_8 *msg );

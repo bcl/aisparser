@@ -5,15 +5,15 @@ import junit.framework.TestCase;
 public class NmeaTest extends TestCase {
 
 	Nmea	nmea_message;
-	
+
 	protected void setUp() {
 		nmea_message = new Nmea();
 	}
-	
+
 	protected void tearDown() {
 		nmea_message = null;
 	}
-	
+
 	public void testFind_start() {
 		nmea_message.init("!AIVDM,1,1,,B,19NS7Sp02wo?HETKA2K6mUM20<L=,0*27\r\n");
 		try {
@@ -34,7 +34,7 @@ public class NmeaTest extends TestCase {
 			nmea_message.find_start();
 			fail("Start found when it doesn't exist");
 		} catch (StartNotFoundException e) {
-			
+
 		}
 	}
 

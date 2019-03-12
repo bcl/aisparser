@@ -12,9 +12,9 @@ VERSION = 1.10
 SRC	= ../src/
 CC	= gcc
 CFLAGS	= -I$(SRC) -g -Wall # -O2
-#LIBS	= 
- 
-OBJS		=	$(SRC)nmea.o $(SRC)vdm_parse.o $(SRC)sixbit.o $(SRC)seaway.o 
+#LIBS	=
+
+OBJS		=	$(SRC)nmea.o $(SRC)vdm_parse.o $(SRC)sixbit.o $(SRC)seaway.o
 OBJS		+=	$(SRC)imo.o $(SRC)access.o
 OBJS		+=	$(SRC)test_nmea.o $(SRC)test_vdm_parse.o $(SRC)test_sixbit.o
 OBJS		+=	$(SRC)test_seaway.o $(SRC)test_imo.o $(SRC)test_access.o
@@ -91,7 +91,7 @@ speed:		$(OBJS) $(HDRS) $(OBJS) speed.o
 
 # Clean up the object files and the sub-directory for distributions
 clean:
-		rm -f *~ 
+		rm -f *~
 		rm -f $(OBJS) main.o speed.o
-		rm -f core *.asc 
+		rm -f core *.asc
 		rm -rf aisparse_test speed_test

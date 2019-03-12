@@ -7,7 +7,7 @@ public class Message11Test extends TestCase {
 	Vdm vdm_message;
 	Message11 msg;
 	int result;
-	
+
 	public void testParse() {
 		vdm_message = new Vdm();
 		 msg = new Message11();
@@ -15,7 +15,7 @@ public class Message11Test extends TestCase {
 		 try {
 			 result = vdm_message.add("!AIVDM,1,1,,A,;4WOL21uM<jCroP`g8B=NFQ00000,0*37\r\n");
 			 assertEquals( "vdm add failed", 0, result );
-			 
+
 			 msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -38,7 +38,7 @@ public class Message11Test extends TestCase {
 		assertEquals("raim", 0, msg.raim());
 		assertEquals("sotdma.sync_state", 0, msg.sotdma_state().sync_state());
 		assertEquals("sotdma.slot_timeout", 0, msg.sotdma_state().slot_timeout());
-		assertEquals("sotdma.sub_message", 0, msg.sotdma_state().sub_message());	
+		assertEquals("sotdma.sub_message", 0, msg.sotdma_state().sub_message());
 	}
 
 }

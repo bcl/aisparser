@@ -15,27 +15,27 @@
     \brief AIVDM/AIVDO AIS Sentence Parser
     \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.8
-    
+
     This module contains the functions to parse incoming Automatic
-    Identification System (AIS) serial messages as defined by IEC-61993-2 
-    Each message type has its own structure, of the form aismsg_XX, based 
+    Identification System (AIS) serial messages as defined by IEC-61993-2
+    Each message type has its own structure, of the form aismsg_XX, based
     on the message id of the message. The parse routine for each message
     is of the form parse_ais_<msgid>, eg, parse_ais_5()
 
     Each of the aismsg_XX parsing functions expect to be passed a pointer
-    to a ais_sate structure containing the raw 6-bit data and a pointer 
+    to a ais_sate structure containing the raw 6-bit data and a pointer
     to the aismsg_XX structure to place the parsed information into.
 
     All aismsg_XX structures are cleared by their respecive parsers, except
     for parse_ais_24() which stores 2 messages into a single structure.
- 
+
     Data like the ship's name and callsign are converted to ASCII
     before being stored. Positions are converted to signed long values,
-    and other fields like course over ground, speed, heading, etc. 
+    and other fields like course over ground, speed, heading, etc.
     are left for further decoding. 1/1000 minute positions are converted
     to 1/10000 minute positions to make comparisons easier.
 
-    Not all of these parsers have been fully tested with live data. 
+    Not all of these parsers have been fully tested with live data.
     Here is a list of the ones that have been tested so far:
       1,3,4,5,7,12,15,20
 
@@ -61,7 +61,7 @@
         {
             // Get the 6 bit message id
             ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6 );
-            
+
             // process message with appropriate parser
             switch( ais.msgid ) {
                 case 1:
@@ -73,7 +73,7 @@
             }
         }
     }
-    \endcode    
+    \endcode
 
 
 */
@@ -82,37 +82,37 @@
     <center>Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com><br>
     http://www.aisparser.com/
     </center>
-    
-    
+
+
     The Automatic Identification System (AIS) allows ships to be tracked in
     realtime based on information transmitted by each ship. They are equipped
-    with either a Class A or Class B AIS transponder which includes a GPS 
+    with either a Class A or Class B AIS transponder which includes a GPS
     for accurate position and speed reporting. AIS receivers decode the
     transmitted information and output the data as AIVDM messages.
-    
+
     The structure of the AIVDM message is described in IEC 61993-2 and it is
     a variation of the NMEA 0183 sentence format that includes the raw data
     encoded in a 6-bit format. A Message 1 example looks like this:
-    
+
     \code
     !AIVDM,1,1,,B,19NS7Sp02wo?HETKA2K6mUM20<L=,0*27
     \endcode
-    
-    The meaning of each data element in the AIS messages is covered by the 
+
+    The meaning of each data element in the AIS messages is covered by the
     ITU M.1371 and IEC 62287 documents. These documents are available from
     the websites of these organizations:
       - http://www.itu.int
       - http://www.iec.ch
       - http://www.navcenter.org/marcomms/IEC/
-      
-    To fully understand the data produced by this library you should read 
-    the above documents. 
-    
+
+    To fully understand the data produced by this library you should read
+    the above documents.
+
     This library allows you to write programs that accept ASCII AIVDM or
-    AIVDO messages and parse their packed 6-bit data into structures 
+    AIVDO messages and parse their packed 6-bit data into structures
     containging the message data. The general flow of a typical aisparser
     program would look like this:
-    
+
      - Receive ASCII data (via serial port, file or network socket)
      - Pass the data to assemble_vdm() to reassemble multipart messages and
        extract their 6-bit data.
@@ -122,26 +122,26 @@
      - Call the appropriate parse_ais_XX function with aismsg_XX structure
        passed to it.
      - Act on the message data: display a position, ship name, etc.
-     
+
     This library is thread safe, all variables used are contained in the
     ais_state structure. To support multiple data streams all you need to
     do is used 2 different instances of ais_state.
 
     To get started you should read the documentation on the vdm_parse.c
     module and look at the example code in the example directory of the
-    source distribution. 
-    
+    source distribution.
+
     Not all of the AIS fields are fully parsed. My philosophy is to get the
-    raw data into a format that your code can easily deal with and to 
+    raw data into a format that your code can easily deal with and to
     minimize the layers between your code and the raw data. This means that
     you will need a copy of the documents mentioned above to fully understand
     the results you will get from parsing messages.
-    
-    eg. The sog field of a message 1,2,3 represents Speed Over Ground in 
+
+    eg. The sog field of a message 1,2,3 represents Speed Over Ground in
     1/10th of a knot. In the message 1 structure it is stored as an int
     instead of dividing it by 10 and converting to a float. This allows you
     to do your own division of the raw value and minimizes potential errors.
-   
+
 */
 
 
@@ -149,9 +149,9 @@
 /** Get 20 bit ETA, Seaway and IMO Timetag
 
     \param state pointer to parser state
-    \param datetime pointer to timetag result struct   
+    \param datetime pointer to timetag result struct
 
-    return 
+    return
       - return 0 if there was no error
       - return 1 if there was an error
       - return 2 if there are < 20 bits to parse
@@ -160,7 +160,7 @@
 int __stdcall get_timetag( sixbit *state, timetag *datetime )
 {
 	int	length;
-	
+
     if ( !state )
         return 1;
     if ( !datetime )
@@ -174,7 +174,7 @@ int __stdcall get_timetag( sixbit *state, timetag *datetime )
 	datetime->day     = (char) get_6bit( state, 5 );
 	datetime->hours   = (char) get_6bit( state, 5 );
 	datetime->minutes = (char) get_6bit( state, 6 );
-	
+
 	return 0;
 }
 
@@ -184,7 +184,7 @@ int __stdcall get_timetag( sixbit *state, timetag *datetime )
 
 	@param sign_bit
 	@param value pointer to value
-	
+
 	eg. to convert a 10 bit 2's complement:
 		conv_sign( 0x00200, &temp );
 */
@@ -203,12 +203,12 @@ void __stdcall conv_sign( unsigned int sign_bit, int *value )
 /** Convert a AIS 6-bit character to ASCII
 
     \param value 6-bit value to be converted
-   
-    return 
+
+    return
       - corresponding ASCII value (0x20-0x5F)
 
-    This function is used to convert binary data to ASCII. This is 
-    different from the 6-bit ASCII to binary conversion for VDM 
+    This function is used to convert binary data to ASCII. This is
+    different from the 6-bit ASCII to binary conversion for VDM
     messages; it is used for strings within the datastream itself.
     eg. Ship Name and Destination.
 */
@@ -258,7 +258,7 @@ int __stdcall pos2ddd( long latitude, long longitude, double *lat_dd, double *lo
     \param lat_min pointer to hold minutes in mm.mmmm format
     \param long_ddd pointer to hold signed longitude in DDD format
     \param long_min pointer to hold minutes in mm.mmmm format
-    
+
 
     This function converts 1/10000 minute formatted positions to standard
     Degrees and decimal minutes format.
@@ -318,21 +318,21 @@ int __stdcall conv_pos( long *latitude, long *longitude )
 
     This function handles re-assembly and extraction of the 6-bit data
     from AIVDM/AIVDO sentences.
-    
+
     Because the NMEA standard limits the length of a line to 80 characters
-    some AIS messages, such as message 5, are output as a multipart VDM 
-    messages. 
-    This routine collects the 6-bit encoded data from these parts and 
+    some AIS messages, such as message 5, are output as a multipart VDM
+    messages.
+    This routine collects the 6-bit encoded data from these parts and
     returns a 0 when all pieces have been reassembled.
-    
+
     It expects the sentences to:
       - Be in order, part 1, part 2, etc.
       - Be from a single sequence
-      
+
     It will return an error if it receives a piece out of order or from
     a new sequence before the previous one is finished.
-    
-        
+
+
     Returns
         - 0 Complete packet
         - 1 Incomplete packet
@@ -348,18 +348,18 @@ int __stdcall conv_pos( long *latitude, long *longitude )
                          "!AIVDM,2,1,9,A,55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H,0*49\r\n",
                          "!AIVDM,2,2,9,A,==40HtI4i@E531H1QDTVH51DSCS0,2*16\r\n"
                        };
-    
+
     memset( &state, 0, sizeof(state) );
     assemble_vdm( &state, buf[0] )
     state.six_state now has the 6-bit data from the message
 
     assemble_vdm( &state, buf[1] );
     This returns a 1 because not all the pieces have been received.
-    
+
     assemble_vdm( &state, buf[2] );
     This returns a 0 and state.six_state has the complete 6-bit data for
     the message 5.
-    
+
     \endcode
 
 */
@@ -407,11 +407,11 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         /* Get an integer from the string */
         *fields[i] = nmea_uint(p);
     }
-    
+
     /* Are we looking for more parts? */
     if (state->total > 0)
     {
-        /* If the sequence doesn't match, or the number is not in 
+        /* If the sequence doesn't match, or the number is not in
            order: reset and exit
         */
         if( (state->sequence != sequence) || (state->num != num-1) )
@@ -422,7 +422,7 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
             return 5;
         }
         state->num++;
-        
+
     } else {
         /* Not looking for more parts, reset the state */
         state->total = total;
@@ -430,7 +430,7 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         state->sequence = sequence;
         init_6bit( &state->six_state );
     }
-    
+
     /* Get the channel character */
     if ( (p = nmea_next_field( p )) == NULL )
     {
@@ -438,14 +438,14 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         return 4;
     }
     state->channel = *p;
-    
+
     /* Point to the 6-bit data */
     if ( (p = nmea_next_field( p )) == NULL )
     {
         /* Error with the string */
         return 4;
     }
-    
+
     /* Copy the 6-bit ASCII field over to the sixbit_state buffer */
     d = state->six_state.bits;
     length = 0;
@@ -467,7 +467,7 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         /* Found a complete packet */
         return 0;
     }
-    
+
     return 1;
 }
 
@@ -479,7 +479,7 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -539,7 +539,7 @@ int __stdcall parse_ais_1( ais_state *state, aismsg_1 *result )
 
    \param state    pointer to ais_state
    \param result   pointer to parsed message result structure to be filled
-   
+
    return:
      - 0 if no errors
      - 1 if there is an error
@@ -557,7 +557,7 @@ int __stdcall parse_ais_2( ais_state *state, aismsg_2 *result )
         return 1;
     if( !result )
         return 1;
-    
+
     length = strlen(state->six_state.bits) * 6;
     if( length != 168 )
         return 2;
@@ -600,7 +600,7 @@ int __stdcall parse_ais_2( ais_state *state, aismsg_2 *result )
 
    \param state    pointer to ais_state
    \param result   pointer to parsed message result structure to be filled
-   
+
    return:
      - 0 if no errors
      - 1 if there is an error
@@ -659,7 +659,7 @@ int __stdcall  parse_ais_3( ais_state *state, aismsg_3 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -717,14 +717,14 @@ int __stdcall  parse_ais_4( ais_state *state, aismsg_4 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
      return:
        - 0 if no errors
        - 1 if there is an error
        - 2 if there is a packet length error
 
      Note that the ship's callsign, name and destination are converted to
-     ASCII before storage. 
+     ASCII before storage.
 */
 /* ----------------------------------------------------------------------- */
 int __stdcall  parse_ais_5( ais_state *state, aismsg_5 *result )
@@ -785,7 +785,7 @@ int __stdcall  parse_ais_5( ais_state *state, aismsg_5 *result )
         i++;
     }
     result->dest[i] = 0;
-    
+
     result->dte          = (char) get_6bit( &state->six_state, 1 );
     result->spare        = (char) get_6bit( &state->six_state, 1 );
 
@@ -800,7 +800,7 @@ int __stdcall  parse_ais_5( ais_state *state, aismsg_5 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -814,7 +814,7 @@ int __stdcall  parse_ais_5( ais_state *state, aismsg_5 *result )
 int __stdcall  parse_ais_6( ais_state *state, aismsg_6 *result )
 {
     int length;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -852,7 +852,7 @@ int __stdcall  parse_ais_6( ais_state *state, aismsg_6 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -919,7 +919,7 @@ int __stdcall  parse_ais_7( ais_state *state, aismsg_7 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
    return:
      - 0 if no errors
      - 1 if there is an error
@@ -968,7 +968,7 @@ int __stdcall  parse_ais_8( ais_state *state, aismsg_8 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1036,7 +1036,7 @@ int __stdcall  parse_ais_9( ais_state *state, aismsg_9 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1076,7 +1076,7 @@ int __stdcall  parse_ais_10( ais_state *state, aismsg_10 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1132,7 +1132,7 @@ int __stdcall  parse_ais_11( ais_state *state, aismsg_11 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1146,7 +1146,7 @@ int __stdcall  parse_ais_12( ais_state *state, aismsg_12 *result )
 {
     int length;
     int i;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -1190,7 +1190,7 @@ int __stdcall  parse_ais_12( ais_state *state, aismsg_12 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return
       - 0 if no errors
       - 1 if there is an error
@@ -1257,7 +1257,7 @@ int __stdcall  parse_ais_13( ais_state *state, aismsg_13 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is a parameter error
@@ -1311,7 +1311,7 @@ int __stdcall  parse_ais_14( ais_state *state, aismsg_14 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return
       - 0 if no errors
       - 1 if there is an error
@@ -1348,7 +1348,7 @@ int __stdcall  parse_ais_15( ais_state *state, aismsg_15 *result )
     result->msgid1_1     = (char)           get_6bit( &state->six_state, 6  );
     result->offset1_1    = (int)            get_6bit( &state->six_state, 12 );
     result->num_reqs     = 1;
-    
+
     if( length > 88 )
     {
         result->spare2    = (char)  get_6bit( &state->six_state, 2 );
@@ -1377,7 +1377,7 @@ int __stdcall  parse_ais_15( ais_state *state, aismsg_15 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return
       - 0 if no errors
       - 1 if there is an error
@@ -1414,7 +1414,7 @@ int __stdcall  parse_ais_16( ais_state *state, aismsg_16 *result )
     result->offset_a     = (int)            get_6bit( &state->six_state, 12 );
     result->increment_a  = (int)            get_6bit( &state->six_state, 10 );
     result->num_cmds     = 1;
-    
+
     if( length == 144 )
     {
         result->destid_b     = (unsigned long)  get_6bit( &state->six_state, 30 );
@@ -1435,7 +1435,7 @@ int __stdcall  parse_ais_16( ais_state *state, aismsg_16 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1495,12 +1495,12 @@ int __stdcall  parse_ais_17( ais_state *state, aismsg_17 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
       - 2 if there is a packet length error
-      
+
      Note that the latitude and longitude are converted to signed values
      before being returned.
 */
@@ -1567,14 +1567,14 @@ int __stdcall  parse_ais_18( ais_state *state, aismsg_18 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
       - 2 if there is a packet length error
 
     Note that the latitude and longitude are converted to signed values
-    before being returned. And the ship's name is converted to ASCII 
+    before being returned. And the ship's name is converted to ASCII
     before being stored.
 */
 /* ----------------------------------------------------------------------- */
@@ -1616,7 +1616,7 @@ int __stdcall  parse_ais_19( ais_state *state, aismsg_19 *result )
         i++;
     }
     result->name[i] = 0;
-   
+
     result->ship_type    = (unsigned char)  get_6bit( &state->six_state, 8  );
     result->dim_bow      = (int)            get_6bit( &state->six_state, 9  );
     result->dim_stern    = (int)            get_6bit( &state->six_state, 9  );
@@ -1641,7 +1641,7 @@ int __stdcall  parse_ais_19( ais_state *state, aismsg_19 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1717,7 +1717,7 @@ int __stdcall  parse_ais_20( ais_state *state, aismsg_20 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1803,7 +1803,7 @@ int __stdcall  parse_ais_21( ais_state *state, aismsg_21 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return
       - 0 if no errors
       - 1 if there is an error
@@ -1879,7 +1879,7 @@ int __stdcall  parse_ais_22( ais_state *state, aismsg_22 *result )
 
     \param state    pointer to ais_state
     \param result   pointer to parsed message result structure to be filled
-   
+
     return:
       - 0 if no errors
       - 1 if there is an error
@@ -1888,7 +1888,7 @@ int __stdcall  parse_ais_22( ais_state *state, aismsg_22 *result )
     Note that the latitudes and longitudes are converted to signed values
     before being returned and that they are converted to 1/10000 minute
     format from 1/1000 minute as received.
-      
+
 */
 /* ----------------------------------------------------------------------- */
 int __stdcall  parse_ais_23( ais_state *state, aismsg_23 *result )
@@ -1949,8 +1949,8 @@ int __stdcall  parse_ais_23( ais_state *state, aismsg_23 *result )
       - 2 if there is a packet length error
       - 3 if unknown part number
 
-    NOTE! The result structure needs to be cleared before use. Because 
-    message 24 is a 2 part message the parse function doesn't clear the 
+    NOTE! The result structure needs to be cleared before use. Because
+    message 24 is a 2 part message the parse function doesn't clear the
     structure before filling it. You should do this:
 
     \code
@@ -1960,10 +1960,10 @@ int __stdcall  parse_ais_23( ais_state *state, aismsg_23 *result )
 	before passing a message 24A to the parse_ais_24() function.
 
     Message 24 is a 2 part message. The first part only contains the MMSI
-    and the ship name. The second message contains the ship dimensions, 
+    and the ship name. The second message contains the ship dimensions,
     etc.
 
-    Check the result->part_number field to determine which message this 
+    Check the result->part_number field to determine which message this
     is. The same structure is used for both messages and the result->flags
     field will have a 0x03 in it when both messages have been parsed.
 

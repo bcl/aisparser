@@ -62,7 +62,7 @@ int main( int argc, char *argv[] )
                           "AIVDM,1,1,,A,18UG;P0012G?Uq4EdHa=c;7@051@,0*53"
     };
 
-    
+
     if (test_ahextobin() != 1)
     {
         exit(-1);
@@ -115,11 +115,11 @@ int main( int argc, char *argv[] )
     if (test_pos2ddd() != 1)
     {
         exit(-1);
-    }    
+    }
     if (test_pos2dmm() != 1)
     {
         exit(-1);
-    }    
+    }
     if (test_assemble_vdm() != 1)
     {
         exit(-1);
@@ -178,7 +178,7 @@ int main( int argc, char *argv[] )
     }
 
     printf("Testing test_msgs\n");
-    
+
     /* Clear out the structures */
     memset( &ais, 0, sizeof( ais_state ) );
 
@@ -187,10 +187,10 @@ int main( int argc, char *argv[] )
         init_6bit( &ais.six_state );
         strcpy( ais.six_state.bits, test_msgs[i] );
         ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6 );
-    
+
         /* Process the AIS message */
         printf( "Message %d\n", ais.msgid );
-                
+
         /* process message with appropriate parser */
         switch( ais.msgid ) {
             case 1:
@@ -202,7 +202,7 @@ int main( int argc, char *argv[] )
                     printf( "Long : %ld\n", msg_1.longitude  );
                 }
                 break;
-                        
+
             case 2:
                 if( parse_ais_2( &ais, &msg_2 ) == 0 )
                 {
@@ -212,7 +212,7 @@ int main( int argc, char *argv[] )
                     printf( "Long : %ld\n", msg_1.longitude  );
                 }
                 break;
-                        
+
             case 3:
                 if( parse_ais_3( &ais, &msg_3 ) == 0 )
                 {
@@ -222,7 +222,7 @@ int main( int argc, char *argv[] )
                     printf( "Long : %ld\n", msg_1.longitude  );
                 }
                 break;
-                        
+
             case 4:
                 if( parse_ais_4( &ais, &msg_4 ) == 0 )
                 {
@@ -232,7 +232,7 @@ int main( int argc, char *argv[] )
                     printf( "Long : %ld\n", msg_1.longitude  );
                 }
                 break;
-                        
+
             case 5:
                 if( parse_ais_5( &ais, &msg_5 ) == 0 )
                 {
@@ -243,7 +243,7 @@ int main( int argc, char *argv[] )
                     printf( "Destination : %s\n", msg_5.dest );
                 }
                 break;
-                
+
             case 12:
                 if (parse_ais_12(&ais, &msg_12) == 0)
                 {
@@ -260,7 +260,7 @@ int main( int argc, char *argv[] )
                     printf( "MMSI : %09ld\n", msg_18.userid );
                     printf( "Lat  : %ld\n", msg_18.latitude  );
                     printf( "Long : %ld\n", msg_18.longitude  );
-                } 
+                }
                 break;
 
             case 24:
@@ -276,7 +276,7 @@ int main( int argc, char *argv[] )
 					{
 						printf("Callsign : %s\n", msg_24.callsign );
 					}
-                } 
+                }
                 break;
 
 
@@ -287,7 +287,7 @@ int main( int argc, char *argv[] )
 	test_seaway();
 
     printf("Testing demo_msgs\n");
-    
+
     /* Clear out the structures */
     memset( &ais, 0, sizeof( ais_state ) );
 
@@ -302,7 +302,7 @@ int main( int argc, char *argv[] )
         }
 
         ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6 );
-    
+
         /* Process the AIS message */
         printf( "msgid       : %d\n", ais.msgid );
 
@@ -314,7 +314,7 @@ int main( int argc, char *argv[] )
                     printf("repeat      : %d\n", msg_1.repeat );
                     printf("userid      : %ld\n", msg_1.userid );
                     printf("nav_status  : %d\n", msg_1.nav_status );
-                    printf("rot         : %d\n", msg_1.rot ); 
+                    printf("rot         : %d\n", msg_1.rot );
                     printf("sog         : %d\n", msg_1.sog );
                     printf("pos_acc     : %d\n", msg_1.pos_acc );
                     printf("longitude   : %ld\n", msg_1.longitude );
@@ -336,7 +336,7 @@ int main( int argc, char *argv[] )
                     printf("repeat      : %d\n", msg_3.repeat );
                     printf("userid      : %ld\n", msg_3.userid );
                     printf("nav_status  : %d\n", msg_3.nav_status );
-                    printf("rot         : %d\n", msg_3.rot ); 
+                    printf("rot         : %d\n", msg_3.rot );
                     printf("sog         : %d\n", msg_3.sog );
                     printf("pos_acc     : %d\n", msg_3.pos_acc );
                     printf("longitude   : %ld\n", msg_3.longitude );

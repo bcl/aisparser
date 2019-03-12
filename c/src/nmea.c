@@ -21,7 +21,7 @@
     verify the checksum, find the start of the sentence, find the next
     field, convert a field to an integer and copy a field to a destination
     buffer.
-    
+
 */
 
 
@@ -33,7 +33,7 @@
     Returns:
       - binary 0x00-0x0F
       - -1 if it was not an ASCII hex character
-      
+
     Example:
     \code
     ahextobin( 'D' ) == 0x0D
@@ -50,7 +50,7 @@ char __stdcall ahextobin( char *c )
     } else if( (*c >= 'a') && (*c <= 'f') ) {
         return *c - ('a'-10);
     }
-    
+
     return -1;
 }
 
@@ -63,12 +63,12 @@ char __stdcall ahextobin( char *c )
     Returns:
       - pointer to next field in string
       - NULL if the end of the string has been reached
-      
+
     Example:
     \code
     char buf[255];
     char *p;
-    
+
     strcpy( buf, "!AIVDM,1,1,,A,19NWoq000Wrt<RJHEuuqiWlN061d,0*5F" );
     p = nmea_next_field( p );
 
@@ -78,13 +78,13 @@ char __stdcall ahextobin( char *c )
 /* ----------------------------------------------------------------------- */
 char * __stdcall nmea_next_field( char *p )
 {
-    while (   p 
-           && (*p != 0) 
-           && (*p != ',') 
+    while (   p
+           && (*p != 0)
+           && (*p != ',')
            && (*p != '*') ) { p++; }
     if (p != 0)
         return p+1;
-        
+
     return NULL;
 }
 
@@ -102,11 +102,11 @@ char * __stdcall nmea_next_field( char *p )
     char buf[255];
     char *p;
     unsigned int i;
-    
+
     strcpy( buf, "!AIVDM,1,1,,A,19NWoq000Wrt<RJHEuuqiWlN061d,0*5F" );
-    p = nmea_next_field( p );   
+    p = nmea_next_field( p );
     i = nmea_uint( p );
-    
+
     i == 1
     \endcode
 */
@@ -115,9 +115,9 @@ unsigned int __stdcall nmea_uint( char *p )
 {
     unsigned int i = 0;
 
-    while (   p 
-           && (*p != 0) 
-           && (*p != ',') 
+    while (   p
+           && (*p != 0)
+           && (*p != ',')
            && (*p != '*') )
     {
         i *= 10;
@@ -125,7 +125,7 @@ unsigned int __stdcall nmea_uint( char *p )
         p++;
     }
 
-    return i;    
+    return i;
 }
 
 
@@ -142,16 +142,16 @@ unsigned int __stdcall nmea_uint( char *p )
 
     This routine stops copying when it hits the end of the field, end of
     the string or len.
-      
+
     Example:
     \code
     char buf1[255];
     char buf2[255];
     char *p;
-    
+
     strcpy( buf1, "!AIVDM,1,1,,A,19NWoq000Wrt<RJHEuuqiWlN061d,0*5F" );
     buf2[0] = 0;
-    
+
     p = buf1;
     nmea_copy_field( buf2, p, 254 );
 
@@ -163,9 +163,9 @@ char * __stdcall nmea_copy_field( char *dest, char *src, int len )
 {
     while (   len
            && src
-           && dest 
-           && (*src != 0) 
-           && (*src != ',') 
+           && dest
+           && (*src != 0)
+           && (*src != ',')
            && (*src != '*') ) { *dest++ = *src++; len--; }
 
     *dest = 0;
@@ -180,10 +180,10 @@ char * __stdcall nmea_copy_field( char *dest, char *src, int len )
 
     Returns:
         - pointer to start character or NULL if not found
-        
+
     The NMEA sentence may not always start at the beginning of the buffer,
     use this routine to make sure the start of the sentence has been found.
-    
+
     Example:
     \code
     char buf[255];
@@ -199,24 +199,24 @@ char * __stdcall nmea_copy_field( char *dest, char *src, int len )
 char * __stdcall find_nmea_start( char *buffer )
 {
     char  *p;
-    
+
     if( !buffer )
         return NULL;
 
     p = buffer;
     while( p && (*p != 0) && (*p != '!') && (*p != '$') )
         p++;
-        
+
     if( *p != 0 )
         return p;
-        
+
     return NULL;
 }
 
 
 /* ----------------------------------------------------------------------- */
 /** Calculate the checksum of a NMEA 0183 sentence
-   
+
     \param buffer pointer to a 0 terminated buffer
     \param checksum pointer to variable where checksum will be stored
 
@@ -224,21 +224,21 @@ char * __stdcall find_nmea_start( char *buffer )
         - 0 if no error
         - 1 if there was an error
         - Fills in *checksum with calculated checksum
-        
+
     This function will calculate the checksum of the string by skipping the
-    ! or $ character and stopping at the * character or end of string. 
+    ! or $ character and stopping at the * character or end of string.
 
     Example:
     \code
     char buf[255];
     unsigned char checksum;
-    
+
     strcpy( (char *) buf, "!AIVDM,1,1,,A,15N;<J0P00Jro1<H>bAP0?vL00Rb,0*1B\n" );
     nmea_checksum( buf, &checksum )
 
     checksum == 0x1B
     \endcode
-   
+
 */
 /* ----------------------------------------------------------------------- */
 unsigned int __stdcall nmea_checksum( char *buffer, unsigned char *checksum )
@@ -249,13 +249,13 @@ unsigned int __stdcall nmea_checksum( char *buffer, unsigned char *checksum )
         return 1;
     if( !checksum )
         return 1;
-  
+
     /* Find start of sentence, after a '!' or '$' */
     p = find_nmea_start( buffer );
     if( p == NULL )
         return 1;
     p++;
-    
+
     *checksum = 0;
     /* Run checksum until end or illegal character */
     while( (*p != 0) && (*p != '*') && !((*p == '!') || (*p == '$')) )
@@ -263,7 +263,7 @@ unsigned int __stdcall nmea_checksum( char *buffer, unsigned char *checksum )
         *checksum ^= *p;
         p++;
     }
-    
+
     /* Check for illegal character */
     if( *p != '*' )
         return 1;
@@ -277,7 +277,7 @@ unsigned int __stdcall nmea_checksum( char *buffer, unsigned char *checksum )
 
     \param buffer pointer to a 0 terminated buffer
     \param checksum pointer to variable where checksum will be stored
-   
+
     Returns:
         - 0 if it does match
         - 1 if it does not match
@@ -285,14 +285,14 @@ unsigned int __stdcall nmea_checksum( char *buffer, unsigned char *checksum )
 
     This function checks the checksum of a string and returns the result.
     The string is expected to start with a ! or $ and end after the
-    2 hex checksum characters. Trailing CR and/or LF are optional. The 
+    2 hex checksum characters. Trailing CR and/or LF are optional. The
     actual checksum is returned in the variable pointed to by checksum.
 
     Example:
     \code
     char buf[255];
     unsigned char checksum;
-    
+
     strcpy( (char *) buf, "!AIVDM,1,1,,A,15N;<J0P00Jro1<H>bAP0?vL00Rb,0*1B\n" );
     if( check_nmea_checksum( buf, &checksum ) != 0 )
     {
@@ -308,18 +308,18 @@ unsigned int __stdcall check_nmea_checksum( char *buffer, unsigned char *checksu
     unsigned int      rv;
     char       *p;
     unsigned char       ssum;
-    
+
     if( !buffer )
         return 2;
     if( !checksum )
         return 2;
-    
+
     if( !( rv = nmea_checksum( buffer, checksum ) ) )
     {
         /* Find the checksum in the sentence */
         if( ( p = strchr( (char *) buffer, '*') ) == NULL )
             return 2;
-        
+
         /* Make sure it found the end of the sentence */
         if( *p == '*' )
         {
@@ -329,11 +329,11 @@ unsigned int __stdcall check_nmea_checksum( char *buffer, unsigned char *checksu
                 /* Convert the checksum and check it */
                 ssum  = ahextobin( p+1 ) << 4;
                 ssum += ahextobin( p+2 );
-                
+
                 if( ssum == *checksum )
                     return 0;
             } else {
-                return 1;  
+                return 1;
             }
         } else {
             return 1;

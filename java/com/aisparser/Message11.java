@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 11 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 11 class
  * UTC/Date response
- * 
+ *
  */
 public class Message11 extends Messages {
     int             utc_year;          // 14 bits : UTC Year
@@ -26,7 +26,7 @@ public class Message11 extends Messages {
     int             spare;             // 10 bits : Spare
     int             raim;              // 1 bit   : RAIM flag
     Sotdma         sotdma_state;
-    
+
     public int utc_year() { return this.utc_year; }
     public int utc_month() { return this.utc_month; }
     public int utc_day() { return this.utc_day; }
@@ -46,13 +46,13 @@ public class Message11 extends Messages {
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() != 168)
 			throw new AISMessageException("Message 11 wrong length");
-		
+
 		super.parse( 11, six_state );
 
 	    /* Parse the Message 11 */
@@ -72,6 +72,6 @@ public class Message11 extends Messages {
 	    this.spare        = (int)            six_state.get( 10 );
 	    this.raim         = (int)            six_state.get( 1  );
 	    this.sotdma_state = new Sotdma();
-		this.sotdma_state.parse( six_state );	
+		this.sotdma_state.parse( six_state );
 	}
 }

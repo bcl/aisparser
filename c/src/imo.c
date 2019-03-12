@@ -16,15 +16,15 @@
     \brief IMO Binary Message Parsing
     \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.0
-    
+
     For exact definitions of each field you should see the IMO SN/Circ. 236
     28 May 2004
 
     The format of the !AIVDM strings are covered in IEC 61993-2
 
     AIS Messages 6 and 8 are used to pass the data.
-    
-    Includes information like Meteorological and Hydrological data, Dangerous Cargo Indication, 
+
+    Includes information like Meteorological and Hydrological data, Dangerous Cargo Indication,
     etc.
 
 	Example Code:
@@ -51,14 +51,14 @@
 
 		// Copy the DAC and FI from the message 8 over to seaway
 		dac = message.app_id >> 6;
-		fi = message.app_id & 0x3F; 
+		fi = message.app_id & 0x3F;
 		imo = message.data;
 
 		// Is it a ...
 		if ((dac == 1) && (fi == 11))
 		{
 			result = parse_imo1_11( &imo, &msg1_11);
-			
+
 			// msg1_11 now holds the water level information
 		}
     }
@@ -71,19 +71,19 @@
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
-    This function parses a Meteorological and Hydrological message into 
+    This function parses a Meteorological and Hydrological message into
 	a imo1_11 structure
 */
 /* ----------------------------------------------------------------------- */
 int __stdcall parse_imo1_11( sixbit *state, imo1_11 *result )
 {
     int length;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -151,12 +151,12 @@ int __stdcall parse_imo1_11( sixbit *state, imo1_11 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
-    This function parses a Meteorological and Hydrological message into 
+    This function parses a Meteorological and Hydrological message into
 	a imo1_12 structure
 */
 /* ----------------------------------------------------------------------- */
@@ -164,7 +164,7 @@ int __stdcall parse_imo1_12( sixbit *state, imo1_12 *result )
 {
     int length;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -229,12 +229,12 @@ int __stdcall parse_imo1_12( sixbit *state, imo1_12 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
-    This function parses a Meteorological and Hydrological message into 
+    This function parses a Meteorological and Hydrological message into
 	a imo1_13 structure
 */
 /* ----------------------------------------------------------------------- */
@@ -242,7 +242,7 @@ int __stdcall parse_imo1_13( sixbit *state, imo1_13 *result )
 {
     int length;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -300,12 +300,12 @@ int __stdcall parse_imo1_13( sixbit *state, imo1_13 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
-    This function parses a Meteorological and Hydrological message into 
+    This function parses a Meteorological and Hydrological message into
 	a imo1_14 structure
 */
 /* ----------------------------------------------------------------------- */
@@ -313,7 +313,7 @@ int __stdcall parse_imo1_14( sixbit *state, imo1_14 *result )
 {
     int length;
     int i;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -350,19 +350,19 @@ int __stdcall parse_imo1_14( sixbit *state, imo1_14 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
-    This function parses a Meteorological and Hydrological message into 
+    This function parses a Meteorological and Hydrological message into
 	a imo1_15 structure
 */
 /* ----------------------------------------------------------------------- */
 int __stdcall parse_imo1_15( sixbit *state, imo1_15 *result )
 {
     int length;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -387,19 +387,19 @@ int __stdcall parse_imo1_15( sixbit *state, imo1_15 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
-    This function parses a Meteorological and Hydrological message into 
+    This function parses a Meteorological and Hydrological message into
 	a imo1_16 structure
 */
 /* ----------------------------------------------------------------------- */
 int __stdcall parse_imo1_16( sixbit *state, imo1_16 *result )
 {
     int length;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -424,12 +424,12 @@ int __stdcall parse_imo1_16( sixbit *state, imo1_16 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
-    This function parses a Meteorological and Hydrological message into 
+    This function parses a Meteorological and Hydrological message into
 	a imo1_16 structure
 */
 /* ----------------------------------------------------------------------- */
@@ -438,7 +438,7 @@ int __stdcall parse_imo1_17( sixbit *state, imo1_17 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -454,7 +454,7 @@ int __stdcall parse_imo1_17( sixbit *state, imo1_17 *result )
     for( i=0; i<4; i++ )
     {
 		result->targets[i].type = (char) get_6bit( state, 2 );
-	    
+
 		switch(result->targets[i].type)
 		{
 			case 0:	// MMSI
@@ -464,7 +464,7 @@ int __stdcall parse_imo1_17( sixbit *state, imo1_17 *result )
 			case 1:	// IMO
 				get_6bit( state, 12 );
 				result->targets[i].imo = (long) get_6bit( state, 30 );
-				break;			
+				break;
 			case 2:	// Callsign
 				j = 0;
 			    while( j != 7 )
@@ -490,14 +490,14 @@ int __stdcall parse_imo1_17( sixbit *state, imo1_17 *result )
 		result->targets[i].cog = (int) get_6bit( state, 9 );
 		result->targets[i].timestamp = (char) get_6bit( state, 6 );
 		result->targets[i].sog = (char) get_6bit( state, 8 );
-		
+
 		/* Convert the position to signed value */
 		result->targets[i].longitude *= 10;
 		result->targets[i].latitude *= 10;
 	   	conv_pos( &result->targets[i].latitude, &result->targets[i].longitude);
-	   	
+
 	}
-	
+
 	return 0;
 }
 

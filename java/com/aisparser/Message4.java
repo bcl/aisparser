@@ -4,7 +4,7 @@ package com.aisparser;
  * AIS Message 4 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
@@ -12,7 +12,7 @@ package com.aisparser;
 /**
  * AIS Message 4 class
  * Base Station Report
- * 
+ *
  */
 public class Message4 extends Messages {
     int             utc_year;          // 14 bits : UTC Year
@@ -45,21 +45,21 @@ public class Message4 extends Messages {
     public int sync_state() { return this.sync_state; }
     public int slot_timeout() { return this.slot_timeout; }
     public int sub_message() { return this.sub_message; }
-    
-    
+
+
 	public Message4()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() != 168 )
 			throw new AISMessageException("Message 5 wrong length");
-		
+
 		super.parse( 4, six_state );
-		
+
 		this.utc_year     = (int)  six_state.get( 14 );
 	    this.utc_month    = (int)  six_state.get( 4  );
 	    this.utc_day      = (int)  six_state.get( 5  );

@@ -15,12 +15,12 @@ public class Message18Test extends TestCase {
 		try {
 			result = vdm_message.add("!AIVDM,1,1,,A,B52IRsP005=abWRnlQP03w`UkP06,0*2A\r\n");
 			assertEquals( "vdm add failed", 0, result );
-			 
+
 			msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-		
+
 		assertEquals( "msgid", 18, msg.msgid());
 		assertEquals( "repeat", 0, msg.repeat());
 		assertEquals( "userid", 338060014, msg.userid());

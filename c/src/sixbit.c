@@ -13,21 +13,21 @@
     \brief 6-bit packed ASCII functions
     \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.8
-        
+
     This module's functions are used to extract data from the 6-bit packed
     ASCII string used by AIVDM/AIVDO AIS messages.
-    
+
     The state of the sixbit machine is held in the sixbit structure so that
     multiple streams can be processed by maintaining separate instances
     of sixbit. init_6bit() should be called with a pointer to the sixbit
-    instance, it will setup the structure for parsing. The 6-bit data 
+    instance, it will setup the structure for parsing. The 6-bit data
     should then be copied into the sixbit.bits buffer. A maximum of 255
     characters are allowed (this is changed by #SIXBIT_LEN in sixbit.h)
-	
+
     Up to 32 bits of data are fetched from the string by calling get_6bit()
 
     The size of the packet can be calculated with strlen(state->bits) * 6 but
-    note that due to padding at the end of the string the data may be 
+    note that due to padding at the end of the string the data may be
     1-6 bits longer than the the expected length for the message id.
 
     It is up to the calling function to keep track of how many bits have
@@ -70,7 +70,7 @@ unsigned int __stdcall sixbit_length( sixbit *state )
       - 6-bit value (0x00-0x3F)
 
     This is used to convert the packed 6-bit value to a binary value. It
-    is not used to convert data from fields such as the name and 
+    is not used to convert data from fields such as the name and
     destination -- Use ais2ascii() instead.
 */
 /* ----------------------------------------------------------------------- */
@@ -98,8 +98,8 @@ char __stdcall binfrom6bit( char ascii )
       - -1 if it fails
       - 6-bit ASCII
 
-    This is used to convert a 6 bit binary value to the packed 6-bit value 
-    It is not used to convert data from fields such as the name and 
+    This is used to convert a 6 bit binary value to the packed 6-bit value
+    It is not used to convert data from fields such as the name and
     destination -- Use ais2ascii() instead.
 */
 /* ----------------------------------------------------------------------- */
@@ -119,13 +119,13 @@ char __stdcall binto6bit( char value )
 
     \param state state of 6-bit parser
 
-    This function initializes the state of the sixbit parser variables 
+    This function initializes the state of the sixbit parser variables
     and 0 terminates the 6-bit string.
-    
+
     Example:
     \code
     sixbit state;
-    
+
     init_6bit( &state );
     \endcode
 */
@@ -136,9 +136,9 @@ int __stdcall init_6bit( sixbit *state )
     state->remainder_bits = 0;
     state->p = state->bits;
     *state->p = 0;
-    
+
     return 0;
-}   
+}
 
 
 /* ----------------------------------------------------------------------- */
@@ -173,10 +173,10 @@ unsigned long __stdcall get_6bit( sixbit *state, short numbits )
 {
     unsigned long result;
     short         fetch_bits;
-    
+
     result = 0;
     fetch_bits = numbits;
-    
+
     while( fetch_bits > 0 )
     {
         /*  Is there anything left over from the last call? */
@@ -203,7 +203,7 @@ unsigned long __stdcall get_6bit( sixbit *state, short numbits )
                 return result;
             }
         }
-        
+
         /* Get the next block of 6 bits from the ASCII string */
         if( *state->p != 0 )
         {

@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 19 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 19 class
  * Extended Class B Equipment Position Report
- * 
+ *
  */
 public class Message19 extends Messages {
     int             regional1;         // 8 bits   : Regional Bits
@@ -25,14 +25,14 @@ public class Message19 extends Messages {
     String          name;              // 120 bits : Ship Name in ASCII
     int             ship_type;         // 8 bits   : Type of Ship and Cargo
     int             dim_bow;           // 9 bits   : GPS Ant. Distance from Bow
-    int             dim_stern;         // 9 bits   : GPS Ant. Distance from Stern   
+    int             dim_stern;         // 9 bits   : GPS Ant. Distance from Stern
     int             dim_port;          // 6 bits   : GPS Ant. Distance from Port
     int             dim_starboard;     // 6 bits   : GPS Ant. Distance from Starboard
     int             pos_type;          // 4 bits   : Type of Position Fixing Device
     int             raim;              // 1 bit    : RAIM Flag
     int             dte;               // 1 bit    : DTE Flag
     int             spare;             // 5 bits   : Spare
-    
+
     public int regional1() { return this.regional1; }
     public int sog() { return this.sog; }
     public int pos_acc() { return this.pos_acc; }
@@ -52,20 +52,20 @@ public class Message19 extends Messages {
     public int raim() { return this.raim; }
     public int dte() { return this.dte; }
     public int spare() { return this.spare; }
-    
+
 	public Message19()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if ( six_state.bit_length() != 312 )
 			throw new AISMessageException("Message 19 wrong length");
-		
+
 		super.parse( 19, six_state );
-		
+
 	    this.regional1      = (int) six_state.get( 8  );
 	    this.sog            = (int)            six_state.get( 10 );
 	    this.pos_acc        = (int)            six_state.get( 1  );
@@ -87,6 +87,6 @@ public class Message19 extends Messages {
 	    this.pos_type       = (int)            six_state.get( 4  );
 	    this.raim           = (int)            six_state.get( 1  );
 	    this.dte            = (int)            six_state.get( 1  );
-	    this.spare          = (int)            six_state.get( 5  );   
+	    this.spare          = (int)            six_state.get( 5  );
 	}
 }

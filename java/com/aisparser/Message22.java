@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 22 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 22 class
  * Channel Management
- * 
+ *
  */
 public class Message22 extends Messages {
     int             spare1;            // 2 bits   : Spare
@@ -28,7 +28,7 @@ public class Message22 extends Messages {
     int             bw_b;              // 1 bit    : Channel B Bandwidth
     int             tz_size;           // 3 bits   : Transitional Zone size
     long            spare2;            // 23 bits  : Spare
-    
+
     public int spare1() { return this.spare1; }
     public int channel_a() { return this.channel_a; }
     public int channel_b() { return this.channel_b; }
@@ -45,18 +45,18 @@ public class Message22 extends Messages {
     public int bw_b() { return this.bw_b; }
     public int tz_size() { return this.tz_size; }
     public long spare2() { return this.spare2; }
-    
+
 	public Message22()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() != 168)
 			throw new AISMessageException("Message 22 wrong length");
-		
+
 		super.parse( 22, six_state );
 
 	    this.spare1         = (int)          six_state.get( 1  );

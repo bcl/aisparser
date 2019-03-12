@@ -8,7 +8,7 @@ public class Message1Test extends TestCase {
 	Vdm vdm_message;
 	Message1 msg;
 	int result;
-	
+
 	public void testParse()
 	{
 		vdm_message = new Vdm();
@@ -21,7 +21,7 @@ public class Message1Test extends TestCase {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-		
+
 		assertEquals( "msgid", 1, msg.msgid());
 		assertEquals( "repeat", 0, msg.repeat());
 		assertEquals( "userid", 636012431, msg.userid());

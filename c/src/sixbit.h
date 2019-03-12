@@ -7,7 +7,7 @@
 /*! \file
     \brief Header file for sixbit.c
     \author Brian C. Lane <bcl@brianlane.com>
-    
+
 */
 
 

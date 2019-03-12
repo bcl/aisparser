@@ -4,7 +4,7 @@ package com.aisparser;
  * VDM Parser Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
@@ -36,7 +36,7 @@ class VDMSentenceException extends Exception
  * This keeps track partial messages until a complete message has been
  * received and it holds the sixbit state for exteacting bits from the
  * message.
- */	
+ */
 public class Vdm {
     int    msgid;               //!< Message ID 0-31
     int    sequence;            //!< VDM message sequence number
@@ -44,8 +44,8 @@ public class Vdm {
     int    num;                 //!< Number of the last part stored
     char   channel;             //!< AIS Channel character
     Sixbit six_state;           //!< sixbit parser state
-	
-    
+
+
     /*
      * Constructor, initialize the state
      */
@@ -63,7 +63,7 @@ public class Vdm {
     {
     	return this.six_state;
     }
-    
+
     /**
      * Get the message id
      */
@@ -71,7 +71,7 @@ public class Vdm {
     {
     	return this.msgid;
     }
-	
+
 	/**
 	 *  Assemble AIVDM/VDO sentences
 	 *
@@ -79,18 +79,18 @@ public class Vdm {
      * from AIVDM/AIVDO sentences.
      *
      * Because the NMEA standard limits the length of a line to 80 characters
-     * some AIS messages, such as message 5, are output as a multipart VDM 
-     * messages. 
-     * This routine collects the 6-bit encoded data from these parts and 
+     * some AIS messages, such as message 5, are output as a multipart VDM
+     * messages.
+     * This routine collects the 6-bit encoded data from these parts and
      * returns a 1 when all pieces have been reassembled.
-     * 
+     *
      * It expects the sentences to:
      * - Be in order, part 1, part 2, etc.
      * - Be from a single sequence
-     * 
+     *
      * It will return an error if it receives a piece out of order or from
      * a new sequence before the previous one is finished.
-     * 
+     *
      * Returns
      *   - 0 Complete packet
      *   - 1 Incomplete packet
@@ -99,7 +99,7 @@ public class Vdm {
      *   - 4 Error with nmea_next_field
      *   - 5 Out of sequence packet
      *
-     */	
+     */
 	public int add( String str )
 		throws ChecksumFailedException, StartNotFoundException, VDMSentenceException
 	{
@@ -109,9 +109,9 @@ public class Vdm {
 		int	total;
 		int num;
 		int sequence;
-		
+
 		nmea_message.init(str);
-		
+
 		if (nmea_message.checkChecksum() != 0)
 			throw new ChecksumFailedException();
 		ptr = nmea_message.find_start();
@@ -127,7 +127,7 @@ public class Vdm {
 		fields = str.split(",|\\*");
 		if (fields.length != 8)
 			throw new VDMSentenceException("Does not have 8 fields");
-		
+
 		// Get the message info for multipart messages
 		try {
 			total = Integer.parseInt(fields[1]);
@@ -161,9 +161,9 @@ public class Vdm {
 	        this.six_state.init("");
 		}
 		this.channel = fields[4].charAt(0);
-		
+
 		this.six_state.add(fields[5]);
-		
+
 		if ((total==0) || (this.total == num))
 		{
 		    this.total    = 0;
@@ -176,14 +176,14 @@ public class Vdm {
 		    } catch (SixbitsExhaustedException e) {
 		    	throw new VDMSentenceException("Not enough bits for msgid");
 		    }
-		    
+
 		    // Adjust bit count
 		   this.six_state.padBits( Integer.parseInt(fields[6]) );
-		    
+
 		    /* Found a complete packet */
 		    return 0;
 		}
-		
+
 		// No complete message yet
 		return 1;
 	}

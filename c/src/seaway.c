@@ -16,7 +16,7 @@
     \brief St. Lawrence Seaway Message Parsing
     \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.0
-    
+
     For exact definitions of each field you should see the ITU M.1371,
     IEC 62287 and the IALA Clarifications on M.1371
 
@@ -27,7 +27,7 @@
     available from http://www.greatlakes-seaway.com/en/pdf/aisdata.pdf
 
     AIS Messages 6 and 8 are used to pass the data.
-    
+
     Includes information like wind information, water level and flow, lock order,
     lock time.
 
@@ -55,7 +55,7 @@
 
 		// Copy the DAC and FI from the message 8 over to seaway
 		dac = message.app_id >> 6;
-		fi = message.app_id & 0x3F; 
+		fi = message.app_id & 0x3F;
 		seaway = message.data;
 
 		// Get the Seaway msgid
@@ -66,7 +66,7 @@
 		if ((fi == 1) && (msgid == 3))
 		{
 			result = parse_seaway1_3( &seaway, &msg1_3);
-			
+
 			// msg1_3 now holds the water level information
 		}
     }
@@ -80,8 +80,8 @@
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -93,7 +93,7 @@ int __stdcall parse_seaway1_1( sixbit *state, seaway1_1 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -130,7 +130,7 @@ int __stdcall parse_seaway1_1( sixbit *state, seaway1_1 *result )
         result->report[i].dew_point = (int) get_6bit( state, 10 );
         result->report[i].visibility= (unsigned char) get_6bit( state, 8 );
         result->report[i].water_temp= (int) get_6bit( state, 10 );
-        
+
     	/* Convert the position to signed value */
 		result->report[i].longitude *= 10;
 		result->report[i].latitude *= 10;
@@ -154,8 +154,8 @@ int __stdcall parse_seaway1_1( sixbit *state, seaway1_1 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -167,7 +167,7 @@ int __stdcall parse_seaway1_2( sixbit *state, seaway1_2 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -205,7 +205,7 @@ int __stdcall parse_seaway1_2( sixbit *state, seaway1_2 *result )
 		result->report[i].longitude *= 10;
 		result->report[i].latitude *= 10;
     	conv_pos( &result->report[i].latitude, &result->report[i].longitude);
-        
+
         /* Is there enough data for another? */
         if( sixbit_length(state) < 144)
             break;
@@ -219,8 +219,8 @@ int __stdcall parse_seaway1_2( sixbit *state, seaway1_2 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -232,7 +232,7 @@ int __stdcall parse_seaway1_3( sixbit *state, seaway1_3 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -287,8 +287,8 @@ int __stdcall parse_seaway1_3( sixbit *state, seaway1_3 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -300,7 +300,7 @@ int __stdcall parse_seaway1_6( sixbit *state, seaway1_6 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -350,8 +350,8 @@ int __stdcall parse_seaway1_6( sixbit *state, seaway1_6 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -363,7 +363,7 @@ int __stdcall parse_seaway2_1( sixbit *state, seaway2_1 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -426,8 +426,8 @@ int __stdcall parse_seaway2_1( sixbit *state, seaway2_1 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -438,7 +438,7 @@ int __stdcall parse_seaway2_2( sixbit *state, seaway2_2 *result )
 {
     int length;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -519,8 +519,8 @@ int __stdcall parse_seaway2_2( sixbit *state, seaway2_2 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -530,7 +530,7 @@ int __stdcall parse_seaway2_2( sixbit *state, seaway2_2 *result )
 int __stdcall parse_seaway32_1( sixbit *state, seaway32_1 *result )
 {
     int length;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -552,12 +552,12 @@ int __stdcall parse_seaway32_1( sixbit *state, seaway32_1 *result )
 
 
 /* ----------------------------------------------------------------------- */
-/** PAWSS Message 1.4 - Hydro/Current 
+/** PAWSS Message 1.4 - Hydro/Current
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -569,7 +569,7 @@ int __stdcall parse_pawss1_4( sixbit *state, pawss1_4 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -620,8 +620,8 @@ int __stdcall parse_pawss1_4( sixbit *state, pawss1_4 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -633,7 +633,7 @@ int __stdcall parse_pawss1_5( sixbit *state, pawss1_5 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -687,8 +687,8 @@ int __stdcall parse_pawss1_5( sixbit *state, pawss1_5 *result )
 
     \param state pointer to parser state
     \param result pointer to result structure
-   
-    return 
+
+    return
       - return 0 if there was no error
       - return 1 if there was an error
 
@@ -700,7 +700,7 @@ int __stdcall parse_pawss2_3( sixbit *state, pawss2_3 *result )
     int length;
     int i;
     int j;
-    
+
     if( !state )
         return 1;
     if( !result )
@@ -737,7 +737,7 @@ int __stdcall parse_pawss2_3( sixbit *state, pawss2_3 *result )
     for( i=0; i<4; i++ )
     {
         result->report[i].order  = (char) get_6bit( state, 5 );
-        
+
         /* Get the Vessel Name, convert to ASCII */
         j = 0;
         while( j != 15 )
@@ -755,7 +755,7 @@ int __stdcall parse_pawss2_3( sixbit *state, pawss2_3 *result )
             j++;
         }
         result->report[i].position_name[j] = 0;
-        
+
         result->report[i].time_hh = (char) get_6bit( state, 5 );
         result->report[i].time_mm = (char) get_6bit( state, 6 );
         result->report[i].spare   = (char) get_6bit( state, 6 );

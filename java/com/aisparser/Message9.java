@@ -5,14 +5,14 @@ package com.aisparser;
  * AIS Message 9 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 9 class
  * Standard SAR Aircraft Position Report
- * 
+ *
  */
 public class Message9 extends Messages {
     int            altitude;          // 12 bits  : Altitude
@@ -29,7 +29,7 @@ public class Message9 extends Messages {
     int            comm_state;        // 1 bit    : Comm State Flag
     Sotdma         sotdma_state = null;
     Itdma          itdma_state = null;
-    
+
     public int altitiude() { return this.altitude; }
     public int sog() { return this.sog; }
     public int pos_acc() { return this.pos_acc; }
@@ -45,20 +45,20 @@ public class Message9 extends Messages {
     public int comm_state() { return this.comm_state; }
     public Sotdma sotdma_state() { return this.sotdma_state; }
     public Itdma itdma_state() { return this.itdma_state; }
-    
+
 	public Message9()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() != 168)
 			throw new AISMessageException("Message 9 wrong length");
-		
+
 		super.parse( 9, six_state );
-        
+
 		this.altitude   = (int)   six_state.get( 12 );
 		this.sog        = (int)   six_state.get( 10 );
 		this.pos_acc    = (int)   six_state.get( 1  );
@@ -75,7 +75,7 @@ public class Message9 extends Messages {
     	this.assigned   = (char)  six_state.get( 1  );
     	this.raim       = (char)  six_state.get( 1  );
     	this.comm_state = (char)  six_state.get( 1  );
-    	
+
     	if (this.comm_state == 0)
     	{
     		this.sotdma_state = new Sotdma();

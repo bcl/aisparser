@@ -75,7 +75,7 @@ int test_seaway1_1( void )
 	char msg[100];
 	sixbit seaway;
 	seaway1_1 msg1_1;
-	
+
 	p = test_msg1_1;
 	t = msg;
 	while (*p)
@@ -113,8 +113,8 @@ int test_seaway1_1( void )
 	if( ((char) get_6bit( &seaway, 6)) != 1)
 	{
 		fprintf( stderr, "test_seaway1_1() failed: msgid != 1\n");
-        return 0;        
-	} 
+        return 0;
+	}
 
 	parse_seaway1_1( &seaway, &msg1_1);
 
@@ -139,7 +139,7 @@ int test_seaway1_1( void )
 		fprintf( stderr, "test_seaway1_1() failed: report[0].utc_time.month != 34\n");
         return 0;
 	}
-	
+
 	if ( strcmp( "TEST1  ", msg1_1.report[0].station_id) != 0)
 	{
 		fprintf( stderr, "test_seaway1_1() failed: report[0].station_id != 'TEST1  '\n");
@@ -148,11 +148,11 @@ int test_seaway1_1( void )
 
 	short lat_dd, long_ddd;
 	double lat_min, long_min;
-	
+
 	pos2dmm( msg1_1.report[0].latitude, msg1_1.report[0].longitude,
 	         &lat_dd, &lat_min,
              &long_ddd, &long_min );
-	
+
 	if ( long_ddd != 27)
 	{
 		fprintf( stderr, "test_seaway1_1() failed: report[0].longitude (deg)\n");
@@ -179,13 +179,13 @@ int test_seaway1_1( void )
 		fprintf( stderr, "test_seaway1_1() failed: report[0].speed\n");
         return 0;
 	}
-	
+
 	if ( msg1_1.report[0].gust != 40)
 	{
 		fprintf( stderr, "test_seaway1_1() failed: report[0].gust\n");
         return 0;
 	}
-	
+
 	if ( msg1_1.report[0].direction != 293)
 	{
 		fprintf( stderr, "test_seaway1_1() failed: report[0].direction\n");
@@ -215,7 +215,7 @@ int test_seaway1_1( void )
 		fprintf( stderr, "test_seaway1_1() failed: report[0].visibility\n");
         return 0;
 	}
-	
+
 	if ( msg1_1.report[0].water_temp != 60)
 	{
 		fprintf( stderr, "test_seaway1_1() failed: report[0].water_temp\n");
@@ -233,7 +233,7 @@ int test_seaway1_2( void )
 	char msg[100];
 	sixbit seaway;
 	seaway1_2 msg1_2;
-	
+
 	p = test_msg1_2;
 	t = msg;
 	while (*p)
@@ -270,8 +270,8 @@ int test_seaway1_2( void )
 	if( ((char) get_6bit( &seaway, 6)) != 2)
 	{
 		fprintf( stderr, "test_seaway1_2() failed: msgid != 2\n");
-        return 0;        
-	} 
+        return 0;
+	}
 
 	parse_seaway1_2( &seaway, &msg1_2);
 
@@ -305,11 +305,11 @@ int test_seaway1_2( void )
 
 	short lat_dd, long_ddd;
 	double lat_min, long_min;
-	
+
 	pos2dmm( msg1_2.report[0].latitude, msg1_2.report[0].longitude,
 	         &lat_dd, &lat_min,
              &long_ddd, &long_min );
-	
+
 	if ( long_ddd != 27)
 	{
 		fprintf( stderr, "test_seaway1_2() failed: report[0].longitude (deg)\n");
@@ -336,13 +336,13 @@ int test_seaway1_2( void )
 		fprintf( stderr, "test_seaway1_2() failed: report[0].speed\n");
         return 0;
 	}
-	
+
 	if ( msg1_2.report[0].gust != 40)
 	{
 		fprintf( stderr, "test_seaway1_2() failed: report[0].gust\n");
         return 0;
 	}
-	
+
 	if ( msg1_2.report[0].direction != 293)
 	{
 		fprintf( stderr, "test_seaway1_2() failed: report[0].direction\n");
@@ -360,7 +360,7 @@ int test_seaway1_3( void )
 	char msg[100];
 	sixbit seaway;
 	seaway1_3 msg1_3;
-	
+
 	p = test_msg1_3;
 	t = msg;
 	while (*p)
@@ -397,8 +397,8 @@ int test_seaway1_3( void )
 	if( ((char) get_6bit( &seaway, 6)) != 3)
 	{
 		fprintf( stderr, "test_seaway1_3() failed: msgid != 3\n");
-        return 0;        
-	} 
+        return 0;
+	}
 
 	parse_seaway1_3( &seaway, &msg1_3);
 
@@ -432,11 +432,11 @@ int test_seaway1_3( void )
 
 	short lat_dd, long_ddd;
 	double lat_min, long_min;
-	
+
 	pos2dmm( msg1_3.report[0].latitude, msg1_3.report[0].longitude,
 	         &lat_dd, &lat_min,
              &long_ddd, &long_min );
-	
+
 	if ( long_ddd != 27)
 	{
 		fprintf( stderr, "test_seaway1_3() failed: report[0].longitude (deg)\n");
@@ -487,7 +487,7 @@ int test_seaway1_6( void )
 	char msg[100];
 	sixbit seaway;
 	seaway1_6 msg1_6;
-	
+
 	p = test_msg1_6;
 	t = msg;
 	while (*p)
@@ -524,8 +524,8 @@ int test_seaway1_6( void )
 	if( ((char) get_6bit( &seaway, 6)) != 6)
 	{
 		fprintf( stderr, "test_seaway1_6() failed: msgid != 6\n");
-        return 0;        
-	} 
+        return 0;
+	}
 
 	parse_seaway1_6( &seaway, &msg1_6);
 
@@ -559,11 +559,11 @@ int test_seaway1_6( void )
 
 	short lat_dd, long_ddd;
 	double lat_min, long_min;
-	
+
 	pos2dmm( msg1_6.report[0].latitude, msg1_6.report[0].longitude,
 	         &lat_dd, &lat_min,
              &long_ddd, &long_min );
-	
+
 	if ( long_ddd != 27)
 	{
 		fprintf( stderr, "test_seaway1_6() failed: report[0].longitude (deg)\n");
@@ -609,7 +609,7 @@ int test_seaway2_1( void )
 	char msg[100];
 	sixbit seaway;
 	seaway2_1 msg2_1;
-	
+
 	p = test_msg2_1;
 	t = msg;
 	while (*p)
@@ -646,8 +646,8 @@ int test_seaway2_1( void )
 	if( ((char) get_6bit( &seaway, 6)) != 1)
 	{
 		fprintf( stderr, "test_seaway2_1() failed: msgid != 1\n");
-        return 0;        
-	} 
+        return 0;
+	}
 
 	parse_seaway2_1( &seaway, &msg2_1);
 
@@ -681,11 +681,11 @@ int test_seaway2_1( void )
 
 	short lat_dd, long_ddd;
 	double lat_min, long_min;
-	
+
 	pos2dmm( msg2_1.latitude, msg2_1.longitude,
 	         &lat_dd, &lat_min,
              &long_ddd, &long_min );
-	
+
 	if ( long_ddd != 27)
 	{
 		fprintf( stderr, "test_seaway2_1() failed: longitude (deg)\n");
@@ -751,7 +751,7 @@ int test_seaway2_2( void )
 	char msg[100];
 	sixbit seaway;
 	seaway2_2 msg2_2;
-	
+
 	p = test_msg2_2;
 	t = msg;
 	while (*p)
@@ -788,8 +788,8 @@ int test_seaway2_2( void )
 	if( ((char) get_6bit( &seaway, 6)) != 2)
 	{
 		fprintf( stderr, "test_seaway2_2() failed: msgid != 2\n");
-        return 0;        
-	} 
+        return 0;
+	}
 
 	parse_seaway2_2( &seaway, &msg2_2);
 
@@ -814,7 +814,7 @@ int test_seaway2_2( void )
 		fprintf( stderr, "test_seaway2_2() failed: utc_time.month != 30\n");
         return 0;
 	}
-	
+
 	if ( strcmp( "MILKY STAR     ", msg2_2.name) != 0 )
 	{
 		fprintf( stderr, "test_seaway2_2() failed: name\n");
@@ -874,7 +874,7 @@ int test_seaway2_2( void )
 		fprintf( stderr, "test_seaway2_2() failed: first_ata.month != 30\n");
         return 0;
 	}
-	
+
 	if ( strcmp( "SLS_L03", msg2_2.second_lock) != 0 )
 	{
 		fprintf( stderr, "test_seaway2_2() failed: second_lock\n");
@@ -920,7 +920,7 @@ int test_seaway32_1( void )
 	sixbit seaway;
 	int dac, fi, msgid;
 	seaway32_1 msg32_1;
-	
+
 	p = test_msg32_1;
 	t = msg;
 	while (*p)
@@ -957,8 +957,8 @@ int test_seaway32_1( void )
 	if( (msgid = (char) get_6bit( &seaway, 6)) != 1)
 	{
 		fprintf( stderr, "test_seaway32_1() failed: msgid != 1 [%d]\n", msgid );
-        return 0;        
-	} 
+        return 0;
+	}
 
 	parse_seaway32_1( &seaway, &msg32_1);
 
@@ -975,28 +975,28 @@ int test_seaway32_1( void )
 		fprintf( stderr, "test_seaway32_1() failed: minor != 0\n");
         return 0;
 	}
-	
+
 	return 1;
 }
 
 
 
-/** 
+/**
 */
 void test_seaway()
 {
-	test_seaway1_1();	
+	test_seaway1_1();
 	test_seaway1_2();
 	test_seaway1_3();
 	test_seaway2_1();
 	test_seaway2_2();
 	test_seaway32_1();
-	
+
 	// Need test functions for the pawss messages
 }
 
 
-	
+
 void old()
 {
 	char *p;
@@ -1005,7 +1005,7 @@ void old()
 	sixbit seaway;
 	int dac, fi, spare, msgid;
 	seaway1_1 msg1_1;
-	
+
 	p = test_msg1_1;
 	t = msg;
 	while (*p)
@@ -1021,29 +1021,29 @@ void old()
 	seaway.p = seaway.bits;
 	seaway.remainder = 0;
 	seaway.remainder_bits = 0;
-	
+
 	dac = (int) get_6bit( &seaway, 10);
-	fi = (char) get_6bit( &seaway, 6); 
-	
+	fi = (char) get_6bit( &seaway, 6);
+
 	spare = (char) get_6bit( &seaway, 2);
 	msgid = (char) get_6bit( &seaway, 6);
 
 	printf( "DAC  : 0x%03X (%d)\n", dac, dac );
 	printf( "FI   : 0x%02X (%d)\n", fi, fi);
 	printf( "Spare: 0x%02X (%d)\n", spare, spare );
-	printf( "msgid: 0x%02X (%d)\n", msgid, msgid );	
+	printf( "msgid: 0x%02X (%d)\n", msgid, msgid );
 
 	parse_seaway1_1( &seaway, &msg1_1);
-	
+
 	short lat_dd, long_ddd;
 	double lat_min, long_min;
-	
+
 	pos2dmm( msg1_1.report[0].latitude, msg1_1.report[0].longitude,
 	         &lat_dd, &lat_min,
              &long_ddd, &long_min );
-	
-	
-	
+
+
+
 }
 
 
@@ -1067,13 +1067,13 @@ void test_seaway_msgs()
 
     memset( &state, 0, sizeof(state) );
 	for (i=0; i<6; i++)
-	{ 
+	{
 		if( assemble_vdm( &state, test_messages[i] ) == 0)
 		{
 		    state.msgid = (char) get_6bit( &state.six_state, 6 );
 			if (state.msgid != 8)
 				continue;
-				
+
 		    if( (result = parse_ais_8( &state, &message )) != 0 )
 		    {
 		        fprintf( stderr, "test_ais_1() failed: error %d\n", result);
@@ -1086,7 +1086,7 @@ void test_seaway_msgs()
 			memset( &seaway, 0, sizeof( seaway ) );
 
 			dac = message.app_id >> 6;
-			fi = message.app_id & 0x3F; 
+			fi = message.app_id & 0x3F;
 			seaway = message.data;
 
 			spare = (char) get_6bit( &seaway, 2);
@@ -1096,7 +1096,7 @@ void test_seaway_msgs()
 			printf( "DAC  : 0x%03X (%d)\n", dac, dac );
 			printf( "FI   : 0x%02X (%d)\n", fi, fi);
 			printf( "Spare: 0x%02X (%d)\n", spare, spare );
-			printf( "msgid: 0x%02X (%d)\n", msgid, msgid );	
+			printf( "msgid: 0x%02X (%d)\n", msgid, msgid );
 
 			seaway1_3 msg1_3;
 			if ((fi == 1) && (msgid == 3))
@@ -1105,7 +1105,7 @@ void test_seaway_msgs()
 				{
 					fprintf( stderr, "parse_seaway1_3 failed: %d\n", result);
 				}
-				
+
 				int r;
 				for (r=0; r<6; r++)
 				{
@@ -1123,7 +1123,7 @@ void test_seaway_msgs()
 					printf("datum     : %d\n", report->datum);
 					printf("spare     : %d\n", report->spare);
 					printf("\n\n");
-					
+
 				}
 			}
 		    memset( &state, 0, sizeof(state) );

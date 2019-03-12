@@ -21,7 +21,7 @@ int test_ahextobin( void )
 {
     char c;
     char i;
-    
+
     for( c = '0', i=0; c <= '9'; c++, i++ )
     {
         if( ahextobin( &c ) != i )
@@ -30,7 +30,7 @@ int test_ahextobin( void )
             return 0;
         }
     }
-    
+
     for( c = 'A', i=10; c <= 'F'; c++, i++ )
     {
         if( ahextobin( &c ) != i )
@@ -48,7 +48,7 @@ int test_ahextobin( void )
             return 0;
         }
     }
-    
+
     fprintf( stderr, "ahextobin(): Passed\n" );
     return 1;
 }
@@ -59,7 +59,7 @@ int test_nmea_next_field( void )
 {
     char buf[255];
     char *p;
-    
+
     strcpy( buf, "!AIVDM,1,1,,A,19NWoq000Wrt<RJHEuuqiWlN061d,0*5F" );
     p = buf;
     if (strncmp(p, "!AIVDM", 6) != 0)
@@ -110,7 +110,7 @@ int test_nmea_next_field( void )
         return 0;
     }
 
-    fprintf( stderr, "nmea_next_field(): Passed\n");    
+    fprintf( stderr, "nmea_next_field(): Passed\n");
     return 1;
 }
 
@@ -119,7 +119,7 @@ int test_nmea_uint( void )
 {
     char buf[255];
     char *p;
-    
+
     strcpy( buf, "42,1122,0531,0703,0707,65535,0");
     p = buf;
     if (nmea_uint(p) != 42)
@@ -174,10 +174,10 @@ int test_nmea_copy_field( void )
     char buf1[255];
     char buf2[255];
     char *p;
-    
+
     strcpy( buf1, "!AIVDM,1,1,,A,19NWoq000Wrt<RJHEuuqiWlN061d,0*5F" );
     buf2[0] = 0;
-    
+
     p = buf1;
     nmea_copy_field( buf2, p, 254 );
     if (strcmp(buf2, "!AIVDM") != 0)
@@ -228,9 +228,9 @@ int test_nmea_copy_field( void )
         fprintf( stderr, "nmea_copy_field() 7: Failed\n" );
         return 0;
     }
-    
+
     fprintf( stderr, "nmea_copy_field(): Passed\n" );
-    return 1;    
+    return 1;
 }
 
 
@@ -245,7 +245,7 @@ int test_find_nmea_start( void )
         fprintf( stderr, "find_nmea_start() 1: failed\n" );
         return 0;
     }
-    
+
     strcpy( (char *) buf, "$PSHI,123,456,789*CC" );
     if( ( p = find_nmea_start( buf ) ) == NULL )
     {
@@ -293,21 +293,21 @@ int test_nmea_checksum( void )
 {
     char buf[255];
     unsigned char checksum;
-    
+
     strcpy( (char *) buf, "!AIVDM,1,1,,A,15N;<J0P00Jro1<H>bAP0?vL00Rb,0*1B\n" );
     if( (nmea_checksum( buf, &checksum ) != 0) || (checksum != 0x1B) )
     {
         fprintf( stderr, "nmea_checksum() 1: Failed\n" );
         return 0;
     }
-    
+
     strcpy( (char *) buf, "!AIVDM,1,1,,A,403OwpiuFt3Sdo=sbvK=CG7008J3,0*41" );
     if( (nmea_checksum( buf, &checksum ) != 0) || (checksum == 0x41) )
     {
         fprintf( stderr, "nmea_checksum() 2: Failed\n" );
         return 0;
     }
-    
+
     strcpy( (char *) buf, "!AIVDM,1,1,,A,403OwpiuFt3Sdo=sbvK=CG7008J3,0*" );
     if( (nmea_checksum( buf, &checksum ) != 0) || (checksum == 0x41) )
     {
@@ -315,7 +315,7 @@ int test_nmea_checksum( void )
         return 0;
     }
 
-    
+
     fprintf( stderr, "nmea_checksum(): Passed\n" );
     return 1;
 }
@@ -325,28 +325,28 @@ int test_check_nmea_checksum( void )
 {
     char buf[255];
     unsigned char checksum;
-    
+
     strcpy( (char *) buf, "!AIVDM,1,1,,A,15N;<J0P00Jro1<H>bAP0?vL00Rb,0*1B\n" );
     if( check_nmea_checksum( buf, &checksum ) != 0 )
     {
         fprintf( stderr, "check_nmea_checksum() 1: Failed\n" );
         return 0;
     }
-    
+
     strcpy( (char *) buf, "!AIVDM,1,1,,A,403OwpiuFt3Sdo=sbvK=CG7008J3,0*41" );
     if( check_nmea_checksum( buf, &checksum ) == 0 )
     {
         fprintf( stderr, "check_nmea_checksum() 2: Failed\n" );
         return 0;
     }
-    
+
     strcpy( (char *) buf, "/s:114,r:4242/!AIVDM,1,1,,A,403OwpiuFt3Sdo=sbvK=CG7008J3,0*41" );
     if( check_nmea_checksum( buf, &checksum ) == 0 )
     {
         fprintf( stderr, "check_nmea_checksum() 3: Failed\n" );
         return 0;
     }
-    
+
     fprintf( stderr, "check_nmea_checksum(): Passed\n" );
     return 1;
 }

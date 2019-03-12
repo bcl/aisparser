@@ -29,13 +29,13 @@ def check_checksum( msg ):
 	    break;
         sum1 = sum1 ^ ord(c)
     sum1 = sum1 & 0xFF
-    
+
     # Find the checksum at the end of the string
     sum2 = -1
     try:
         i = msg.index( '*' )
 	sum2 = int(msg[i+1:i+3], 16)
-	
+
 	if sum1 == sum2:
 	    return (True, sum1, sum2)
     except:
@@ -66,5 +66,5 @@ def make_checksum( msg ):
 	    break;
         sum1 = sum1 ^ ord(c)
     sum1 = sum1 & 0xFF
-    
+
     return sum1

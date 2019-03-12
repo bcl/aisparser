@@ -4,27 +4,27 @@ package com.aisparser;
  * AIS Position Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 
 /**
  * AIS Position class
- * 
+ *
  * Convert raw unsigned AIS position to signed 1/10000 degree position
  * and provide helper methods for other formats
- * 
+ *
  */
 public class Position {
 	long	longitude;
 	long	latitude;
-	
+
 	public Position()
 	{
 		super();
 	}
-	
+
 	public void setLongitude( long raw_longitude )
 	{
 	    /* Convert longitude to signed number */
@@ -36,7 +36,7 @@ public class Position {
 	    	this.longitude = raw_longitude;
 	    }
 	}
-	
+
 	public void setLatitude( long raw_latitude )
 	{
 	    /* Convert latitude to signed number */
@@ -48,12 +48,12 @@ public class Position {
 	    	this.latitude = raw_latitude;
 	    }
 	}
-	
+
 	public long longitude()
 	{
 		return this.longitude;
 	}
-	
+
 	public long latitude()
 	{
 		return this.latitude;

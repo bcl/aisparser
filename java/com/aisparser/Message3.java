@@ -4,7 +4,7 @@ package com.aisparser;
  * AIS Message 3 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
@@ -12,11 +12,11 @@ package com.aisparser;
 /**
  * AIS Message 3 class
  * Position Report
- * 
+ *
  */
 public class Message3 extends Messages {
     int            nav_status;        // 4 bits  : Navigational Status
-    int			   rot;               // 8 bits  : Rate of Turn   
+    int			   rot;               // 8 bits  : Rate of Turn
     int            sog;               // 10 bits : Speed Over Ground
     int            pos_acc;           // 1 bit   : Position Accuracy
     Position       pos;               //         : Lat/Long 1/10000 minute
@@ -30,7 +30,7 @@ public class Message3 extends Messages {
     int            slot_increment;    // 13 bits : ITDMA Slot Increment
     int            num_slots;         // 3 bits  : ITDMA Number of Slots
     int            keep;              // 1 bit   : ITDMA Keep Flag
-    
+
     public int nav_status() { return this.nav_status; }
     public int rot() { return this.rot; }
     public int sog() { return this.sog; }
@@ -48,20 +48,20 @@ public class Message3 extends Messages {
     public int num_slots() { return this.num_slots; }
     public int keep() { return this.keep; }
 
-    
+
 	public Message3()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() != 168 )
 			throw new AISMessageException("Message 3 wrong length");
-		
+
 		super.parse( 3, six_state );
-		
+
 	    /* Parse the Message 3 */
 	    this.nav_status     = (int)  six_state.get( 4 );
 	    this.rot            = (int)  six_state.get( 8 );
