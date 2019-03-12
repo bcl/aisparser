@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 20 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 20 class
  * Data Link Management Message
- * 
+ *
  */
 public class Message20 extends Messages {
     int             spare1;            // 2 bits   : Spare
@@ -53,19 +53,19 @@ public class Message20 extends Messages {
     public int increment4() { return this.increment4; }
     public int spare2() { return this.spare2; }
     public int num_cmds() { return this.num_cmds; }
-    
+
 	public Message20()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		int length = six_state.bit_length();
 		if ((length < 72) || (length > 162))
 			throw new AISMessageException("Message 20 wrong length");
-		
+
 		super.parse( 20, six_state );
 
 		this.spare1         = (int) six_state.get( 2  );

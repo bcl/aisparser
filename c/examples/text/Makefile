@@ -11,9 +11,9 @@ VERSION = 0.1
 
 CC	= gcc
 CFLAGS	= -I../../src -g -Wall # -O2
-#LIBS	= 
+#LIBS	=
 SRC	= ../../src/
- 
+
 OBJS		=	main.o $(SRC)nmea.o $(SRC)vdm_parse.o $(SRC)sixbit.o
 HDRS		= 	$(SRC)nmea.h $(SRC)vdm_parse.h $(SRC)sixbit.h $(SRC)portable.h
 
@@ -82,8 +82,8 @@ ais_text:	$(OBJS) $(HDRS) $(OBJS)
 
 # Clean up the object files and the sub-directory for distributions
 clean:
-		rm -f *~ 
+		rm -f *~
 		rm -f $(OBJS)
-		rm -f core *.asc 
+		rm -f core *.asc
 		rm -f ais_text
 

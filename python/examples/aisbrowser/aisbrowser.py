@@ -4,7 +4,7 @@
     AIS Browser
     Copyright 2007-2008 by Brian C. Lane
     All Rights Reserved
-    
+
     This is a wxPython GUI application for browsing AIS message logs,
     it will display detailed information about the selected message.
 
@@ -40,9 +40,9 @@ class BrowserConfig:
         # For Windows it should be in the current directory?
         # For Mac it should be ?
         # sys.platform, os.name and os.path.expanduser("~") may all be useful
-        self.config_file = os.getenv("HOME") + os.sep + ".aisbrowserrc" 
+        self.config_file = os.getenv("HOME") + os.sep + ".aisbrowserrc"
 
-        if not os.path.isfile( self.config_file ): 
+        if not os.path.isfile( self.config_file ):
             # Create config file
             self.config.add_section("main")
             self.config.add_section("source_columns")
@@ -55,7 +55,7 @@ class BrowserConfig:
         Save the config file
         """
         cf = open( config_file, "w" )
-        self.config.write(cf) 
+        self.config.write(cf)
         cf.close()
 
     def SetLastFile(self, filename, selection):
@@ -70,7 +70,7 @@ class BrowserConfig:
         Save the current window geometry
         """
         self.config.set("main","width",width)
-        self.config.set("main","height",height) 
+        self.config.set("main","height",height)
         self.config.set("main","splitter",splitter)
 
     def SetSourceColumns(self, columns):
@@ -109,7 +109,7 @@ class AisMessage:
 				ais_msg = self.data
 				self.binary_state = aisparser.binary_state()
 				self.binary_state.dac = ais_msg.app_id >> 6
-				self.binary_state.fi = ais_msg.app_id & 0x3F 
+				self.binary_state.fi = ais_msg.app_id & 0x3F
 				self.binary_state.six_state = ais_msg.data
 
 #				print "dac = %d" % (self.binary_state.dac)
@@ -119,7 +119,7 @@ class AisMessage:
 #					print "St. Lawrence Seaway"
 					self.seaway_spare = aisparser.get_6bit( self.binary_state.six_state, 2 )
 					self.seaway_msgid = aisparser.get_6bit( self.binary_state.six_state, 6 )
-					
+
 					if (ord(self.binary_state.fi),self.seaway_msgid) in [(1,1),(1,2),(1,3),(1,6),(2,1),(2,2),(32,1)]:
 						msg_struct = getattr( aisparser, "seaway%d_%d" % (ord(self.binary_state.fi),self.seaway_msgid))
 						msg_func = getattr( aisparser, "parse_seaway%d_%d" % (ord(self.binary_state.fi),self.seaway_msgid))
@@ -154,34 +154,34 @@ class DataSource:
     filename = ""
     ais_info = []
 
-    
+
     def GetColumnHeaders(self):
         return ['mmsi','msgid','channel','sentence']
 
-        
+
     def GetCount(self):
         return len(self.ais_info)
 
-        
+
     def GetItem(self, index):
         # Parse AIVDM line # index into mmsi, msgid and sentence
         mmsi = "%d" % (self.ais_info[index].msg.data.userid)
         channel = self.ais_info[index].channel
         msgid = "%d" % (self.ais_info[index].msgid)
         sixbit = self.ais_info[index].six_state.bits
-        
+
         return [ mmsi, msgid, channel, sixbit ]
 
 
     def GetDetails(self, index):
         return self.ais_info[index]
 
-        
+
     def UpdateCache(self, start, end):
 #        print start, end
         pass
 
-        
+
     def LoadFile(self):
         """
         Re-Assemble the data into full packets
@@ -189,7 +189,7 @@ class DataSource:
         # Initialize the AIS Parser class
         ais_state = aisparser.ais_state()
 
-       
+
         # Process the whole file
         info = os.stat( self.filename )
 
@@ -197,7 +197,7 @@ class DataSource:
                                "Time remaining",
                                info[stat.ST_SIZE],
                                style=wx.PD_ELAPSED_TIME | wx.PD_REMAINING_TIME)
- 
+
 
         ais_file = open( self.filename, "r" )
         old_pos = 0
@@ -205,16 +205,16 @@ class DataSource:
             line = ais_file.readline().strip()
             if not line:
                 break
-            pos = ais_file.tell() 
+            pos = ais_file.tell()
             if pos > old_pos + 4e3:
                 keepGoing = dialog.Update(pos)
                 old_pos = pos
- 
+
             result = aisparser.assemble_vdm( ais_state, line )
             if result == 0:
                 ais_state.msgid = aisparser.get_6bit( ais_state.six_state, 6 )
                 ais_state.msg = AisMessage( ais_state )
-                if ais_state.msg.data: 
+                if ais_state.msg.data:
                     self.ais_info.append( ais_state )
                 # Re-start the parser, creating a new ais_state object
                 ais_state = aisparser.ais_state()
@@ -240,22 +240,22 @@ class SourceListCtrl(wx.ListCtrl,ListCtrlAutoWidthMixin):
         # set based on the last user settings.
 
         # Set column 1,2 to center
- 
+
     def DoCacheItems(self, evt):
         self.dataSource.UpdateCache( evt.GetCacheFrom(), evt.GetCacheTo())
 
-        
+
     def OnGetItemText( self, item, col ):
         data = self.dataSource.GetItem(item)
         return data[col]
 
-        
+
     def OnGetItemAttr( self, item ):
         return None
 
 
     def OnGetItemImage( self, item ):
-        return -1        
+        return -1
 
 
 class DetailListCtrl(wx.ListCtrl,ListCtrlAutoWidthMixin):
@@ -300,7 +300,7 @@ class BrowserFrame(wx.Frame):
         self.sourcelist.Bind( wx.EVT_LIST_ITEM_SELECTED, self.UpdateDetails, self.sourcelist )
         self.detaillist = DetailListCtrl( self.sp1 )
 
-        # If the user has previously adjusted the positions, the 
+        # If the user has previously adjusted the positions, the
         # initial settings should come from the user's last selections
         self.sp1.SplitHorizontally(self.sourcelist, self.detaillist, 200)
 
@@ -349,7 +349,7 @@ class BrowserFrame(wx.Frame):
 						seaway_msg = details.msg.binary_data
 						print dir(seaway_msg)
 						print type(seaway_msg.report)
-						
+
 					elif details.msg.binary_type == 'imo':
 						pass
 
@@ -402,6 +402,6 @@ if __name__ == '__main__':
     frame.Show()
 
 #    wx.lib.inspection.InspectionTool().Show()
-    
+
     app.MainLoop()
 

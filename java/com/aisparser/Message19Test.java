@@ -17,12 +17,12 @@ public class Message19Test extends TestCase {
 		try {
 			result = vdm_message.add("");
 			assertEquals( "vdm add failed", 0, result );
-			 
+
 			msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-		
+
 		assertEquals( "msgid", 19, msg.msgid());
 		assertEquals( "repeat", 0, msg.repeat());
 		assertEquals( "userid", 0, msg.userid());

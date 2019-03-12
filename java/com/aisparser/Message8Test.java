@@ -7,7 +7,7 @@ public class Message8Test extends TestCase {
 	Vdm vdm_message;
 	Message8 msg;
 	int result;
-	
+
 	public void testParse() {
 		vdm_message = new Vdm();
 		 msg = new Message8();
@@ -21,7 +21,7 @@ public class Message8Test extends TestCase {
 
 			 result = vdm_message.add("!AIVDM,3,3,1,A,8fDSaOKeP,2*0C\r\n");
 			 assertEquals( "vdm add failed", 0, result );
-			 
+
 			 msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -32,11 +32,11 @@ public class Message8Test extends TestCase {
 		assertEquals( "userid", 366999983, msg.userid());
 		assertEquals("spare", 0, msg.spare() );
 		assertEquals("app_id", 23481, msg.app_id());
-		
+
 		Sixbit data = msg.data();
 		assertEquals("data length", 568, data.bit_length());
-		
-		// Here is where the payload would be parsed, if we knew how...	
+
+		// Here is where the payload would be parsed, if we knew how...
 	}
 
 }

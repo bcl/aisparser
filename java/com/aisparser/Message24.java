@@ -4,22 +4,22 @@ package com.aisparser;
  * AIS Message 24 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 24 class
  * Class B"CS" Static Data Report
- * 
+ *
  */
 public class Message24 extends Messages {
     int            part_number;       // 2 bits   : Part Number
 
-    //!< Message 24A 
+    //!< Message 24A
     String         name;              // 120 bits : Ship Name in ASCII
 
-    //!< Message 24B 
+    //!< Message 24B
     int            ship_type;         // 8 bits   : Type of Ship and Cargo
     String         vendor_id;         // 42 bits  : Vendor ID in ASCII
     String         callsign;          // 42 bits  : Callsign in ASCII
@@ -29,8 +29,8 @@ public class Message24 extends Messages {
     int            dim_starboard;     // 6 bits   : GPS Ant. Distance from Starboard
     int            spare;             // 6 bits   : Spare
 
-    int            flags;             // A/B flags - A = 1  B = 2  Both = 3  
-    
+    int            flags;             // A/B flags - A = 1  B = 2  Both = 3
+
     public int part_number() { return this.part_number; }
     public String name() { return this.name; }
     public int ship_type() { return this.ship_type; }
@@ -42,21 +42,21 @@ public class Message24 extends Messages {
     public int dim_starboard() { return this.dim_starboard; }
     public int spare() { return this.spare; }
     public int flags() { return this.flags; }
-    
+
 	public Message24()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		int length = six_state.bit_length();
 		if ((length != 160) && (length != 168))
 			throw new AISMessageException("Message 24 wrong length");
-		
+
 		super.parse( 24, six_state );
-		
+
 	    this.part_number    = (int)          six_state.get( 2  );
 
 	    if( this.part_number == 0 )
@@ -64,7 +64,7 @@ public class Message24 extends Messages {
 	        /* Parse 24A */
 	        /* Get the Ship Name, convert to ASCII */
 	        this.name = six_state.get_string(20);
-	        
+
 	        /* Indicate reception of part A */
 	        this.flags |= 0x01;
 	    } else if( this.part_number == 1 ) {

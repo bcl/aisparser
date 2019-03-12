@@ -24,9 +24,9 @@
 typedef struct {
     char            msgid;             //!< 6 bits  : Message ID (1)
     char            repeat;            //!< 2 bits  : Repeated
-    unsigned long   userid;            //!< 30 bits : UserID / MMSI    
+    unsigned long   userid;            //!< 30 bits : UserID / MMSI
     char            nav_status;        //!< 4 bits  : Navigational Status
-    unsigned char   rot;               //!< 8 bits  : Rate of Turn   
+    unsigned char   rot;               //!< 8 bits  : Rate of Turn
     int             sog;               //!< 10 bits : Speed Over Ground
     char            pos_acc;           //!< 1 bit   : Position Accuracy
     long            longitude;         //!< 28 bits : Longitude in 1/10000 minute
@@ -170,7 +170,7 @@ typedef struct {
     char            sequence_3;        //!< 2 bits   : Sequence Number 3
     unsigned long   destid_4;          //!< 30 bits  : Destination MMSI 4
     char            sequence_4;        //!< 2 bits   : Sequence Number 4
-    char            num_acks;          //!< Number of acks 
+    char            num_acks;          //!< Number of acks
 } aismsg_7;
 
 
@@ -265,7 +265,7 @@ typedef struct {
     unsigned long   destination;       //!< 30 bits  : Destination MMSI
     char            retransmit;        //!< 1 bit    : Retransmit
     char            spare;             //!< 1 bit    : Spare
-    char            message[158];      //!< 936 bits : Message in ASCII   
+    char            message[158];      //!< 936 bits : Message in ASCII
 } aismsg_12;
 
 
@@ -284,7 +284,7 @@ typedef struct {
     char            sequence_3;        //!< 2 bits   : Sequence Number 3
     unsigned long   destid_4;          //!< 30 bits  : Destination MMSI 4
     char            sequence_4;        //!< 2 bits   : Sequence Number 4
-    char            num_acks;          //!< Number of acks 
+    char            num_acks;          //!< Number of acks
 } aismsg_13;
 
 
@@ -317,7 +317,7 @@ typedef struct {
     char            msgid2_1;          //!< 6 bits   : MessageID 2.1
     int             offset2_1;         //!< 12 bits  : Slot Offset 2.1
     char            spare4;            //!< 2 bits   : Spare
-    char            num_reqs;          //!< Number of interrogation requests           
+    char            num_reqs;          //!< Number of interrogation requests
 } aismsg_15;
 
 
@@ -417,7 +417,7 @@ typedef struct {
     char            name[21];          //!< 120 bits : Ship Name in ASCII
     unsigned char   ship_type;         //!< 8 bits   : Type of Ship and Cargo
     int             dim_bow;           //!< 9 bits   : GPS Ant. Distance from Bow
-    int             dim_stern;         //!< 9 bits   : GPS Ant. Distance from Stern   
+    int             dim_stern;         //!< 9 bits   : GPS Ant. Distance from Stern
     char            dim_port;          //!< 6 bits   : GPS Ant. Distance from Port
     char            dim_starboard;     //!< 6 bits   : GPS Ant. Distance from Starboard
     char            pos_type;          //!< 4 bits   : Type of Position Fixing Device
@@ -458,7 +458,7 @@ typedef struct {
 /** AIS Message 21 - Aids-to-navigation Report
 */
 typedef struct {
-    char            msgid;             //!< 6 bits   : MessageID (21)     
+    char            msgid;             //!< 6 bits   : MessageID (21)
     char            repeat;            //!< 2 bits   : Repeated
     unsigned long   userid;            //!< 30 bits  : UserID / MMSI
     char            aton_type;         //!< 5 bits   : Type of AtoN
@@ -515,8 +515,8 @@ typedef struct {
 
 /** AIS Message 23 - Group Assignment Command
 
-    The geographic area is defined by 2 corners, stored in 
-    the NE and SW positions. 
+    The geographic area is defined by 2 corners, stored in
+    the NE and SW positions.
 */
 typedef struct {
     char            msgid;             //!< 6 bits   : MessageID (23)
@@ -549,10 +549,10 @@ typedef struct {
     unsigned long   userid;            //!< 30 bits  : UserID / MMSI
     char            part_number;       //!< 2 bits   : Part Number
 
-    //!< Message 24A 
+    //!< Message 24A
     char            name[21];          //!< 120 bits : Ship Name in ASCII
 
-    //!< Message 24B 
+    //!< Message 24B
     unsigned char   ship_type;         //!< 8 bits   : Type of Ship and Cargo
     char            vendor_id[8];      //!< 42 bits  : Vendor ID in ASCII
     char            callsign[8];       //!< 42 bits  : Callsign in ASCII
@@ -562,7 +562,7 @@ typedef struct {
     char            dim_starboard;     //!< 6 bits   : GPS Ant. Distance from Starboard
     char            spare;             //!< 6 bits   : Spare
 
-    char            flags;             //!< A/B flags - A = 1  B = 2  Both = 3  
+    char            flags;             //!< A/B flags - A = 1  B = 2  Both = 3
 } aismsg_24;
 
 

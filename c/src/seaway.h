@@ -216,7 +216,7 @@ typedef struct {
     long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
     long            latitude;          //!< 24 bits  : Latitude in 1/1000 minute
     char            spare2;            //!< 3 bits   : Reserved for Future Use
-    procession_order  report[4];       //!< N * 184  : 1-4 Vessel Procession Order Reports    
+    procession_order  report[4];       //!< N * 184  : 1-4 Vessel Procession Order Reports
 } pawss2_3;
 
 

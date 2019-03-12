@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 15 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 15 class
  * Interrogation
- * 
+ *
  */
 public class Message15 extends Messages {
     int            spare1;            // 2 bits   : Spare
@@ -26,7 +26,7 @@ public class Message15 extends Messages {
     int            msgid2_1;          // 6 bits   : MessageID 2.1
     int            offset2_1;         // 12 bits  : Slot Offset 2.1
     int            spare4;            // 2 bits   : Spare
-    int            num_reqs;          // Number of interrogation requests     
+    int            num_reqs;          // Number of interrogation requests
 
     public int spare1() { return this.spare1; }
     public long destid1() { return this.destid1; }
@@ -41,27 +41,27 @@ public class Message15 extends Messages {
     public int offset2_1() { return this.offset2_1; }
     public int spare4() { return this.spare4; }
     public int num_reqs() { return this.num_reqs; }
-    
+
 	public Message15()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		int length = six_state.bit_length();
 		if ((length < 88) || (length > 162))
 			throw new AISMessageException("Message 15 wrong length");
-		
+
 		super.parse( 15, six_state );
-    
+
 	    this.spare1       = (int)   six_state.get( 2  );
 	    this.destid1      = (long)  six_state.get( 30 );
 	    this.msgid1_1     = (int)   six_state.get( 6  );
 	    this.offset1_1    = (int)   six_state.get( 12 );
 	    this.num_reqs     = 1;
-	    
+
 	    if( length > 88 )
 	    {
 	        this.spare2    = (int)  six_state.get( 2 );

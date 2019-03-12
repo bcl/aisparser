@@ -68,7 +68,7 @@ typedef struct {
     char            good[21];          //!< 20x6 (120) bits : Main Dangerous Good
     char			imd[6];            //!< 4x6 (24) bits : IMD Category of Main Dangerous Good
     int             un_number;         //!< 13 bits  : UN Number 1-3363  0=not available
-    int             quantity;          //!< 10 bits  : Quantity of Main Dangerous Good 
+    int             quantity;          //!< 10 bits  : Quantity of Main Dangerous Good
     char            units;             //!< 2 bits   : 0=not avail. 1=kg 2=tons (1E3kg) 3=1000tons(1E6kg)
     char            spare;             //!< 3 bits   : spare
 } imo1_12;
@@ -132,13 +132,13 @@ typedef struct {
 	int             num_persons;       //!< 13 bits  : Number of Persons on Board 0-8191 0=not available
 	char            spare;             //!< 3 bits   : spare
 } imo1_16;
-	
+
 
 /** Pseudo-AIS Targets used by imo1_17
 */
 typedef struct {
     char            type;              //!< 2 bits   : 0=MMSI 1=IMO 2=Callsign 3=Other
-    // 42 bits are allocated for MMSI, ISO or Callsign 
+    // 42 bits are allocated for MMSI, ISO or Callsign
     // When MMSI and ISO are used, skip 12 bits first
     long            mmsi;              //!< 30 bits  : MMSI
     long            imo;               //!< 30 bits  : IMO
@@ -149,7 +149,7 @@ typedef struct {
     long            longitude;         //!< 25 bits  : Longitude in 1/1000 minute
 	int             cog;               //!< 9 bits   : Course over ground 0-359 degrees 360=not available
 	char            timestamp;         //!< 6 bits   : UTC Second when generated 60=not available
-	unsigned char   sog;               //!< 8 bits   : Speed over ground 0-254kts 255=not available		
+	unsigned char   sog;               //!< 8 bits   : Speed over ground 0-254kts 255=not available
 }  pseudo_target;
 
 /** Application 6 - Number of Persons on Board

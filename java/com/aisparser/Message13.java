@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 13 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 13 class
  * Safety Related Acknowledge
- * 
+ *
  */
 public class Message13 extends Messages {
     int            spare;             // 2 bits   : Spare
@@ -23,8 +23,8 @@ public class Message13 extends Messages {
     int            sequence_3;        // 2 bits   : Sequence Number 3
     long           destid_4;          // 30 bits  : Destination MMSI 4
     int            sequence_4;        // 2 bits   : Sequence Number 4
-    int            num_acks;          // Number of acks 
-	
+    int            num_acks;          // Number of acks
+
     public int spare() { return this.spare; }
     public long destid_1() { return this.destid_1; }
     public int sequence_1() { return this.sequence_1; }
@@ -35,20 +35,20 @@ public class Message13 extends Messages {
     public long destid_4() { return this.destid_4; }
     public int sequence_4() { return this.sequence_4; }
     public int num_acks() { return this.num_acks; }
-    
-	
+
+
 	public Message13()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		int length = six_state.bit_length();
 		if ((length < 72) || (length > 168))
 			throw new AISMessageException("Message 13 wrong length");
-		
+
 		super.parse( 13, six_state );
 
 	    this.spare        = (int)   six_state.get( 2  );

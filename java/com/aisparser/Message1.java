@@ -4,7 +4,7 @@ package com.aisparser;
  * AIS Message 1 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
@@ -12,11 +12,11 @@ package com.aisparser;
 /**
  * AIS Message 1 class
  * Position Report
- * 
+ *
  */
 public class Message1 extends Messages {
     int            nav_status;        // 4 bits  : Navigational Status
-    int			   rot;               // 8 bits  : Rate of Turn   
+    int			   rot;               // 8 bits  : Rate of Turn
     int            sog;               // 10 bits : Speed Over Ground
     int            pos_acc;           // 1 bit   : Position Accuracy
     Position       pos;               //         : Lat/Long 1/10000 minute
@@ -29,7 +29,7 @@ public class Message1 extends Messages {
     int            sync_state;        // 2 bits  : SOTDMA sync state
     int            slot_timeout;      // 3 bits  : SOTDMA Slot Timeout
     int            sub_message;       // 14 bits : SOTDMA sub-message
-    
+
     public int nav_status() { return this.nav_status; }
     public int rot() { return this.rot; }
     public int sog() { return this.sog; }
@@ -45,20 +45,20 @@ public class Message1 extends Messages {
     public int sync_state() { return this.sync_state; }
     public int slot_timeout() { return this.slot_timeout; }
     public int sub_message() { return this.sub_message; }
-    
+
 	public Message1()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() != 168 )
 			throw new AISMessageException("Message 1 wrong length");
-		
+
 		super.parse( 1, six_state );
-		
+
 	    /* Parse the Message 1 */
 	    this.nav_status   = (int)  six_state.get( 4 );
 	    this.rot          = (int)  six_state.get( 8 );

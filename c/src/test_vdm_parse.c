@@ -34,8 +34,8 @@ int test_pos2ddd( void )
     long longitude;
     double lat_dd;
     double long_ddd;
- 
- 
+
+
     /* North East quadrant (+,+)
        Trondheim, Norway  63.416277, 10.412227
      */
@@ -59,7 +59,7 @@ int test_pos2ddd( void )
         fprintf( stderr, "test_pos2ddd() 2: failed\n");
         return 0;
     }
-    
+
     /* South East quadrant (-,+)
        Tasmania  -42.000951, 146.594319
      */
@@ -71,7 +71,7 @@ int test_pos2ddd( void )
         fprintf( stderr, "test_pos2ddd() 3: failed\n");
         return 0;
     }
-    
+
     /* South West quadrant (-,-)
        Bolivia  -17.668295, -62.777665
      */
@@ -83,7 +83,7 @@ int test_pos2ddd( void )
         fprintf( stderr, "test_pos2ddd() 4: failed\n");
         return 0;
     }
-    
+
     /* Center */
     latitude = 0;
     longitude = 0;
@@ -107,7 +107,7 @@ int test_pos2dmm( void )
     double lat_min;
     short long_ddd;
     double long_min;
-    
+
     /* North East quadrant (+,+)
        Trondheim, Norway  63.416277, 10.412227
      */
@@ -122,7 +122,7 @@ int test_pos2dmm( void )
         fprintf( stderr, "test_pos2dmm() 1: failed\n");
         return 0;
     }
- 
+
     /* North West quadrant (+,-)
        Lexington Green, USA  42.471021, -71.353514
      */
@@ -137,7 +137,7 @@ int test_pos2dmm( void )
         fprintf( stderr, "test_pos2dmm() 2: failed\n");
         return 0;
     }
-    
+
     /* South East quadrant (-,+)
        Tasmania  -42.000951, 146.594319
      */
@@ -152,7 +152,7 @@ int test_pos2dmm( void )
         fprintf( stderr, "test_pos2dmm() 3: failed\n");
         return 0;
     }
-    
+
     /* South West quadrant (-,-)
        Bolivia  -17.668295, -62.777665
      */
@@ -167,7 +167,7 @@ int test_pos2dmm( void )
         fprintf( stderr, "test_pos2dmm() 4: failed\n");
         return 0;
     }
-    
+
     /* Center */
     latitude = 0;
     longitude = 0;
@@ -183,8 +183,8 @@ int test_pos2dmm( void )
 
     fprintf( stderr, "test_pos2ddd() Passed\n");
     return 1;
-    
-        
+
+
 
 }
 
@@ -194,7 +194,7 @@ int test_conv_pos( void )
     long latitude;
     long longitude;
 
-    
+
     /* North East quadrant (+,+)
        Trondheim, Norway  63.416277, 10.412227
      */
@@ -218,7 +218,7 @@ int test_conv_pos( void )
         fprintf( stderr, "test_conv_pos() 2: failed\n");
         return 0;
     }
-    
+
     /* South East quadrant (-,+)
        Tasmania  -42.000951, 146.594319
      */
@@ -230,7 +230,7 @@ int test_conv_pos( void )
         fprintf( stderr, "test_conv_pos() 3: failed\n");
         return 0;
     }
-    
+
     /* South West quadrant (-,-)
        Bolivia  -17.668295, -62.777665
      */
@@ -242,7 +242,7 @@ int test_conv_pos( void )
         fprintf( stderr, "test_conv_pos() 4: failed\n");
         return 0;
     }
-    
+
     /* Center */
     latitude = 0;
     longitude = 0;
@@ -252,7 +252,7 @@ int test_conv_pos( void )
         fprintf( stderr, "test_conv_pos() 5: failed\n");
         return 0;
     }
-    
+
     fprintf( stderr, "test_conv_pos() Passed\n");
     return 1;
 }
@@ -265,7 +265,7 @@ int test_assemble_vdm( void )
                          "!AIVDM,2,1,9,A,55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H,0*49\r\n",
                          "!AIVDM,2,2,9,A,==40HtI4i@E531H1QDTVH51DSCS0,2*16\r\n"
                        };
-    
+
     memset( &state, 0, sizeof(state) );
 
     if (assemble_vdm( &state, buf[0] ) != 0)
@@ -302,7 +302,7 @@ int test_assemble_vdm( void )
 
 
 
-    
+
 
 
 int test_ais_1( void )
@@ -710,7 +710,7 @@ int test_ais_5( void )
     ais_state state;
     aismsg_5  message;
     unsigned int  result;
-    /* !AIVDM,2,1,9,A,55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H,0*49 
+    /* !AIVDM,2,1,9,A,55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H,0*49
        !AIVDM,2,2,9,A,==40HtI4i@E531H1QDTVH51DSCS0,2*16 */
     char s[] = "55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H==40HtI4i@E531H1QDTVH51DSCS0";
 

@@ -10,7 +10,7 @@ public class test_aisparser {
 	{
 		int	msgid;
 		long mmsi;
-		
+
 		out.println("Testing sixbit...");
 		try {
 			msgid = (int) ais_sixbit.get(6);
@@ -23,13 +23,13 @@ public class test_aisparser {
 			out.println("Ran out of bits!");
 		}
 	}
-	
-	
+
+
 	static void test_nmea()
 	{
 		Nmea nmea_message = new Nmea();
 		nmea_message.init("!AIVDM,1,1,,B,19NS7Sp02wo?HETKA2K6mUM20<L=,0*27\r\n");
-		
+
 		if (nmea_message.checkChecksum() == 0)
 			out.println("Checksum is OK");
 		else
@@ -40,11 +40,11 @@ public class test_aisparser {
 	{
 		Vdm vdm_message = new Vdm();
 		int result;
-		
+
 		try {
 			result = vdm_message.add("!AIVDM,1,1,,B,19NS7Sp02wo?HETKA2K6mUM20<L=,0*27\r\n");
 			out.printf("result = %d\n", result);
-			
+
 			Message1 msg = new Message1();
 			msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
@@ -56,15 +56,15 @@ public class test_aisparser {
 			out.printf("result = %d\n", result);
 			result = vdm_message.add("!AIVDM,2,2,6,B,1KUDhH888888880,2*6A");
 			out.printf("result = %d\n", result);
-			
+
 			Message5 msg = new Message5();
 			msg.parse( vdm_message.sixbit() );
-			
+
 		} catch (Exception e) {
 			out.printf("Error: %s\n", e.getMessage());
 		}
 	}
-	
+
 	public static void main( String args[] )
 	{
 		//test_sixbit();

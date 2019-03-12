@@ -7,7 +7,7 @@ public class Message5Test extends TestCase {
 	Vdm vdm_message;
 	Message5 msg;
 	int result;
-	
+
 	public void testParse()
 	{
 		vdm_message = new Vdm();
@@ -19,12 +19,12 @@ public class Message5Test extends TestCase {
 
 			 result = vdm_message.add("!AIVDM,2,2,9,A,==40HtI4i@E531H1QDTVH51DSCS0,2*16\r\n");
 			 assertEquals( "vdm add failed", 0, result );
-			 
+
 			 msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-		
+
 		assertEquals( "msgid", 5, msg.msgid());
 		assertEquals( "repeat", 0, msg.repeat());
 		assertEquals( "userid", 366710810, msg.userid());

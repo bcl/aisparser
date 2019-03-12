@@ -5,13 +5,13 @@ package com.aisparser;
  * AIS itdma Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Itdma class
- * 
+ *
  */
 public class Itdma {
     int           sync_state;      // 2 bits   : ITDMA Sync State
@@ -23,7 +23,7 @@ public class Itdma {
     public int slot_inc() { return this.slot_inc; }
     public int num_slots() { return this.num_slots; }
     public int keep_flag() { return this.keep_flag; }
-    
+
 	public Itdma()
 	{
 	}

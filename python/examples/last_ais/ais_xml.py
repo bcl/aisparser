@@ -37,7 +37,7 @@ def calc_vector( last_pos, current_pos ):
     else:
         current_pos.dx = 0.0
         current_pos.dy = 0.0
-    
+
 
 def write_last( (info, pos, last_update) ):
     # Check for invalid positions
@@ -46,14 +46,14 @@ def write_last( (info, pos, last_update) ):
 
     if info == None or pos == None:
         return
-        
+
     try:
         # Convert position
         (status,lat_dd,lat_min,long_ddd,long_min) = aisparser.pos2dmm( pos.latitude, pos.longitude );
 
     #    s = "%s (%s) @ %d %0.4f %d %0.4f" % (last_info[str(userid)][1].rstrip(), userid, lat_dd, lat_min, long_ddd, long_min )
         s = "%s (%s) @ %d %0.4f %d %0.4f" % (info.name.rstrip(), info.userid, lat_dd, lat_min, long_ddd, long_min )
-        
+
         f = open( sig_file, 'w' )
         f.write( "---[%s]---\n" % (s.center(62)) )
         f.close()
@@ -62,10 +62,10 @@ def write_last( (info, pos, last_update) ):
         raise
 
 def write_xml( ships ):
-    """ Update the XML file with the most recent ship positions 
+    """ Update the XML file with the most recent ship positions
     """
 #    pp = pprint.PrettyPrinter(indent=4)
-#    pp.pprint(ships)        
+#    pp.pprint(ships)
 
     f = open( xml_file, 'w' )
     f.write( "<markers>\n" )
@@ -108,13 +108,13 @@ def write_xml( ships ):
                 length = info.dim_bow + info.dim_stern
                 width = ord(info.dim_port) + ord(info.dim_starboard)
                 draught = info.draught
-                
+
             # Base Station, no speed, course or status
             if ord(pos.msgid) == 4:
                 pos.sog = 0
                 pos.cog = 0
                 pos.nav_status = "\0"
-                 
+
 #            pp = pprint.PrettyPrinter(indent=4)
 #            print ">>>>>>>>"
 #            pp.pprint(pos)
@@ -126,20 +126,20 @@ def write_xml( ships ):
             try:
                 ais_info = "%s!%s!%s!%s!%s!%0.1f!" % (mmsi,imo,callsign,dest,eta,pos.sog/10.0)
                 ais_info += "%0.1f!%d!" % (pos.cog/10.0,ord(pos.nav_status))
-                ais_info += "%d!%d!%0.1f!%s" % (length, width, draught/10.0,time.asctime(time.gmtime(last_update))) 
-                
+                ais_info += "%d!%d!%0.1f!%s" % (length, width, draught/10.0,time.asctime(time.gmtime(last_update)))
+
             except:
 #                pp = pprint.PrettyPrinter(indent=4)
 #                pp.pprint(info)
                 raise
-                
-            f.write( "<marker lat='%0.4f' lon='%0.4f' name='%s' dx='%0.4f' dy='%0.4f' type='%d' ais='%s'/>\n" % (lat_dd,long_ddd,name,pos.dx,pos.dy,ship_type,ais_info)) 
+
+            f.write( "<marker lat='%0.4f' lon='%0.4f' name='%s' dx='%0.4f' dy='%0.4f' type='%d' ais='%s'/>\n" % (lat_dd,long_ddd,name,pos.dx,pos.dy,ship_type,ais_info))
         else:
             print "Skipped %s - %s" % (mmsi,time.asctime(time.gmtime(last_update)))
 
     f.write( "</markers>\n" )
     f.close()
-    
+
     # Copy to live website
     os.system("scp /tmp/data.xml aisparser@neil.home:/home/aisparser/live_html/")
 
@@ -165,13 +165,13 @@ try:
     while not done:
         # Read AIS messages from the source
         data = sf.readline()
-        
+
         # Parse the data
         result = aisparser.assemble_vdm( ais_state, data )
         if( result == 0):
             ais_state.msgid = aisparser.get_6bit( ais_state.six_state, 6 )
             if debug: print "msgid = %d" % (ais_state.msgid)
-            
+
             # Message 1: Position Update
             if ais_state.msgid == 1:
                msg = aisparser.aismsg_1()
@@ -196,7 +196,7 @@ try:
 
                write_last(last_info[str(msg.userid)])
 
-            # Message 2: Position Update            
+            # Message 2: Position Update
             elif ais_state.msgid == 2:
                msg = aisparser.aismsg_2()
                aisparser.parse_ais_2( ais_state, msg )
@@ -207,7 +207,7 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                # Update the ship info
                if last_info.has_key(str(msg.userid)):
                    info, last_pos, null = last_info[str(msg.userid)]
@@ -219,7 +219,7 @@ try:
                last_info[str(msg.userid)] = (info,msg,time.time())
 
                write_last(last_info[str(msg.userid)])
-            
+
             # Message 3: Position Update
             elif ais_state.msgid == 3:
                msg = aisparser.aismsg_3()
@@ -231,7 +231,7 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                # Update the ship info
                if last_info.has_key(str(msg.userid)):
                    info, last_pos, null = last_info[str(msg.userid)]
@@ -243,7 +243,7 @@ try:
                last_info[str(msg.userid)] = (info,msg,time.time())
 
                write_last(last_info[str(msg.userid)])
-            
+
             # Message 4: Base Station Report
             elif ais_state.msgid == 4:
                msg = aisparser.aismsg_4()
@@ -255,7 +255,7 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                # Update the ship info
                if last_info.has_key(str(msg.userid)):
                    info, last_pos, null = last_info[str(msg.userid)]
@@ -273,14 +273,14 @@ try:
                msg = aisparser.aismsg_5()
                aisparser.parse_ais_5( ais_state, msg )
                msg.msgid = 5
-            
+
                if debug:
                    print "msgid    : %d" % (ord(msg.msgid))
                    print "mmsi       : %d" % (msg.userid)
                    print "callsign   : %s" % (msg.callsign)
                    print "name       : %s" % (msg.name)
                    print "destination: %s" % (msg.dest)
-                   
+
                # Clean up any '@' characters
                msg.callsign = msg.callsign.replace('@', ' ')
                msg.name = msg.name.replace('@', ' ')
@@ -304,7 +304,7 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                # Update the ship info
                if last_info.has_key(str(msg.userid)):
                    info, last_pos, null = last_info[str(msg.userid)]
@@ -332,7 +332,7 @@ try:
 
                name = msg.name.replace('@', ' ')
 #               last_info[str(msg.userid)] = (None,name,None)
-            
+
             # Message 24: Class B ship Name
             elif ais_state.msgid == 24:
                msg = aisparser.aismsg_24()
@@ -353,10 +353,10 @@ try:
         if time.time() > last_xml + xml_update:
             write_xml( last_info )
             last_xml = time.time()
-            
+
 except:
     s.close()
 #    last_info.close()
-    
+
     raise
     

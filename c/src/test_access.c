@@ -36,7 +36,7 @@ void test_access()
 
     memset( &state, 0, sizeof(state) );
 	for (i=0; i<6; i++)
-	{ 
+	{
 		if( assemble_vdm( &state, test_messages[i] ) == 0)
 		{
 		    state.msgid = (char) get_6bit( &state.six_state, 6 );
@@ -51,7 +51,7 @@ void test_access()
 
 			seaway = get_msg8_data( &message );
 			dac = message.app_id >> 6;
-			fi = message.app_id & 0x3F; 
+			fi = message.app_id & 0x3F;
 
 			spare = (char) get_6bit( seaway, 2);
 			msgid = (char) get_6bit( seaway, 6);
@@ -74,7 +74,7 @@ void test_access()
 				{
 					report = get_water_level_report( &msg1_3, r);
 					utc_time = get_water_level_utc_time( report );
-					
+
 					printf("month     : %d\n", utc_time->month);
 					printf("day       : %d\n", utc_time->day);
 					printf("hours     : %d\n", utc_time->hours);

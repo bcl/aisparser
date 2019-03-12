@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 5 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 5 class
  * Static and Voyage Related Data
- * 
+ *
  */
 public class Message5 extends Messages {
     int            version;           // 2 bits          : AIS Version
@@ -45,25 +45,25 @@ public class Message5 extends Messages {
     public String dest() { return this.dest; }
     public int dte() { return this.dte; }
     public int spare() { return this.spare; }
-    
-    
+
+
 	public Message5()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() != 424 )
 			throw new AISMessageException("Message 5 wrong length");
-		
+
 		super.parse( 5, six_state );
-    
+
 	    this.version      = (int)  six_state.get( 2 );
 	    this.imo          = (long) six_state.get( 30 );
 	    this.callsign     =        six_state.get_string(7);
-	    this.name         =        six_state.get_string(20);	    
+	    this.name         =        six_state.get_string(20);
 	    this.ship_type    = (int)  six_state.get( 8  );
 	    this.dim_bow      = (int)  six_state.get( 9  );
 	    this.dim_stern    = (int)  six_state.get( 9  );
@@ -73,6 +73,6 @@ public class Message5 extends Messages {
 	    this.eta          = (long) six_state.get( 20 );
 	    this.draught      = (int)  six_state.get( 8  );
 	    this.dest         =        six_state.get_string(20);
-	    
+
 	}
 }

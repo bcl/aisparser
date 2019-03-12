@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 23 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 23 class
  * Group Assignment
- * 
+ *
  */
 public class Message23 extends Messages {
     int             spare1;            // 2 bits   : Spare
@@ -24,7 +24,7 @@ public class Message23 extends Messages {
     int             report_interval;   // 4 bits   : Reporting Interval from IEC 62287 Table 17
     int             quiet_time;        // 4 bits   : Quiet Time in Minutes
     int             spare3;            // 6 bits   : Spare
-    
+
     public int spare1() { return this.spare1; }
     public long NE_longitude() { return this.NE_pos.longitude(); }
     public long NE_latitude() { return this.NE_pos.latitude(); }
@@ -36,20 +36,20 @@ public class Message23 extends Messages {
     public int txrx_mode() { return this.txrx_mode; }
     public int quiet_time() { return this.quiet_time; }
     public int spare3() { return this.spare3; }
-    
+
 	public Message23()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		if (six_state.bit_length() == 168)
 			throw new AISMessageException("Message 23 wrong length");
-		
+
 		super.parse( 23, six_state );
-	
+
 	    this.spare1         = (int)           six_state.get( 2  );
 
 

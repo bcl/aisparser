@@ -13,11 +13,11 @@ public class Message14Test extends TestCase {
 		msg = new Message14();
 
 		fail("Not yet implemented - Need test data");
-		
+
 		try {
 			result = vdm_message.add("");
 			assertEquals( "vdm add failed", 0, result );
-			 
+
 			msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());

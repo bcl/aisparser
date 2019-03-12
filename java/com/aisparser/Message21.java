@@ -4,14 +4,14 @@ package com.aisparser;
  * AIS Message 21 Class
  * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
  * All Rights Reserved
- * 
+ *
  * @author Brian C. Lane
  */
 
 /**
  * AIS Message 21 class
  * Aids-to-Navigation Report
- * 
+ *
  */
 public class Message21 extends Messages {
     int             aton_type;         // 5 bits    : Type of AtoN
@@ -32,7 +32,7 @@ public class Message21 extends Messages {
     int             spare1;            // 1 bit     : Spare
     String          name_ext;          // 0-84 bits : Extended name in ASCII
     int             spare2;            // 0-6 bits  : Spare
-    
+
     public int aton_type() { return this.aton_type; }
     public String name() { return this.name; }
     public int pos_acc() { return this.pos_acc; }
@@ -52,19 +52,19 @@ public class Message21 extends Messages {
     public int spare1() { return this.spare1; }
     public String name_ext() { return this.name_ext; }
     public int spare2() { return this.spare2; }
-    
+
 	public Message21()
 	{
 		super();
 	}
-	
+
 	public void parse( Sixbit six_state )
 		throws SixbitsExhaustedException, AISMessageException
 	{
 		int length = six_state.bit_length();
 		if ((length < 272) || (length > 360))
 			throw new AISMessageException("Message 21 wrong length");
-		
+
 		super.parse( 21, six_state );
 
 	    this.aton_type      = (int)          six_state.get( 5  );

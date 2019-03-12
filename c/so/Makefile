@@ -11,9 +11,9 @@ VERSION = 1.9
 
 CC	= gcc
 CFLAGS	= -I../src -g -Wall -fPIC
-#LIBS	= 
+#LIBS	=
 SRC	= ../src/
- 
+
 OBJS		=	$(SRC)nmea.o $(SRC)vdm_parse.o $(SRC)sixbit.o $(SRC)imo.o $(SRC)seaway.o
 HDRS		= 	$(SRC)nmea.h $(SRC)vdm_parse.h $(SRC)sixbit.h $(SRC)portable.h $(SRC)imo.h $(SRC)seaway.h
 
@@ -80,12 +80,12 @@ linux:	$(OBJS) $(HDRS) $(OBJS)
 
 osx:	$(OBJS) $(HDRS) $(OBJS)
 		$(CC) -dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,1.0,-current_version,1.0,-install_name,libais.1.dylib -o libais.1.dylib $(OBJS)
-        
+
 # Clean up the object files and the sub-directory for distributions
 clean:
-		rm -f *~ 
+		rm -f *~
 		rm -f $(OBJS)
-		rm -f core *.asc 
+		rm -f core *.asc
 		rm -f libais.so.$(VERSION)
 		rm -f libais.1.dylib
 

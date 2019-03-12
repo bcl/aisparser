@@ -15,7 +15,7 @@ public class Message20Test extends TestCase {
 		try {
 			result = vdm_message.add("!AIVDM,1,1,,A,D03OwphiIN>4,0*25");
 			assertEquals( "vdm add failed", 0, result );
-			 
+
 			msg.parse( vdm_message.sixbit() );
 		} catch (Exception e) {
 			fail(e.getMessage());

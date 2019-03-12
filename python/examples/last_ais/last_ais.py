@@ -28,11 +28,11 @@ def write_last( userid, latitude, longitude ):
         return
 
     # Convert position to DD DD.MMMM
-    (status,lat_dd,lat_min,long_ddd,long_min) = aisparser.pos2dmm( latitude, longitude );   
+    (status,lat_dd,lat_min,long_ddd,long_min) = aisparser.pos2dmm( latitude, longitude );
 
     # Output format
     s = "%s (%s) @ %d %0.4f %d %0.4f" % (last_info[str(userid)][1].rstrip(), userid, lat_dd, lat_min, long_ddd, long_min )
-    
+
     f = open( sig_file, 'w' )
     f.write( "---[%s]---\n" % (s.center(62)) )
     f.close()
@@ -58,14 +58,14 @@ try:
     while not done:
         # Read AIS messages from the source
         data = sf.readline()
-        
+
         # Reassemble AIS messages
         result = aisparser.assemble_vdm( ais_state, data )
         if( result == 0):
             # Get the msgid from the first 6 bits of the message
             ais_state.msgid = aisparser.get_6bit( ais_state.six_state, 6 )
             if debug: print "msgid = %d" % (ais_state.msgid)
-            
+
             # Parse based on msgid
             if ais_state.msgid == 1:
                # Message 1 Class
@@ -82,7 +82,7 @@ try:
                # If we have name information, write the position to a file
                if last_info.has_key(str(msg.userid)):
                    write_last(msg.userid,msg.latitude,msg.longitude)
-            
+
             elif ais_state.msgid == 2:
                msg = aisparser.aismsg_2()
                aisparser.parse_ais_2( ais_state, msg )
@@ -91,10 +91,10 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                if last_info.has_key(str(msg.userid)):
                    write_last(msg.userid,msg.latitude,msg.longitude)
-            
+
             elif ais_state.msgid == 3:
                msg = aisparser.aismsg_3()
                aisparser.parse_ais_3( ais_state, msg )
@@ -103,10 +103,10 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                if last_info.has_key(str(msg.userid)):
                    write_last(msg.userid,msg.latitude,msg.longitude)
-            
+
             elif ais_state.msgid == 4:
                msg = aisparser.aismsg_4()
                aisparser.parse_ais_4( ais_state, msg )
@@ -115,20 +115,20 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                if last_info.has_key(str(msg.userid)):
                    write_last(msg.userid,msg.latitude,msg.longitude)
-            
+
             elif ais_state.msgid == 5:
                msg = aisparser.aismsg_5()
                aisparser.parse_ais_5( ais_state, msg )
-            
+
                if debug:
                    print "mmsi       : %d" % (msg.userid)
                    print "callsign   : %s" % (msg.callsign)
                    print "name       : %s" % (msg.name)
                    print "destination: %s" % (msg.dest)
-                   
+
                # Clean up any '@' characters
                callsign = msg.callsign.replace('@', ' ')
                name = msg.name.replace('@', ' ')
@@ -136,7 +136,7 @@ try:
 
                # Add the name info to the shelf database
                last_info[str(msg.userid)] = (callsign,name,dest)
-            
+
             elif ais_state.msgid == 18:
                msg = aisparser.aismsg_18()
                aisparser.parse_ais_18( ais_state, msg )
@@ -145,10 +145,10 @@ try:
                    print "mmsi     : %d" % (msg.userid)
                    print "latitude : %d" % (msg.latitude)
                    print "longitude: %d" % (msg.longitude)
-               
+
                if last_info.has_key(str(msg.userid)):
                    write_last(msg.userid,msg.latitude,msg.longitude)
-            
+
             elif ais_state.msgid == 19:
                msg = aisparser.aismsg_19()
                aisparser.parse_ais_19( ais_state, msg )
@@ -161,10 +161,10 @@ try:
 
                # Clean up any '@' characters
                name = msg.name.replace('@', ' ')
-               
+
                # Add the name info to the shelf database
                last_info[str(msg.userid)] = (None,name,None)
-            
+
             elif ais_state.msgid == 24:
                msg = aisparser.aismsg_24()
                aisparser.parse_ais_24( ais_state, msg )
@@ -183,5 +183,5 @@ try:
 except:
     s.close()
     last_info.close()
-    
+
     raise
