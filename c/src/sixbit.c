@@ -59,7 +59,7 @@ unsigned int __stdcall sixbit_length( sixbit *state )
 /* ----------------------------------------------------------------------- */
 /** Convert an ascii value to a 6-bit binary value
 
-    This function checks the ASCII value to make sure it can be coverted.
+    This function checks the ASCII value to make sure it can be converted.
     If not, it returns a -1.
     Otherwise it returns the 6-bit binary value.
 
@@ -88,7 +88,7 @@ char __stdcall binfrom6bit( char ascii )
 /* ----------------------------------------------------------------------- */
 /** Convert a binary value to a 6-bit ASCII value
 
-    This function checks the binary value to make sure it can be coverted.
+    This function checks the binary value to make sure it can be converted.
     If not, it returns a -1.
     Otherwise it returns the 6-bit ASCII value.
 
@@ -217,5 +217,3 @@ unsigned long __stdcall get_6bit( sixbit *state, short numbits )
     }
     return result;
 }
-
-
