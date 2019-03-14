@@ -118,6 +118,13 @@ public class SixbitTest extends TestCase {
 		// Need more tests
 	}
 
+	public void testGet_string_empty() {
+		six_state.init("");
+		assertEquals("", six_state.get_string(0));
+                // Cover SixbitsExhaustedException.
+		assertEquals("@@@@@", six_state.get_string(5));
+	}
+
 	public void testGet_string() {
 		String s;
 
@@ -125,5 +132,4 @@ public class SixbitTest extends TestCase {
 		s = six_state.get_string(4);
 		assertEquals("Failed to get AIS string ", "TEST", s);
 	}
-
 }
