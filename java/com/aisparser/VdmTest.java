@@ -1,6 +1,5 @@
 package com.aisparser;
 
-import static java.lang.System.out;
 import junit.framework.TestCase;
 
 public class VdmTest extends TestCase {
