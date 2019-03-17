@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    Test AIS routines
-   Copyright 2006-2008 by Brian C. Lane
+   Copyright 2006-2019 by Brian C. Lane
    All Rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>
@@ -33,6 +33,8 @@ int main( int argc, char *argv[] )
     aismsg_24 msg_24;
     aismsg_27 msg_27;
 
+    /* Test messages for the raw 6-bit parsing code */
+    #define NUM_TEST_MSGS 13
     char *test_msgs[] = { "19NS7Sp02wo?HETKA2K6mUM20<L=",
                           "35Mk33gOkSG?bLtK?;B2dRO`00`",
                           "403OwpiuIKl:Ro=sbvK=CG700<3b",
@@ -46,10 +48,9 @@ int main( int argc, char *argv[] )
                           "H52IRsP518Tj0l59D0000000000",
                           "H52IRsTU000000000000000@5120",
                           "K3M@PpqK>Qkv=PEp"
-
-
     };
 
+    /* Test messages for the vdm_parse function */
     #define NUM_DEMO_MSGS 11
     char *demo_msgs[] = { "!AIVDM,1,1,,B,15MqvC0Oh9G?qinK?VlPhA480@2n,0*1F,123,14",
                           "!AIVDM,1,1,,B,15Mf@6P001G?v68K??4SejL<00Sl,0*71",
@@ -192,7 +193,7 @@ int main( int argc, char *argv[] )
     /* Clear out the structures */
     memset( &ais, 0, sizeof( ais_state ) );
 
-    for (i=0; i<13; i++)
+    for (i=0; i<NUM_TEST_MSGS; i++)
     {
         init_6bit( &ais.six_state );
         strcpy( ais.six_state.bits, test_msgs[i] );
@@ -298,8 +299,6 @@ int main( int argc, char *argv[] )
                     printf( "Long : %ld\n", msg_27.longitude  );
                 }
                 break;
-
-
         }
     }
 

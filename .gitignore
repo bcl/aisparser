@@ -4,3 +4,6 @@
 python/linux/aisparser_wrap.c
 python/linux/aisparser.py
 tags
+aisparse_test
+speed_test
+tmp

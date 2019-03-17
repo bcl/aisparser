@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    libuais VDM/VDO sentence parser Test functions
-   Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2019 by Brian C. Lane <bcl@brianlane.com>
    All rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>
@@ -329,9 +329,23 @@ int test_conv_pos27( void )
 int test_assemble_vdm( void )
 {
     ais_state state;
-    char buf[3][255] = { "!AIVDM,1,1,,B,19NS7Sp02wo?HETKA2K6mUM20<L=,0*27\r\n",
-                         "!AIVDM,2,1,9,A,55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H,0*49\r\n",
-                         "!AIVDM,2,2,9,A,==40HtI4i@E531H1QDTVH51DSCS0,2*16\r\n"
+    char *buf[255] = { "!AIVDM,1,1,,B,19NS7Sp02wo?HETKA2K6mUM20<L=,0*27\r\n",
+                       "!AIVDM,2,1,9,A,55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H,0*49\r\n",
+                       "!AIVDM,2,2,9,A,==40HtI4i@E531H1QDTVH51DSCS0,2*16\r\n",
+                       /* Out of order 2nd part */
+                       "!AIVDM,3,1,4,B,53nFBv01SJ<thHp6220H4heHTf2222222222221?50:454o<`9QSlUDp,0*05\r\n",
+                       "!AIVDM,3,3,4,B,==40HtI4i@E531H1QDTVH51DSCS0,2*18\r\n",
+                       /* Out of sequence, good part # */
+                       "!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E\r\n",
+                       "!AIVDM,2,2,7,B,1@0000000000000,2*51\r\n",
+                       /* No start to the sequence */
+                       "!BSVDM,2,2,4,A,54SkDki@000,2*06\r\n",
+                       /* Good part # and sequence, wrong channel */
+                       "!AIVDM,2,1,9,A,55Mf@6P00001MUS;7GQL4hh61L4hh6222222220t41H,0*49\r\n",
+                       "!AIVDM,2,2,9,B,==40HtI4i@E531H1QDTVH51DSCS0,2*15\r\n",
+                       /* Wrong part #, wrong sequence */
+                       "!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E\r\n",
+                       "!AIVDM,2,1,5,B,1@0000000000000,2*50\r\n",
                        };
 
     memset( &state, 0, sizeof(state) );
@@ -364,13 +378,68 @@ int test_assemble_vdm( void )
         return 0;
     }
 
+    /* Test out of order 2nd part */
+    if (assemble_vdm( &state, buf[3] ) != 1)
+    {
+        fprintf( stderr, "test_assemble_vdm() 6: failed\n" );
+        return 0;
+    }
+    /* Out of order should return a 5 */
+    if (assemble_vdm( &state, buf[4] ) != 5)
+    {
+        fprintf( stderr, "test_assemble_vdm() 7: failed\n" );
+        return 0;
+    }
+
+    /* Test out of sequence, good part # */
+    if (assemble_vdm( &state, buf[5] ) != 1)
+    {
+        fprintf( stderr, "test_assemble_vdm() 8: failed\n" );
+        return 0;
+    }
+    /* Out of sequence should return a 5 */
+    if (assemble_vdm( &state, buf[6] ) != 5)
+    {
+        fprintf( stderr, "test_assemble_vdm() 9: failed\n" );
+        return 0;
+    }
+
+    /* Test out of order part #, no start */
+    if (assemble_vdm( &state, buf[7] ) != 5)
+    {
+        fprintf( stderr, "test_assemble_vdm() 10: failed\n" );
+        return 0;
+    }
+
+    /* Good part # and sequence, wrong channel */
+    if (assemble_vdm( &state, buf[8] ) != 1)
+    {
+        fprintf( stderr, "test_assemble_vdm() 11: failed\n" );
+        return 0;
+    }
+    /* Wrong channel should return 5 */
+    if (assemble_vdm( &state, buf[9] ) != 5)
+    {
+        fprintf( stderr, "test_assemble_vdm() 12: failed\n" );
+        return 0;
+    }
+
+    /* Wrong part #, wrong sequence */
+    if (assemble_vdm( &state, buf[10] ) != 1)
+    {
+        fprintf( stderr, "test_assemble_vdm() 13: failed\n" );
+        return 0;
+    }
+    /* Wrong part #, wrong sequence should return 5 */
+    if (assemble_vdm( &state, buf[11] ) != 5)
+    {
+        fprintf( stderr, "test_assemble_vdm() 14: failed\n" );
+        return 0;
+    }
+
     fprintf( stderr, "test_assemble_vdm() Passed\n");
     return 1;
 }
-
-
-
-
 
 
 int test_ais_1( void )
