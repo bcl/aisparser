@@ -458,6 +458,11 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         state->num++;
 
     } else {
+        /* First message MUST be #1, otherwise it is out of order */
+        if (num != 1) {
+            return 5;
+        }
+
         /* Not looking for more parts, reset the state */
         state->total = total;
         state->num = num;
