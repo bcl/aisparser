@@ -442,13 +442,20 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         *fields[i] = nmea_uint(p);
     }
 
+    /* Get the channel character */
+    if ( (p = nmea_next_field( p )) == NULL )
+    {
+        /* Error with the string */
+        return 4;
+    }
+
     /* Are we looking for more parts? */
     if (state->total > 0)
     {
         /* If the sequence doesn't match, or the number is not in
-           order: reset and exit
+           order, or the channel doesn't match: reset and exit
         */
-        if( (state->sequence != sequence) || (state->num != num-1) )
+        if( (state->sequence != sequence) || (state->num != num-1) || (state->channel != *p) )
         {
             state->total = 0;
             state->sequence =0;
@@ -467,16 +474,9 @@ int __stdcall assemble_vdm( ais_state *state, char *str )
         state->total = total;
         state->num = num;
         state->sequence = sequence;
+        state->channel = *p;
         init_6bit( &state->six_state );
     }
-
-    /* Get the channel character */
-    if ( (p = nmea_next_field( p )) == NULL )
-    {
-        /* Error with the string */
-        return 4;
-    }
-    state->channel = *p;
 
     /* Point to the 6-bit data */
     if ( (p = nmea_next_field( p )) == NULL )
