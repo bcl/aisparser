@@ -59,11 +59,11 @@
 {                                                                              }
 { ---------------------------------------------------------------------------- }
 Unit AISParser;
-                                                                               
-Interface                                                                      
-                                                                               
+
+Interface
+
 Uses Windows, Classes, SysUtils, StrUtils, Dialogs;
-                                                                               
+
 Const
   MAX_NMEA_LENGTH = 255;
   MAX_NMEA_FIELDS = 50;
@@ -228,13 +228,13 @@ Type
     spare: SmallInt;                   //!< 2 bits   : Spare
     destid_1: LongInt;                 //!< 30 bits  : Destination MMSI 1
     sequence_1: SmallInt;              //!< 2 bits   : Sequence Number 1
-    destid_2: LongInt;                 //!< 30 bits  : Destination MMSI 2                                          
+    destid_2: LongInt;                 //!< 30 bits  : Destination MMSI 2
     sequence_2: SmallInt;              //!< 2 bits   : Sequence Number 2
     destid_3: LongInt;                 //!< 30 bits  : Destination MMSI 3
-    sequence_3: SmallInt;              //!< 2 bits   : Sequence Number 3                                          
+    sequence_3: SmallInt;              //!< 2 bits   : Sequence Number 3
     destid_4: LongInt;                 //!< 30 bits  : Destination MMSI 4
     sequence_4: SmallInt;              //!< 2 bits   : Sequence Number 4
-    num_acks: SmallInt;                //!< Number of acks                                          
+    num_acks: SmallInt;                //!< Number of acks
   end {aismsg_7};
 
   { AIS Message 8 - Binary Broadcast Message }
@@ -305,13 +305,13 @@ Type
     utc_second: SmallInt;              //!< 6 bits  : UTC Second
     pos_acc: SmallInt;                 //!< 1 bit   : Position Accuracy
     longitude: LongInt;                //!< 28 bits : Longitude in 1/10000 minute
-    latitude: LongInt;                 //!< 27 bits : Latitude in 1/10000 minute                                          
-    pos_type: SmallInt;                //!< 4 bits  : Type of position fixing device                                          
-    spare: Integer;                    //!< 10 bits : Spare                                          
-    raim: SmallInt;                    //!< 1 bit   : RAIM flag                                          
-    sync_state: SmallInt;              //!< 2 bits  : SOTDMA sync state                                          
+    latitude: LongInt;                 //!< 27 bits : Latitude in 1/10000 minute
+    pos_type: SmallInt;                //!< 4 bits  : Type of position fixing device
+    spare: Integer;                    //!< 10 bits : Spare
+    raim: SmallInt;                    //!< 1 bit   : RAIM flag
+    sync_state: SmallInt;              //!< 2 bits  : SOTDMA sync state
     slot_timeout: SmallInt;            //!< 3 bits  : SOTDMA Slot Timeout
-    sub_message: Integer;              //!< 14 bits : SOTDMA sub-message                                          
+    sub_message: Integer;              //!< 14 bits : SOTDMA sub-message
   end {aismsg_11};
 
   { AIS Message 12 - Addressed safety related message }
@@ -319,9 +319,9 @@ Type
     msgid: SmallInt;                   //!< 6 bits   : MessageID (12)
     isrepeat: SmallInt;                //!< 2 bits   : Repeated
     userid: LongInt;                   //!< 30 bits  : UserID / MMSI
-    sequence: SmallInt;                //!< 2 bits   : Sequence                                          
-    destination: LongInt;              //!< 30 bits  : Destination MMSI                                          
-    retransmit: SmallInt;              //!< 1 bit    : Retransmit                                          
+    sequence: SmallInt;                //!< 2 bits   : Sequence
+    destination: LongInt;              //!< 30 bits  : Destination MMSI
+    retransmit: SmallInt;              //!< 1 bit    : Retransmit
     spare: SmallInt;                   //!< 1 bit    : Spare
     msg: Array[0..157] Of Char;        //!< 936 bits : Message in ASCII
   end {aismsg_12};
@@ -382,8 +382,8 @@ Type
     offset_a: Integer;                 //!< 12 bits  : Slot Offset A
     increment_a: Integer;              //!< 10 bits  : Increment A
     destid_b: LongInt;                 //!< 30 bits  : Destination MMSI B
-    offset_b: Integer;                 //!< 12 bits  : Slot Offset B                                          
-    increment_b: Integer;              //!< 10 bits  : Increment B                                          
+    offset_b: Integer;                 //!< 12 bits  : Slot Offset B
+    increment_b: Integer;              //!< 10 bits  : Increment B
     spare2: SmallInt;                  //!< 4 bits   : Spare
     num_cmds: SmallInt;                //!< Number of commands received
   end {aismsg_16};
@@ -398,9 +398,9 @@ Type
     latitude: LongInt;                 //!< 17 bits  : Latitude in 1/1000 minute
     spare2: SmallInt;                  //!< 5 bits   : Spare
     msg_type: SmallInt;                //!< 6 bits   : Mesage Type from M.823
-    station_id: Integer;               //!< 10 bits  : Station ID from M.823                                          
-    z_count: Integer;                  //!< 13 bits  : Z Count                                          
-    seq_num: SmallInt;                 //!< 3 bits   : Sequence Number                                          
+    station_id: Integer;               //!< 10 bits  : Station ID from M.823
+    z_count: Integer;                  //!< 13 bits  : Z Count
+    seq_num: SmallInt;                 //!< 3 bits   : Sequence Number
     num_words: SmallInt;               //!< 5 bits   : Number of Data Words
     health: SmallInt;                  //!< 3 bits   : Reference Station Health from M.823
     data: Array[0..117] Of SmallInt;   //!< 0-696 bits  : Data in 6-bit format
@@ -469,21 +469,21 @@ Type
     offset1: Integer;                  //!< 12 bits  : Slot Offset 1
     slots1: SmallInt;                  //!< 4 bits   : Number of Slots 1
     timeout1: SmallInt;                //!< 3 bits   : Timeout in Minutes 2
-    increment1: Integer;               //!< 11 bits  : Slot Increment 1                                          
-    offset2: Integer;                  //!< 12 bits  : Slot Offset 2                                          
-    slots2: SmallInt;                  //!< 4 bits   : Number of Slots 2                                          
-    timeout2: SmallInt;                //!< 3 bits   : Timeout in Minutes 2                                          
-    increment2: Integer;               //!< 11 bits  : Slot Increment 2                                          
+    increment1: Integer;               //!< 11 bits  : Slot Increment 1
+    offset2: Integer;                  //!< 12 bits  : Slot Offset 2
+    slots2: SmallInt;                  //!< 4 bits   : Number of Slots 2
+    timeout2: SmallInt;                //!< 3 bits   : Timeout in Minutes 2
+    increment2: Integer;               //!< 11 bits  : Slot Increment 2
     offset3: Integer;                  //!< 12 bits  : Slot Offset 3
     slots3: SmallInt;                  //!< 4 bits   : Number of Slots 3
     timeout3: SmallInt;                //!< 3 bits   : Timeout in Minutes 3
     increment3: Integer;               //!< 11 bits  : Slot Increment 3
     offset4: Integer;                  //!< 12 bits  : Slot Offset 4
     slots4: SmallInt;                  //!< 4 bits   : Number of Slots 4
-    timeout4: SmallInt;                //!< 3 bits   : Timeout in Minutes 4                                          
+    timeout4: SmallInt;                //!< 3 bits   : Timeout in Minutes 4
     increment4: Integer;               //!< 11 bits  : Slot Increment 4
     spare2: SmallInt;                  //!< 0-6 bits : Spare
-    num_cmds: SmallInt;                //!< Number of commands received                                          
+    num_cmds: SmallInt;                //!< Number of commands received
   end {aismsg_20};
 
   { AIS Message 21 - Aids-to-navigation Report }
@@ -523,27 +523,27 @@ Type
     userid: LongInt;                   //!< 30 bits  : UserID / MMSI
     spare1: SmallInt;                  //!< 2 bits   : Spare
     channel_a: Integer;                //!< 12 bits  : M.1084 Channel A Frequency
-    channel_b: Integer;                //!< 12 bits  : M.1084 Channel B Frequency                                          
-    txrx_mode: SmallInt;               //!< 4 bits   : TX/RX Mode                                          
-    power: SmallInt;                   //!< 1 bit    : Power Level                                          
-    NE_longitude: LongInt;             //!< 18 bits  : Longitude in 1/1000 minutes                                          
-    NE_latitude: LongInt;              //!< 17 bits  : Latitude in 1/1000 minutes                                          
+    channel_b: Integer;                //!< 12 bits  : M.1084 Channel B Frequency
+    txrx_mode: SmallInt;               //!< 4 bits   : TX/RX Mode
+    power: SmallInt;                   //!< 1 bit    : Power Level
+    NE_longitude: LongInt;             //!< 18 bits  : Longitude in 1/1000 minutes
+    NE_latitude: LongInt;              //!< 17 bits  : Latitude in 1/1000 minutes
     addressed_1: LongInt;              //!< 30 bits  : Destination MMSI 1
     SW_longitude: LongInt;             //!< 18 bits  : Longitude in 1/1000 minutes
     SW_latitude: LongInt;              //!< 17 bits  : Latitude in 1/1000 minutes
-    addressed_2: LongInt;              //!< 30 bits  : Destination MMSI 2                                          
+    addressed_2: LongInt;              //!< 30 bits  : Destination MMSI 2
     addressed: SmallInt;               //!< 1 bit    : Addressed flag
     bw_a: SmallInt;                    //!< 1 bit    : Channel A Bandwidth
     bw_b: SmallInt;                    //!< 1 bit    : Channel B Bandwidth
     tz_size: SmallInt;                 //!< 3 bits   : Transitional Zone size
-    spare2: LongInt;                   //!< 23 bits  : Spare                                          
+    spare2: LongInt;                   //!< 23 bits  : Spare
   end {aismsg_22};
 
   { AIS Message 23 - Group Assignment Command }
   { The geographic area is defined by 2 corners, stored in }
   { the NE and SW positions. }
   TAISMsg_23 = Record
-    msgid: SmallInt;                   //!< 6 bits   : MessageID (23)                                          
+    msgid: SmallInt;                   //!< 6 bits   : MessageID (23)
     isrepeat: SmallInt;                //!< 2 bits   : Repeated
     userid: LongInt;                   //!< 30 bits  : UserID / MMSI
     spare1: SmallInt;                  //!< 2 bits   : Spare
@@ -804,7 +804,7 @@ Begin
       Inc(State.p);
     End
     Else
-      // Nothing more to fetch, return what we have 
+      // Nothing more to fetch, return what we have
       Break;
   End;
 End;
