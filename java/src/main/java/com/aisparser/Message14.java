@@ -1,40 +1,36 @@
 package com.aisparser;
 /**
- * AIS Parser SDK
- * AIS Message 14 Class
- * Copyright 2008 by Brian C. Lane <bcl@brianlane.com>
- * All Rights Reserved
+ * AIS Parser SDK AIS Message 14 Class Copyright 2008 by Brian C. Lane <bcl@brianlane.com> All
+ * Rights Reserved
  *
  * @author Brian C. Lane
  */
 
-/**
- * AIS Message 14 class
- * Safety Related Broadcast
- *
- */
+/** AIS Message 14 class Safety Related Broadcast */
 public class Message14 extends Messages {
-    int            spare;            // 2 bits   : Spare
-    String         message;          // 968 bits : Message in ASCII
+    int spare; // 2 bits   : Spare
+    String message; // 968 bits : Message in ASCII
 
-    public int spare() { return this.spare; }
-    public String message() { return this.message; }
+    public int spare() {
+        return this.spare;
+    }
 
-	public Message14()
-	{
-		super();
-	}
+    public String message() {
+        return this.message;
+    }
 
-	public void parse( Sixbit six_state )
-		throws SixbitsExhaustedException, AISMessageException
-	{
-		int length = six_state.bit_length();
-		if ((length < 40) || (length > 1008))
-			throw new AISMessageException("Message 14 wrong length");
+    public Message14() {
+        super();
+    }
 
-		super.parse( 14, six_state );
+    public void parse(Sixbit six_state) throws SixbitsExhaustedException, AISMessageException {
+        int length = six_state.bit_length();
+        if ((length < 40) || (length > 1008))
+            throw new AISMessageException("Message 14 wrong length");
 
-	    this.spare        = (int)   six_state.get( 2  );
-	    this.message = six_state.get_string( (length-40)/6 );
-	}
+        super.parse(14, six_state);
+
+        this.spare = (int) six_state.get(2);
+        this.message = six_state.get_string((length - 40) / 6);
+    }
 }
