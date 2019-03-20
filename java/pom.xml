@@ -88,6 +88,31 @@
         <groupId>com.coveo</groupId>
         <artifactId>fmt-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <check>
+            <!-- Per-class thresholds -->
+	    <!-- TODO(schwehr): Up these to maybe 60 -->
+            <lineRate>0</lineRate>
+            <branchRate>0</branchRate>
+            <!-- Project-wide thresholds -->
+	    <!-- TODO(schwehr): Up these to maybe 80 -->
+            <totalLineRate>50</totalLineRate>
+            <totalBranchRate>50</totalBranchRate>
+          </check>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
