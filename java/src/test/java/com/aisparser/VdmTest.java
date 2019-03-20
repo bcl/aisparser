@@ -1,19 +1,31 @@
 package com.aisparser;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-public class VdmTest extends TestCase {
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+/** Tests for {@link Sixbit}. */
+@RunWith(JUnit4.class)
+public class VdmTest {
 
     Vdm vdm_message;
 
-    protected void setUp() {
+    @Before
+    public void setUp() {
         vdm_message = new Vdm();
     }
 
-    protected void tearDown() {
+    @After
+    public void tearDown() {
         vdm_message = null;
     }
 
+    @Test
     public void testMsgid() {
         int result;
 
@@ -26,6 +38,7 @@ public class VdmTest extends TestCase {
         }
     }
 
+    @Test
     public void testAdd() {
         int result;
 
