@@ -62,7 +62,7 @@ int main( int argc, char *argv[] )
                           "!AIVDM,1,1,,B,15Mts3?P@;G8RB@JLbgamrBF0H6B,0*16,142,aass,12311",
                           "!AIVDM,1,1,,A,34a=CB1001JwAEhHra0qk4wF2000,0*5B",
                           "\\s:ASM//Port=63//MMSI=2573225,c:1301961602*7A\\!BSVDM,1,1,,A,13P<JR50h00IkkJQi<Dt29ef0`PL,0*57",
-                          "AIVDM,1,1,,A,18UG;P0012G?Uq4EdHa=c;7@051@,0*53"
+                          "!AIVDM,1,1,,A,18UG;P0012G?Uq4EdHa=c;7@051@,0*53"
     };
 
 
