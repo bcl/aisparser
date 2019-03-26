@@ -11,17 +11,13 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class Message7Test {
 
-    Vdm vdm_message;
-    Message7 msg;
-    int result;
-
     @Test
     public void testParse() {
-        vdm_message = new Vdm();
-        msg = new Message7();
+        Message7 msg = new Message7();
 
         try {
-            result = vdm_message.add("!AIVDM,1,1,,A,703Owpi9lmaQ,0*3B");
+            Vdm vdm_message = new Vdm();
+            int result = vdm_message.add("!AIVDM,1,1,,A,703Owpi9lmaQ,0*3B");
             assertEquals("vdm add failed", 0, result);
 
             msg.parse(vdm_message.sixbit());

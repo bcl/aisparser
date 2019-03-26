@@ -11,17 +11,13 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class Message8Test {
 
-    Vdm vdm_message;
-    Message8 msg;
-    int result;
-
     @Test
     public void testParse() {
-        vdm_message = new Vdm();
-        msg = new Message8();
+        Message8 msg = new Message8();
 
         try {
-            result =
+            Vdm vdm_message = new Vdm();
+            int result =
                     vdm_message.add(
                             "!AIVDM,3,1,1,A,85MwqciKf@nWshjR1VfGGDssdvT>hncBfTwcsgGKo?t,0*2E\r\n");
             assertEquals("vdm add failed", 1, result);
