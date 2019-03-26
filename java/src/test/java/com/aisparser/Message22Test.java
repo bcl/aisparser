@@ -12,20 +12,16 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class Message22Test {
 
-    Vdm vdm_message;
-    Message22 msg;
-    int result;
-
     @Test
     @Ignore("Need test data")
     public void testParse() {
-        vdm_message = new Vdm();
-        msg = new Message22();
+        Message22 msg = new Message22();
 
         fail("Not implemented - need test data");
 
         try {
-            result = vdm_message.add("");
+            Vdm vdm_message = new Vdm();
+            int result = vdm_message.add("");
             assertEquals("vdm add failed", 0, result);
 
             msg.parse(vdm_message.sixbit());
