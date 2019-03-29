@@ -43,4 +43,12 @@ public class Message1Test {
         assertEquals("slot_timeout", 3, msg.slot_timeout());
         assertEquals("sub_message", 1805, msg.sub_message());
     }
+
+    @Test(expected = AISMessageException.class)
+    public void testWrongBitLength() throws SixbitsExhaustedException, AISMessageException {
+        Sixbit six_state = new Sixbit();
+        six_state.init("19NS7Sp02wo?HETKA2K6mUM20<L"); // Short
+        Message1 msg = new Message1();
+        msg.parse(six_state);
+    }
 }
