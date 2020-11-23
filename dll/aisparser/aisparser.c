@@ -1,7 +1,7 @@
 /* -----------------------------------------------------------------------
    AIS Parser SDK
    Visual Basic Interface
-   Copyright 2006 by Brian C. Lane
+   Copyright 2006-2025 by Brian C. Lane
 
    ----------------------------------------------------------------------- */
 #include <windows.h>

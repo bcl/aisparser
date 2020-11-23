@@ -4,7 +4,7 @@ import platform
 SYSTEM = platform.system().lower()
 
 MAJOR_VERSION = 1
-MINOR_VERSION = 10
+MINOR_VERSION = 11
 PATCH_VERSION = 0
 
 aisparser_module = Extension(

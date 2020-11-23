@@ -1,7 +1,7 @@
 #
 # Makefile for ais_json example
 #
-# Copyright 2006 by Brian C. Lane <bcl@brianlane.com>
+# Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com>
 # All Rights Reserved
 #
 # Please note that this Makefile *needs* GNU make. BSD make won't do.

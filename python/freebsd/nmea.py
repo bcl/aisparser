@@ -2,7 +2,7 @@
 """
    NMEA string parser class
    by Brian C. Lane <bcl@brianlane.com>
-   Copyright 2006 by Brian C. Lane
+   Copyright 2006-2025 by Brian C. Lane
    All Rights Reserved
 """
 

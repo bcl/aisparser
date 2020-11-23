@@ -1,13 +1,13 @@
 { ---------------------------------------------------------------------------- }
 { Delphi Implementation of AISParser Library                                   }
-{ Copyright 2006 by Brian C. Lane <bcl@brianlane.com>                          }
+{ Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com>                     }
 { All Rights Reserved                                                          }
 {                                                                              }
 { Delphi conversion by: Chris Krohn <ckrohn@caymanport.com>                    }
 {                                                                              }
 {                                                                              }
 {  AIVDM/AIVDO AIS Message Parser                                              }
-{  <center>Copyright 2006 by Brian C. Lane <bcl@brianlane.com><br>             }
+{  <center>Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com><br>        }
 {  http://www.aisparser.com/                                                   }
 {                                                                              }
 {  The Automatic Identification System (AIS) allows ships to be tracked in     }
@@ -658,7 +658,7 @@ Implementation
   SIXBIT Functions
 
   6-bit packed ASCII Functions
-  Copyright 2006 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
+  Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
   Version 1.0
 
   This module's Functions are used to extract data from the 6-bit packed
@@ -816,7 +816,7 @@ End;
   NMEA Functions
 
   NMEA 0183 Sentence Parser Module
-  Copyright 2006 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
+  Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
   version 1.0
 
   This module provides utility Functions for handling NMEA 0183 data
@@ -1110,7 +1110,7 @@ End;
   VDM_PARSE Functions
 
   AIVDM/AIVDO AIS Sentence Parser
-  Copyright 2006 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
+  Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
   Version 1.0
 
   This module contains the Functions to parse incoming Automatic

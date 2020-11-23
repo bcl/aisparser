@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    Process AIS messages read from stdin and output JSON structure
-   Copyright 2006 by Brian C. Lane
+   Copyright 2006-2025 by Brian C. Lane
    All Rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>

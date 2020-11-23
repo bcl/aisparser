@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # AIS Parser SDK Python Example
-# Copyright 2006 by Brian C. Lane
+# Copyright 2006-2025 by Brian C. Lane
 #
 # Decode incoming AIS messages, recording ship names and associated MMSI
 # numbers. Write the last heard AIS ship's information to a file. I use

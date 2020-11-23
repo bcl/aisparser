@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    Test AIS routines
-   Copyright 2006-2019 by Brian C. Lane
+   Copyright 2006-2025 by Brian C. Lane
    All Rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>
