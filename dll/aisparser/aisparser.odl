@@ -2,7 +2,7 @@
 [
     // UUID for this project, generated with GUIDGEN
 	uuid(1E5B88B3-2F69-41d3-B5F7-7BA6FC5CB5F7),
-    helpstring("AIS Parser SDK Library for Windows - http://www.aisparser.com\nCopyright 2006-2007 by Brian C. Lane\nAll Rights Reserved"),
+    helpstring("AIS Parser SDK Library for Windows - http://www.aisparser.com\nCopyright 2006-2020 by Brian C. Lane\nAll Rights Reserved"),
     // Standard English Locale
 	lcid(0x0409),
     // Assign a version number to keep track of changes.

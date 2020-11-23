@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    AIS Parser SDK St. Lawrence Seaway Test functions
-   Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
    All rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>
@@ -16,7 +16,7 @@
 
 /*! \file
     \brief St. Lawrence Seaway Test functions
-    \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
+    \author Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.0
 
     This module contains functions to test the St. Lawrence Seaway

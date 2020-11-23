@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    NMEA 0183 Sentence Parsing Test Module
-   Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
    All Rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>

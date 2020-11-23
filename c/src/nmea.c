@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    NMEA 0183 Sentence Parsing
-   Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
    All Rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>
@@ -12,7 +12,7 @@
 
 /*! \file
     \brief NMEA 0183 Sentence Parser Module
-    \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
+    \author Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.8
 
     This module provides utility functions for handling NMEA 0183 data

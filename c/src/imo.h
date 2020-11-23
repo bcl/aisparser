@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    IMO Binary Message Data Header
-   Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
    All rights Reserved
    ----------------------------------------------------------------------- */
 

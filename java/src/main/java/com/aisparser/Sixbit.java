@@ -2,7 +2,7 @@ package com.aisparser;
 /**
  * 6-bit packed ASCII functions
  *
- * @author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com All Rights Reserved
+ * @author Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com All Rights Reserved
  */
 class SixbitsExhaustedException extends Exception {
     public SixbitsExhaustedException() {}

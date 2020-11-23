@@ -26,7 +26,7 @@ Attribute VB_Exposed = False
 Private Sub Command1_Click()
 
 ' AIS Parser SDK Visual Basic DLL Test Functions
-' Copyright 2006-2007 by Brian C. Lane
+' Copyright 2006-2020 by Brian C. Lane
 ' All Rights Reserved
 ' http://www.aisparser.com
 '

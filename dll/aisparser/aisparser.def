@@ -1,5 +1,5 @@
 LIBRARY   aisparser
-DESCRIPTION "AIS Parser http://www.aisparser.com\nCopyright 2006-2007 by Brian C. Lane\nAll Rights Reserved\n"
+DESCRIPTION "AIS Parser http://www.aisparser.com\nCopyright 2006-2020 by Brian C. Lane\nAll Rights Reserved\n"
 EXPORTS
     InitAisparser
 	CloseAisparser

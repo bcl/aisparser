@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    libuais VDM/VDO sentence parser Test functions
-   Copyright 2006-2019 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
    All rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>

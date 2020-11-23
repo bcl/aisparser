@@ -1,13 +1,13 @@
 #
 # Makefile for aisparser test code
 #
-# Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+# Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
 # All Rights Reserved
 #
 # Please note that this Makefile *needs* GNU make. BSD make won't do.
 #
 
-VERSION = 1.10
+VERSION = 1.11.0
 
 SRC	= ../src/
 CC	= gcc

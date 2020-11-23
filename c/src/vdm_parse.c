@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    libuais VDM/VDO sentence parser
-   Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
    All rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>
@@ -13,7 +13,7 @@
 
 /*! \file
     \brief AIVDM/AIVDO AIS Sentence Parser
-    \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
+    \author Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.8
 
     This module contains the functions to parse incoming Automatic
@@ -79,7 +79,7 @@
 */
 
 /*! \mainpage AIVDM/AIVDO AIS Message Parser
-    <center>Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com><br>
+    <center>Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com><br>
     http://www.aisparser.com/
     </center>
 

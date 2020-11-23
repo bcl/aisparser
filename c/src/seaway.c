@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    AIS Parser SDK St. Lawrence Seaway Data Parsing
-   Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>
+   Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>
    All rights Reserved
    ----------------------------------------------------------------------- */
 #include <stdio.h>
@@ -14,7 +14,7 @@
 
 /*! \file
     \brief St. Lawrence Seaway Message Parsing
-    \author Copyright 2006-2008 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
+    \author Copyright 2006-2020 by Brian C. Lane <bcl@brianlane.com>, All Rights Reserved
     \version 1.0
 
     For exact definitions of each field you should see the ITU M.1371,
