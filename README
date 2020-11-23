@@ -92,6 +92,11 @@ email signature, capturing the latest ship info from my local receiver.
 
 The runme.py example in the swig directory can also be used. It has an example of parsing a Seaway 1.3 message. In python the struct arrays are not properly understood by the SWIG wrapper, so the helper function that matches the message must be used to first extract the array element before Python can operate on it.
 
+Package can be directly pip installed with recent setuptools:
+
+    python setup.py build_ext --inplace
+    pip install -U .
+
 
 Windows DLL
 -----------

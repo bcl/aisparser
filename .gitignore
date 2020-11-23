@@ -7,3 +7,7 @@ tags
 aisparse_test
 speed_test
 tmp
+dist/
+build/
+*.egg-info/
+venv/
