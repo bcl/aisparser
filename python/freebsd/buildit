@@ -1,0 +1,10 @@
+#!/bin/sh
+PYTHON_INCLUDE=/usr/include/python2.7/
+swig -python aisparser.i
+gcc -fpic -I ../../c/src/ -I $PYTHON_INCLUDE \
+    -c ../../c/src/nmea.c ../../c/src/sixbit.c ../../c/src/vdm_parse.c \
+    ../../c/src/seaway.c ../../c/src/imo.c ../../c/src/access.c \
+    aisparser_wrap.c
+ld -shared nmea.o sixbit.o vdm_parse.o seaway.o imo.o access.o aisparser_wrap.o -o _aisparser.so
+
+ 
