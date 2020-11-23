@@ -1,7 +1,10 @@
 from setuptools import setup, Extension
+import platform
+
+SYSTEM = platform.system().lower()
 
 MAJOR_VERSION = 1
-MINOR_VERSION = 0
+MINOR_VERSION = 10
 PATCH_VERSION = 0
 
 aisparser_module = Extension(
@@ -21,7 +24,7 @@ aisparser_module = Extension(
         'c/src/seaway.c',
         'c/src/sixbit.c',
         'c/src/vdm_parse.c',
-        'python/linux/aisparser.i',
+        'python/{}/aisparser.i'.format(SYSTEM),
     ]
 )
 
@@ -30,8 +33,11 @@ setup(
     name = 'python-aisparser',
     description = 'AIS Parsing library',
     url = 'https://github.com/bcl/aisparser',
+    author = "Brian C. Lane",
+    author_email = "bcl@brianlane.com",
+    license = "BSD-3-Clause",
     version = '{}.{}.{}'.format(MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION),
     py_modules=['aisparser'],
-    package_dir = {'': 'python/linux'},
+    package_dir = {'': 'python/{}'.format(SYSTEM)},
     ext_modules = [aisparser_module],
 )
