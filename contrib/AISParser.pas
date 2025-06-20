@@ -9,6 +9,7 @@
 {  AIVDM/AIVDO AIS Message Parser                                              }
 {  <center>Copyright 2006 by Brian C. Lane <bcl@brianlane.com><br>             }
 {  http://www.aisparser.com/                                                   }
+{  https://github.com/bcl/aisparser                                            }
 {                                                                              }
 {  The Automatic Identification System (AIS) allows ships to be tracked in     }
 {  realtime based on information transmitted by each ship. They are equipped   }
@@ -62,7 +63,7 @@ Unit AISParser;
 
 Interface
 
-Uses Windows, Classes, SysUtils, StrUtils, Dialogs;
+Uses Classes, SysUtils, StrUtils, Dialogs;
 
 Const
   MAX_NMEA_LENGTH = 255;
@@ -102,7 +103,7 @@ Type
     isrepeat: SmallInt;                //!< 2 bits  : Repeated
     userid: LongInt;                   //!< 30 bits : UserID / MMSI
     nav_status: SmallInt;              //!< 4 bits  : Navigational Status
-    rot: Byte;                         //!< 8 bits  : Rate of Turn
+    rot: SmallInt;                     //!< 8 bits  : Rate of Turn
     sog: Integer;                      //!< 10 bits : Speed Over Ground
     pos_acc: SmallInt;                 //!< 1 bit   : Position Accuracy
     longitude: LongInt;                //!< 28 bits : Longitude in 1/10000 minute
@@ -124,7 +125,7 @@ Type
     isrepeat: SmallInt;                //!< 2 bits  : Repeated
     userid: LongInt;                   //!< 30 bits : UserID / MMSI
     nav_status: SmallInt;              //!< 4 bits  : Navigational Status
-    rot: Byte;                         //!< 8 bits  : Rate of Turn
+    rot: SmallInt;                     //!< 8 bits  : Rate of Turn
     sog: Integer;                      //!< 10 bits : Speed Over ground
     pos_acc: SmallInt;                 //!< 1 bit   : Position Accuracy
     longitude: LongInt;                //!< 28 bits : Longitude in 1/10000 minute
@@ -146,7 +147,7 @@ Type
     isrepeat: SmallInt;                //!< 2 bits  : Repeated
     userid: LongInt;                   //!< 30 bits : UserID / MMSI
     nav_status: SmallInt;              //!< 4 bits  : Navigational Status
-    rot: Byte;                         //!< 8 bits  : Rate of Turn
+    rot: SmallInt;                     //!< 8 bits  : Rate of Turn
     sog: Integer;                      //!< 10 bits : Speed Over Ground
     pos_acc: SmallInt;                 //!< 1 bit   : Position Accuracy
     longitude: LongInt;                //!< 28 bits : Longitude in 1/10000 minute
@@ -830,7 +831,7 @@ End;
 
 Function IsXDigit(C: Char): Boolean;
 Begin
-  Result := C In ['0'..'9', 'A'..'F', 'a'..'f'];
+  Result := CharInSet( C, ['0'..'9', 'A'..'F', 'a'..'f'] );
 End;
 
 (* -----------------------------------------------------------------------
@@ -1172,10 +1173,13 @@ End;
 
    ----------------------------------------------------------------------- *)
 Function AIS2ASCII(C: Byte): Char;
+var
+  Value: Byte;
 Begin
-  Byte(Result) := C And $3f;
-  If Byte(Result) < $20 Then
-    Byte(Result) := Byte(Result) + $40;
+  Value := C and $3F; // Perform the bitwise AND operation
+  if Value < $20 then
+    Value := Value + $40;
+  Result := Char(Value); // Convert the Byte to Char for the Result
 End;
 
 (* -----------------------------------------------------------------------
@@ -1263,6 +1267,15 @@ Begin
   End;
 
   Result := 0;
+End;
+
+Function ConvRoT( var RoT: SmallInt ): SmallInt;
+Begin
+  // Interpret as signed 8-bit value (two's complement)
+  if RoT >= 128 then
+    Result := RoT - 256
+  else
+    Result := RoT;
 End;
 
 (* -----------------------------------------------------------------------
@@ -1482,6 +1495,8 @@ Begin
     // Convert the position to signed value
     ConvPos(Msg.latitude, Msg.longitude);
 
+    ConvRoT( Msg.RoT );
+
     Result := 0;
   End;
 End;
@@ -1539,6 +1554,8 @@ Begin
     // Convert the position to signed value
     ConvPos(Msg.latitude, Msg.longitude);
 
+    ConvRoT( Msg.RoT );
+
     Result := 0;
   End;
 End;
@@ -1593,6 +1610,8 @@ Begin
 
     // Convert the position to signed value
     ConvPos(Msg.latitude, Msg.longitude);
+
+    ConvRoT( Msg.RoT );
 
     Result := 0;
   End;
