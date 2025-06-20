@@ -1,7 +1,7 @@
 """
 AIS Message Browser message field order
 Copyright 2007 by Brian C. Lane <bcl@brianlane.com>
-http://browser.aisparser.com
+https://github.com/bcl/aisparser
 """
 
 # AIS Message field order -- This should go into another file

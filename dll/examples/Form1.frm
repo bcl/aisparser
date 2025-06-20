@@ -28,7 +28,7 @@ Private Sub Command1_Click()
 ' AIS Parser SDK Visual Basic DLL Test Functions
 ' Copyright 2006-2025 by Brian C. Lane
 ' All Rights Reserved
-' http://www.aisparser.com
+' https://github.com/bcl/aisparser
 '
 ' The DLL exports all of the SDK functions and also provides a couple of
 ' additional routines to make life easier for the VB developer

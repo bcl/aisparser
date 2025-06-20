@@ -7,8 +7,8 @@
 {                                                                              }
 {                                                                              }
 {  AIVDM/AIVDO AIS Message Parser                                              }
-{  <center>Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com><br>        }
-{  http://www.aisparser.com/                                                   }
+{  Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com>                    }
+{  https://github.com/bcl/aisparser                                            }
 {                                                                              }
 {  The Automatic Identification System (AIS) allows ships to be tracked in     }
 {  realtime based on information transmitted by each ship. They are equipped   }

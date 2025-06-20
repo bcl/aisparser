@@ -80,7 +80,7 @@
 
 /*! \mainpage AIVDM/AIVDO AIS Message Parser
     <center>Copyright 2006-2025 by Brian C. Lane <bcl@brianlane.com><br>
-    http://www.aisparser.com/
+    https://github.com/bcl/aisparser
     </center>
 
 
