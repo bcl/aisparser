@@ -10,7 +10,7 @@
 VERSION = 0.1
 
 CC	= gcc
-CFLAGS	= -I../../src -g -Wall # -O2
+CFLAGS	= -I../../src -g -Wall -std=c99 # -O2
 #LIBS	=
 SRC	= ../../src/
 

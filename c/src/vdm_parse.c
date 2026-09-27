@@ -166,16 +166,16 @@ int __stdcall get_timetag( sixbit *state, timetag *datetime )
     if ( !datetime )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if ( length < 20 )
         return 2;
 
-	datetime->month   = (char) get_6bit( state, 4 );
-	datetime->day     = (char) get_6bit( state, 5 );
-	datetime->hours   = (char) get_6bit( state, 5 );
-	datetime->minutes = (char) get_6bit( state, 6 );
+    datetime->month   = (char) get_6bit( state, 4 );
+    datetime->day     = (char) get_6bit( state, 5 );
+    datetime->hours   = (char) get_6bit( state, 5 );
+    datetime->minutes = (char) get_6bit( state, 6 );
 
-	return 0;
+    return 0;
 }
 
 

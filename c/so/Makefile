@@ -10,7 +10,7 @@
 VERSION = 1.9
 
 CC	= gcc
-CFLAGS	= -I../src -g -Wall -fPIC
+CFLAGS	= -I../src -g -Wall -fPIC -std=c99
 #LIBS	=
 SRC	= ../src/
 
