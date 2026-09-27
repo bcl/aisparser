@@ -11,7 +11,7 @@ VERSION = 0.1
 
 SRC	= ../../src/
 CC	= gcc
-CFLAGS	= -I$(SRC) -DENABLE_TEST -g -Wall # -O2
+CFLAGS	= -I$(SRC) -DENABLE_TEST -g -Wall -std=c99 # -O2
 #LIBS	=
 
 OBJS		=	$(SRC)nmea.o $(SRC)vdm_parse.o $(SRC)sixbit.o main.o

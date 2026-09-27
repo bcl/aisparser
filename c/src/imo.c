@@ -89,7 +89,7 @@ int __stdcall parse_imo1_11( sixbit *state, imo1_11 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -170,7 +170,7 @@ int __stdcall parse_imo1_12( sixbit *state, imo1_12 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -248,7 +248,7 @@ int __stdcall parse_imo1_13( sixbit *state, imo1_13 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -319,7 +319,7 @@ int __stdcall parse_imo1_14( sixbit *state, imo1_14 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -337,11 +337,11 @@ int __stdcall parse_imo1_14( sixbit *state, imo1_14 *result )
 	    result->windows[i].current_dir   = (int) get_6bit( state, 9 );
 	    result->windows[i].current_speed = (char) get_6bit( state, 7 );
 
-   		/* Convert the position to signed value */
-   		conv_pos( &result->windows[i].latitude, &result->windows[i].longitude);
-	}
+            /* Convert the position to signed value */
+            conv_pos( &result->windows[i].latitude, &result->windows[i].longitude);
+    }
 
-	return 0;
+    return 0;
 }
 
 
@@ -368,7 +368,7 @@ int __stdcall parse_imo1_15( sixbit *state, imo1_15 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -405,7 +405,7 @@ int __stdcall parse_imo1_16( sixbit *state, imo1_16 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -444,7 +444,7 @@ int __stdcall parse_imo1_17( sixbit *state, imo1_17 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 

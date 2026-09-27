@@ -3,9 +3,8 @@ Copyright 2006-2014 by Brian C. Lane <bcl@brianlane.com>
 All Rights Reserved
 See LICENSE for licensing information
 
-
-This is the first public release of the AIS Parser SDK. I have re-licensed it under the BSD license. See LICENSE for details. This code will now be available at https://github.com/bcl/aisparser/
-
+> [!WARNING]
+> This codebase is essentially unmaintained at this point (2026)
 
 'C' Version:
 AIS Parser SDK source is in ./c/src/

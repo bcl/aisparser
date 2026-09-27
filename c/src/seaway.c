@@ -99,7 +99,7 @@ int __stdcall parse_seaway1_1( sixbit *state, seaway1_1 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -173,7 +173,7 @@ int __stdcall parse_seaway1_2( sixbit *state, seaway1_2 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -238,7 +238,7 @@ int __stdcall parse_seaway1_3( sixbit *state, seaway1_3 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -306,7 +306,7 @@ int __stdcall parse_seaway1_6( sixbit *state, seaway1_6 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -369,7 +369,7 @@ int __stdcall parse_seaway2_1( sixbit *state, seaway2_1 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -444,7 +444,7 @@ int __stdcall parse_seaway2_2( sixbit *state, seaway2_2 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -536,7 +536,7 @@ int __stdcall parse_seaway32_1( sixbit *state, seaway32_1 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -575,7 +575,7 @@ int __stdcall parse_pawss1_4( sixbit *state, pawss1_4 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -639,7 +639,7 @@ int __stdcall parse_pawss1_5( sixbit *state, pawss1_5 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -706,7 +706,7 @@ int __stdcall parse_pawss2_3( sixbit *state, pawss2_3 *result )
     if( !result )
         return 1;
 
-	length = sixbit_length(state);
+    length = sixbit_length(state);
     if( (length < 0) || (length > 1008) )
         return 2;
 
@@ -729,10 +729,10 @@ int __stdcall parse_pawss2_3( sixbit *state, pawss2_3 *result )
     result->latitude  = (long) get_6bit( state, 24 );
     result->spare2 = (char)  get_6bit( state, 3 );
 
-   	/* Convert the position to signed value */
-	result->longitude *= 10;
-	result->latitude *= 10;
-   	conv_pos( &result->latitude, &result->longitude);
+    /* Convert the position to signed value */
+    result->longitude *= 10;
+    result->latitude *= 10;
+    conv_pos( &result->latitude, &result->longitude);
 
     for( i=0; i<4; i++ )
     {
